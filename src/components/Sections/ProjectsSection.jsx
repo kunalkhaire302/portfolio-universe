@@ -7,6 +7,7 @@ import { FaGithub } from 'react-icons/fa';
 const ProjectsSection = () => {
     const { projects: manualProjects } = portfolioData;
     const [allProjects, setAllProjects] = React.useState(manualProjects);
+    const [loading, setLoading] = React.useState(true);
 
     const colorVariants = {
         'electric-blue': 'border-electric-blue text-electric-blue',
@@ -30,25 +31,59 @@ const ProjectsSection = () => {
 
                 const data = await response.json();
 
-                // Filter out forks and existing manual projects
-                const newProjects = data
+                // 1. Filter and Slice (Limit to top 6 to avoid API rate limits)
+                let visibleRepos = data
                     .filter(repo => !repo.fork)
                     .filter(repo => !manualProjects.some(mp => mp.github.toLowerCase() === repo.html_url.toLowerCase()))
-                    .map(repo => ({
+                    .slice(0, 6);
+
+                // 2. Fetch READMEs in parallel
+                const projectsWithReadme = await Promise.all(visibleRepos.map(async (repo) => {
+                    let description = repo.description; // Default to existing description
+
+                    try {
+                        const readmeResponse = await fetch(`https://api.github.com/repos/kunalkhaire302/${repo.name}/readme`, {
+                            headers: { 'Accept': 'application/vnd.github.raw' }
+                        });
+
+                        if (readmeResponse.ok) {
+                            const rawMarkdown = await readmeResponse.text();
+                            // Simple Markdown cleanup to get just text
+                            const cleanText = rawMarkdown
+                                .replace(/^#+\s+(.*)/gm, '') // Remove headers
+                                .replace(/!\[.*?\]\(.*?\)/g, '') // Remove images
+                                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1') // Keep link text, remove url
+                                .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+                                .replace(/[`*_~]/g, '') // Remove formatting chars
+                                .replace(/\n+/g, ' ') // Merge lines
+                                .trim();
+
+                            // Take first 150 chars or first sentence
+                            if (cleanText.length > 10) {
+                                description = cleanText.substring(0, 200) + '...';
+                            }
+                        }
+                    } catch (err) {
+                        console.warn(`Could not fetch README for ${repo.name}`);
+                    }
+
+                    return {
                         id: `gh-${repo.id}`,
                         title: repo.name.replace(/-/g, ' ').replace(/_/g, ' '),
-                        description: repo.description || "No description available.",
-                        technologies: [repo.language].filter(Boolean), // Use primary language
+                        description: description || "No description available.",
+                        technologies: [repo.language].filter(Boolean),
                         github: repo.html_url,
-                        features: [], // Auto-fetched repos won't have detailed features list
+                        features: [],
                         color: 'default'
-                    }));
+                    };
+                }));
 
-                setAllProjects([...manualProjects, ...newProjects]);
+                setAllProjects([...manualProjects, ...projectsWithReadme]);
             } catch (error) {
                 console.error("Error fetching GitHub projects:", error);
-                // Fallback to manual projects only
                 setAllProjects(manualProjects);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -60,6 +95,12 @@ const ProjectsSection = () => {
             <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center text-star-white">
                 Project <span className="text-electric-blue">Nebula</span>
             </h2>
+
+            {loading && (
+                <div className="text-center mb-8">
+                    <p className="text-neon-teal animate-pulse">Scanning Deep Space for Projects... 🛸</p>
+                </div>
+            )}
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {allProjects.map((project, index) => (
