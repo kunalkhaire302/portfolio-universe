@@ -37,11 +37,13 @@ const ProjectsSection = () => {
                     .filter(repo => !manualProjects.some(mp => mp.github.toLowerCase() === repo.html_url.toLowerCase()))
                     .slice(0, 6);
 
-                // 2. Fetch READMEs in parallel
-                const projectsWithReadme = await Promise.all(visibleRepos.map(async (repo) => {
+                // 2. Fetch READMEs and Languages in parallel
+                const projectsWithDetails = await Promise.all(visibleRepos.map(async (repo) => {
                     let description = repo.description; // Default to existing description
+                    let languages = [repo.language].filter(Boolean); // Default to primary language
 
                     try {
+                        // Fetch README
                         const readmeResponse = await fetch(`https://api.github.com/repos/kunalkhaire302/${repo.name}/readme`, {
                             headers: { 'Accept': 'application/vnd.github.raw' }
                         });
@@ -63,15 +65,23 @@ const ProjectsSection = () => {
                                 description = cleanText.substring(0, 200) + '...';
                             }
                         }
+
+                        // Fetch Languages
+                        const languagesResponse = await fetch(repo.languages_url);
+                        if (languagesResponse.ok) {
+                            const languagesData = await languagesResponse.json();
+                            languages = Object.keys(languagesData).slice(0, 4); // Top 4 languages
+                        }
+
                     } catch (err) {
-                        console.warn(`Could not fetch README for ${repo.name}`);
+                        console.warn(`Could not fetch details for ${repo.name}`);
                     }
 
                     return {
                         id: `gh-${repo.id}`,
                         title: repo.name.replace(/-/g, ' ').replace(/_/g, ' '),
                         description: description || "No description available.",
-                        technologies: [repo.language].filter(Boolean),
+                        technologies: languages,
                         github: repo.html_url,
                         features: [],
                         color: 'default'
