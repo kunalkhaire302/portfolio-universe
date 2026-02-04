@@ -83,10 +83,6 @@ No bloat. Production-ready. [Peek at App.js](https://github.com/kunalkhaire302/p
 
 *(GIFs capture the motion—statics can't compete!)*
 
-| Hero Blast-Off | Projects Nebula | Mobile Orbit |
-| --- | --- | --- |
-| ![Hero GIF](https://via.placeholder.com/600x400/0a192f/64ffda?text=Hero+Solar+System+Orbiting) <br> *Intro blasts off with spinning planets!* | ![Projects GIF](https://via.placeholder.com/600x400/0a192f/00d4ff?text=Projects+Grid+Hover+Glow) <br> *Skills/projects glow on hover.* | ![Mobile GIF](https://via.placeholder.com/400x600/0a192f/ff6b35?text=Mobile+Responsive) <br> *Smooth on any screen size.* |
-
 > **Pro tip**: Fork & tweak colors in `tailwind.config.js`—launch your variant!
 
 ## ⚡ **Customize Your Universe: Make It Yours**
