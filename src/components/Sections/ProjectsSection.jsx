@@ -35,6 +35,7 @@ const ProjectsSection = () => {
                 let visibleRepos = data
                     .filter(repo => !repo.fork)
                     .filter(repo => !manualProjects.some(mp => mp.github.toLowerCase() === repo.html_url.toLowerCase()))
+                    .filter(repo => !repo.name.toLowerCase().includes('file-sharing')) // User requested exclusion
                     .slice(0, 6);
 
                 // 2. Fetch READMEs and Languages in parallel

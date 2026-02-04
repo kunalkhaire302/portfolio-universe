@@ -92,20 +92,7 @@ export const portfolioData = {
     ],
 
     projects: [
-        {
-            id: 1,
-            title: "File Sharing Website",
-            description: "Secure upload/download system with authentication and encryption",
-            technologies: ["HTML", "CSS", "JavaScript", "Node.js"],
-            github: "https://github.com/kunalkhaire302/File-Sharing",
-            features: [
-                "Secure file upload and download",
-                "User authentication",
-                "End-to-end encryption",
-            ],
-            color: "electric-blue",
-            icon: "FaLock",
-        },
+
         {
             id: 2,
             title: "Smart Guard: Attendance & Behaviour Analytics System",
