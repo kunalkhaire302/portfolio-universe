@@ -36,6 +36,7 @@ const ProjectsSection = () => {
                     .filter(repo => !repo.fork)
                     .filter(repo => !manualProjects.some(mp => mp.github.toLowerCase() === repo.html_url.toLowerCase()))
                     .filter(repo => !repo.name.toLowerCase().includes('file-sharing')) // Avoid duplicate with manual entry
+                    .filter(repo => !repo.name.toLowerCase().includes('craigslist')) // Avoid duplicate with manual entry
                     .slice(0, 6);
 
                 // 2. Fetch READMEs and Languages in parallel
