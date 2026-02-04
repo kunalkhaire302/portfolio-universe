@@ -89,7 +89,7 @@ const ProjectsSection = () => {
                     };
                 }));
 
-                setAllProjects([...manualProjects, ...projectsWithReadme]);
+                setAllProjects([...manualProjects, ...projectsWithDetails]);
             } catch (error) {
                 console.error("Error fetching GitHub projects:", error);
                 setAllProjects(manualProjects);
