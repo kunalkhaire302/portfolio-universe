@@ -3,7 +3,7 @@ import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
 
 const AboutSection = () => {
-    const { personalInfo, objective, education } = portfolioData;
+    const { objective, education } = portfolioData;
 
     return (
         <SectionContainer id="about" className="min-h-screen">

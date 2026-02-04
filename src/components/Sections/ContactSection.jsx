@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import { FaPaperPlane, FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
 import emailjs from 'emailjs-com';
 

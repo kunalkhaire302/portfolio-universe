@@ -7,7 +7,6 @@ import { FaGithub } from 'react-icons/fa';
 const ProjectsSection = () => {
     const { projects: manualProjects } = portfolioData;
     const [allProjects, setAllProjects] = React.useState(manualProjects);
-    const [loading, setLoading] = React.useState(true);
 
     const colorVariants = {
         'electric-blue': 'border-electric-blue text-electric-blue',
@@ -50,8 +49,6 @@ const ProjectsSection = () => {
                 console.error("Error fetching GitHub projects:", error);
                 // Fallback to manual projects only
                 setAllProjects(manualProjects);
-            } finally {
-                setLoading(false);
             }
         };
 
