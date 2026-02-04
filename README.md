@@ -79,9 +79,6 @@ EmailJS (Contact) + GitHub API (Projects)
 
 No bloat. Production-ready. [Peek at App.js](https://github.com/kunalkhaire302/portfolio-universe/blob/main/src/App.js).
 
-## 📸 **Stellar Screenshots: A Glimpse of the Galaxy**
-
-*(GIFs capture the motion—statics can't compete!)*
 
 > **Pro tip**: Fork & tweak colors in `tailwind.config.js`—launch your variant!
 
