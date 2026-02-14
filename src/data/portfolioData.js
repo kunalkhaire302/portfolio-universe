@@ -186,6 +186,13 @@ export const portfolioData = {
             date: "2025",
             description: "Completed comprehensive job simulation focused on GenAI-powered data analytics",
         },
+        {
+            id: 2,
+            title: "JPMorgan Chase & Co. — Software Engineering Job Simulation",
+            issuer: "JPMorgan Chase & Co.",
+            date: "2026",
+            description: "Awarded to Kunal Khaire for completing the Software Engineering Job Simulation on February 14, 2026, covering Project Setup, Kafka, H2, and REST API development.",
+        },
     ],
 };
 
