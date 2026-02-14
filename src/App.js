@@ -16,6 +16,7 @@ import SkillsSection from './components/Sections/SkillsSection';
 import ProjectsSection from './components/Sections/ProjectsSection';
 import ExperienceSection from './components/Sections/ExperienceSection';
 import CertificationSection from './components/Sections/CertificationSection';
+import ContactSection from './components/Sections/ContactSection';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
             <ProjectsSection />
             <ExperienceSection />
             <CertificationSection />
+            <ContactSection />
 
           </main>
 
