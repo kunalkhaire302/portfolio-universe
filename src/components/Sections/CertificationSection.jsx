@@ -13,7 +13,7 @@ const CertificationSection = () => {
                 Certification <span className="text-cert-gold">Star</span>
             </h2>
 
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center gap-8">
                 {certifications.map((cert, index) => (
                     <motion.div
                         key={cert.id}
