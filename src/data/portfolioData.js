@@ -176,6 +176,21 @@ export const portfolioData = {
             color: "project-purple",
             icon: "FaCog",
         },
+        {
+            id: 7,
+            title: "SmartCSV: Intelligent CSV Analytics Platform",
+            description: "Automated CSV processing and data insights system",
+            technologies: ["Python", "Flask", "Pandas", "NumPy", "Scikit-learn", "HTML", "CSS", "JavaScript", "Chart.js"],
+            github: "https://github.com/kunalkhaire302/SmartCSV",
+            features: [
+                "ETL pipeline for CSV data",
+                "Statistical analysis and visualization",
+                "AI-generated data summaries",
+                "Interactive analytics dashboard",
+            ],
+            color: "neon-teal",
+            icon: "FaChartBar",
+        },
     ],
 
     certifications: [
