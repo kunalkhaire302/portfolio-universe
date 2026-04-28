@@ -52,17 +52,22 @@ const Navigation = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
-            className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${scrolled ? 'bg-space-dark/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'
-                }`}
+            className={`fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-500 rounded-2xl ${scrolled 
+                ? 'bg-[#0a192f]/70 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] py-3 px-6' 
+                : 'bg-transparent py-5 px-6'
+            }`}
         >
-            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div className="flex justify-between items-center">
                 {/* Logo */}
                 <div
-                    className="text-2xl font-bold flex items-center gap-2 cursor-pointer text-star-white hover:text-neon-teal transition-colors"
+                    className="group text-2xl font-black flex items-center gap-2 cursor-pointer text-white"
                     onClick={() => scrollToSection('home')}
                 >
-                    <FaRocket className="text-neon-teal" />
-                    <span>Kunal<span className="text-neon-teal">.dev</span></span>
+                    <div className="relative">
+                        <FaRocket className="text-neon-teal group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300" />
+                        <div className="absolute inset-0 bg-neon-teal blur-md opacity-20 group-hover:opacity-50" />
+                    </div>
+                    <span className="tracking-tighter">KUNAL<span className="text-neon-teal">.</span>DEV</span>
                 </div>
 
                 {/* Desktop Menu */}
@@ -71,20 +76,14 @@ const Navigation = () => {
                         <button
                             key={link.name}
                             onClick={() => scrollToSection(link.to)}
-                            className={`text-sm font-medium tracking-wide transition-all duration-300 relative group ${activeSection === link.to ? 'text-neon-teal' : 'text-slate-300 hover:text-neon-teal'
+                            className={`text-[13px] font-bold uppercase tracking-widest transition-all duration-300 relative py-2 ${activeSection === link.to ? 'text-neon-teal' : 'text-slate-400 hover:text-white'
                                 }`}
                         >
-                            <span className="mr-1 text-neon-teal opacity-0 group-hover:opacity-100 transition-opacity">
-                                &lt;
-                            </span>
                             {link.name}
-                            <span className="ml-1 text-neon-teal opacity-0 group-hover:opacity-100 transition-opacity">
-                                /&gt;
-                            </span>
                             {activeSection === link.to && (
                                 <motion.span
-                                    layoutId="underline"
-                                    className="absolute left-0 bottom-[-5px] w-full h-[2px] bg-neon-teal"
+                                    layoutId="nav-dot"
+                                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-neon-teal shadow-[0_0_8px_#64ffda]"
                                 />
                             )}
                         </button>
@@ -93,7 +92,7 @@ const Navigation = () => {
                     <a
                         href="/resume.pdf"
                         download="Kunal_Khaire_Resume.pdf"
-                        className="btn-primary py-2 px-4 text-sm"
+                        className="bg-neon-teal/10 hover:bg-neon-teal text-neon-teal hover:text-slate-900 border border-neon-teal/50 px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all duration-300 ml-4"
                     >
                         Resume
                     </a>
@@ -103,7 +102,7 @@ const Navigation = () => {
                 <div className="md:hidden">
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="text-2xl text-neon-teal focus:outline-none"
+                        className="p-2 text-2xl text-neon-teal bg-white/5 rounded-lg border border-white/10"
                     >
                         {isOpen ? <FaTimes /> : <FaBars />}
                     </button>

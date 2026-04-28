@@ -53,55 +53,56 @@ const ProjectsSection = () => {
                 Project <span className="text-electric-blue">Nebula</span>
             </h2>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {projects.map((project, index) => (
                     <motion.div
                         key={project.id}
                         initial={{ y: 50, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
-                        transition={{ delay: index * 0.1 }}
-                        className={`glass-card p-6 flex flex-col h-full transition-all duration-300 ${bgVariants[project.color] || ''}`}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className={`group relative glass-morphism p-8 flex flex-col h-full rounded-2xl transition-all duration-500 hover:-translate-y-2 ${bgVariants[project.color] || ''}`}
                     >
-                        <div className="flex justify-between items-start mb-4">
-                            <div className={`p-3 rounded-full bg-opacity-10 bg-white ${colorVariants[project.color] || ''}`}>
-                                <span className="text-2xl">
-                                    {iconMap[project.icon] || <FaRocket />}
-                                </span>
+                        {/* Decorative Gradient Blob */}
+                        <div className={`absolute -top-10 -right-10 w-32 h-32 blur-3xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-full ${project.color === 'electric-blue' ? 'bg-blue-500' : project.color === 'neon-teal' ? 'bg-teal-500' : 'bg-purple-500'}`} />
+
+                        <div className="flex justify-between items-start mb-8">
+                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl border border-white/10 bg-white/5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 ${colorVariants[project.color] || ''}`}>
+                                {iconMap[project.icon] || <FaRocket />}
                             </div>
-                            <div className="flex gap-4">
+                            <div className="flex gap-3">
                                 {project.github && (
-                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-2xl text-slate-400 hover:text-white transition-colors" title="GitHub Repository">
-                                        <FaGithub />
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all" title="GitHub">
+                                        <FaGithub className="text-xl" />
                                     </a>
                                 )}
                                 {project.live && (
-                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="text-2xl text-slate-400 hover:text-white transition-colors" title="Live Demo">
-                                        <FaExternalLinkAlt />
+                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all" title="Live Demo">
+                                        <FaExternalLinkAlt className="text-xl" />
                                     </a>
                                 )}
                             </div>
                         </div>
 
-                        <h3 className="text-xl font-bold text-star-white mb-2 capitalize">{project.title}</h3>
-                        <p className="text-slate-400 text-sm mb-4 flex-grow line-clamp-3">{project.description}</p>
+                        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-neon-teal transition-colors">{project.title}</h3>
+                        <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">{project.description}</p>
 
-                        {project.features.length > 0 && (
-                            <div className="mb-4">
-                                <ul className="list-disc list-inside text-sm text-slate-500">
-                                    {project.features.map((feature, i) => (
-                                        <li key={i}>{feature}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-
-                        <div className="flex flex-wrap gap-2 mt-auto">
-                            {project.technologies.map((tech) => (
-                                <span key={tech} className="text-xs font-mono px-2 py-1 rounded bg-space-light/10 text-neon-teal">
+                        <div className="flex flex-wrap gap-2 mb-6">
+                            {project.technologies.slice(0, 4).map((tech) => (
+                                <span key={tech} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">
                                     {tech}
                                 </span>
                             ))}
                         </div>
+
+                        <a 
+                            href={project.live || project.github} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="w-full py-3 rounded-xl bg-white/5 border border-white/10 text-center text-sm font-bold uppercase tracking-widest text-white hover:bg-neon-teal hover:text-slate-900 hover:border-neon-teal transition-all duration-300"
+                        >
+                            Explore Project
+                        </a>
                     </motion.div>
                 ))}
             </div>

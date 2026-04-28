@@ -24,62 +24,86 @@ const LoadingScreen = ({ onLoadingComplete }) => {
 
     return (
         <motion.div
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-space-dark overflow-hidden"
-            exit={{ opacity: 0, transition: { duration: 1 } }}
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#030712] overflow-hidden"
+            exit={{ opacity: 0, scale: 1.1, transition: { duration: 0.8, ease: "circOut" } }}
         >
-            {/* Background Stars for Loading Screen */}
+            {/* Hyperdrive Stars */}
             <div className="absolute inset-0 overflow-hidden">
-                {[...Array(20)].map((_, i) => (
-                    <div
+                {[...Array(50)].map((_, i) => (
+                    <motion.div
                         key={i}
-                        className="absolute rounded-full bg-star-white"
+                        initial={{ opacity: 0 }}
+                        animate={{ 
+                            opacity: [0, 1, 0],
+                            scaleX: progress > 70 ? [1, 20] : 1,
+                            x: progress > 70 ? [0, 1000] : 0
+                        }}
+                        transition={{ 
+                            duration: progress > 70 ? 0.2 : Math.random() * 3 + 2,
+                            repeat: Infinity,
+                            delay: Math.random() * 5
+                        }}
+                        className="absolute rounded-full bg-white"
                         style={{
-                            width: Math.random() * 3 + 'px',
-                            height: Math.random() * 3 + 'px',
+                            width: '2px',
+                            height: '2px',
                             top: Math.random() * 100 + '%',
                             left: Math.random() * 100 + '%',
-                            opacity: Math.random(),
-                            animation: `twinkle ${Math.random() * 2 + 1}s infinite`
                         }}
                     />
                 ))}
             </div>
 
             <div className="relative z-10 flex flex-col items-center">
-                {/* Rocket Animation */}
+                {/* Rocket / Logo */}
                 <motion.div
                     animate={{
-                        y: [-10, 10, -10],
-                        rotate: [0, 5, -5, 0],
+                        y: [-5, 5, -5],
                     }}
                     transition={{
-                        duration: 2,
+                        duration: 1.5,
                         repeat: Infinity,
                         ease: "easeInOut"
                     }}
-                    className="mb-8 text-6xl text-planet-orange drop-shadow-[0_0_15px_rgba(255,107,53,0.5)]"
+                    className="mb-12 relative"
                 >
-                    <FaRocket />
+                    <div className="text-7xl text-neon-teal filter drop-shadow-[0_0_20px_rgba(100,255,218,0.5)]">
+                        <FaRocket className={progress > 80 ? "rotate-45 transition-transform duration-500" : ""} />
+                    </div>
+                    {progress > 50 && (
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-1 h-20 bg-gradient-to-t from-transparent via-neon-teal/50 to-transparent blur-sm"
+                        />
+                    )}
                 </motion.div>
 
                 {/* Text */}
-                <h2 className="text-xl md:text-2xl font-bold text-star-white mb-6 tracking-wider">
-                    <span className="text-neon-teal">Entering</span> Kunal's Developer Universe...
-                </h2>
+                <div className="text-center mb-8">
+                    <h2 className="text-xs font-black uppercase tracking-[0.5em] text-slate-500 mb-2">
+                        System Initialization
+                    </h2>
+                    <div className="flex items-center justify-center gap-2">
+                        <span className="text-2xl font-bold text-white tracking-tight">
+                            {progress < 30 ? "Booting..." : progress < 70 ? "Loading Universe..." : "Jump in 3.. 2.. 1.."}
+                        </span>
+                    </div>
+                </div>
 
-                {/* Progress Bar Container */}
-                <div className="w-64 h-2 bg-space-blue rounded-full overflow-hidden border border-space-blue/50">
+                {/* Progress Bar */}
+                <div className="relative w-72 h-[2px] bg-white/5 rounded-full overflow-hidden">
                     <motion.div
-                        className="h-full bg-gradient-to-r from-neon-teal to-electric-blue"
+                        className="h-full bg-neon-teal shadow-[0_0_15px_#64ffda]"
                         initial={{ width: 0 }}
                         animate={{ width: `${progress}%` }}
-                        transition={{ ease: "linear" }}
+                        transition={{ ease: "easeOut" }}
                     />
                 </div>
 
-                <p className="mt-2 text-sm text-slate-400 font-mono">
-                    {progress}% Loaded
-                </p>
+                <div className="mt-4 font-mono text-[10px] text-neon-teal/60 tracking-widest uppercase">
+                    Sector {Math.floor(progress * 1.2)} / 100
+                </div>
             </div>
         </motion.div>
     );
