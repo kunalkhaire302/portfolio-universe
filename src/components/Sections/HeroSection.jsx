@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaRocket } from 'react-icons/fa';
 import portfolioData from '../../data/portfolioData';
 
 const HeroSection = () => {
