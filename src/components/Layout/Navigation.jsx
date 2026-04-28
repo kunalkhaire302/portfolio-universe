@@ -105,12 +105,12 @@ const Navigation = () => {
                     </div>
 
                     {/* Desktop Menu */}
-                    <div className="hidden lg:flex items-center justify-center flex-1 px-4 gap-0.5 xl:gap-1">
+                    <div className="hidden lg:flex items-center justify-center flex-1 px-1 xl:px-4 gap-0 xl:gap-1">
                         {navLinks.map((link) => (
                             <button
                                 key={link.name}
                                 onClick={() => scrollToSection(link.to)}
-                                className={`relative px-4 py-2 text-[10px] xl:text-[11px] font-black uppercase tracking-[0.12em] xl:tracking-[0.15em] transition-all duration-300 rounded-full whitespace-nowrap ${
+                                className={`relative px-2 lg:px-3 xl:px-4 py-2 text-[10px] xl:text-[11px] font-black uppercase tracking-[0.12em] xl:tracking-[0.15em] transition-all duration-300 rounded-full whitespace-nowrap ${
                                     activeSection === link.to 
                                     ? 'text-slate-900' 
                                     : 'text-slate-400 hover:text-white'
@@ -129,13 +129,13 @@ const Navigation = () => {
                     </div>
 
                     {/* Right Actions */}
-                    <div className="flex-shrink-0 flex items-center gap-2 md:gap-4">
+                    <div className="flex-shrink-0 flex items-center gap-2 md:gap-3">
                         <a
                             href="/resume.pdf"
                             download="Kunal_Khaire_Resume.pdf"
-                            className="hidden sm:flex relative group overflow-hidden px-5 md:px-6 py-2 rounded-full border border-white/10 hover:border-neon-teal/50 transition-all duration-300"
+                            className="hidden sm:flex relative group overflow-hidden px-4 md:px-5 xl:px-6 py-2 rounded-full border border-white/10 hover:border-neon-teal/50 transition-all duration-300"
                         >
-                            <span className="relative z-10 text-[10px] font-black uppercase tracking-widest text-white group-hover:text-neon-teal transition-colors">Resume</span>
+                            <span className="relative z-10 text-[9px] xl:text-[10px] font-black uppercase tracking-widest text-white group-hover:text-neon-teal transition-colors">Resume</span>
                             <div className="absolute inset-0 bg-white/5 group-hover:bg-neon-teal/5 transition-colors" />
                         </a>
 
