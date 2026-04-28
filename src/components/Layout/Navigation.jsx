@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBars, FaTimes, FaRocket } from 'react-icons/fa';
+import { FaBars, FaTimes, FaRocket, FaChevronRight } from 'react-icons/fa';
 
 const navLinks = [
     { name: 'Home', to: 'home' },
@@ -17,156 +17,205 @@ const Navigation = () => {
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
 
-    // Handle scroll effect for navbar background
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+    // Precision Scroll Spy logic
+    const handleScroll = useCallback(() => {
+        setScrolled(window.scrollY > 20);
 
-            // Determine active section based on scroll position
-            const sections = navLinks.map(link => document.getElementById(link.to));
-            const scrollPosition = window.scrollY + 100; // Offset
+        const sections = navLinks.map(link => document.getElementById(link.to));
+        const viewportHeight = window.innerHeight;
+        const triggerPoint = viewportHeight * 0.3; // Detect section when it's 30% from the top
 
-            for (const section of sections) {
-                if (section &&
-                    section.offsetTop <= scrollPosition &&
-                    (section.offsetTop + section.offsetHeight) > scrollPosition) {
-                    setActiveSection(section.id);
-                }
+        let currentSection = 'home';
+        
+        for (const section of sections) {
+            if (!section) continue;
+            const rect = section.getBoundingClientRect();
+            // If the top of the section is above the trigger point
+            if (rect.top <= triggerPoint) {
+                currentSection = section.id;
             }
-        };
+        }
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        // Special case for bottom of the page
+        if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
+            currentSection = navLinks[navLinks.length - 1].to;
+        }
+
+        setActiveSection(currentSection);
     }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        // Initial call to set active section on load
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [handleScroll]);
 
     const scrollToSection = (id) => {
         const element = document.getElementById(id);
         if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+            const offset = 80; // Account for fixed header
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
             setIsOpen(false);
         }
     };
 
+    // Body scroll lock when mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+    }, [isOpen]);
+
     return (
-        <div className="fixed top-6 left-0 w-full flex justify-center z-50 px-4">
-            <motion.nav
-                initial={{ y: -100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-                className={`flex items-center justify-between gap-8 py-2 px-3 md:px-6 rounded-2xl border transition-all duration-500 ${
-                    scrolled 
-                    ? 'bg-[#0a192f]/80 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] w-full max-w-5xl' 
-                    : 'bg-white/5 backdrop-blur-md border-white/5 w-full max-w-6xl'
-                }`}
-            >
-                {/* Logo */}
-                <div
-                    className="group flex items-center gap-2 cursor-pointer py-2"
-                    onClick={() => scrollToSection('home')}
+        <>
+            <div className="fixed top-0 left-0 w-full flex justify-center z-[100] p-4 md:p-6 pointer-events-none">
+                <motion.nav
+                    initial={{ y: -100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 1, type: "spring", stiffness: 100 }}
+                    className={`pointer-events-auto flex items-center justify-between py-2 px-3 md:px-6 rounded-full border transition-all duration-500 w-full max-w-5xl ${
+                        scrolled 
+                        ? 'bg-space-dark/60 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)]' 
+                        : 'bg-white/5 backdrop-blur-md border-white/5'
+                    }`}
                 >
-                    <div className="relative w-10 h-10 flex items-center justify-center bg-neon-teal/10 rounded-xl border border-neon-teal/20 group-hover:border-neon-teal/50 transition-colors">
-                        <FaRocket className="text-neon-teal group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300" />
-                        <div className="absolute inset-0 bg-neon-teal blur-md opacity-0 group-hover:opacity-20 transition-opacity" />
-                    </div>
-                    <span className="text-white font-black tracking-tighter text-xl hidden sm:block">
-                        KUNAL<span className="text-neon-teal">.</span>DEV
-                    </span>
-                </div>
-
-                {/* Desktop Menu */}
-                <div className="hidden md:flex items-center bg-white/5 rounded-xl border border-white/5 p-1">
-                    {navLinks.slice(0, 4).map((link) => (
-                        <button
-                            key={link.name}
-                            onClick={() => scrollToSection(link.to)}
-                            className={`px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 rounded-lg ${
-                                activeSection === link.to 
-                                ? 'bg-neon-teal text-slate-900 shadow-[0_0_20px_rgba(100,255,218,0.3)]' 
-                                : 'text-slate-400 hover:text-white hover:bg-white/5'
-                            }`}
-                        >
-                            {link.name}
-                        </button>
-                    ))}
-                    
-                    {/* More Links Dropdown or just the rest */}
-                    <div className="h-4 w-px bg-white/10 mx-2" />
-                    
-                    {navLinks.slice(4).map((link) => (
-                        <button
-                            key={link.name}
-                            onClick={() => scrollToSection(link.to)}
-                            className={`px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 rounded-lg ${
-                                activeSection === link.to 
-                                ? 'text-neon-teal' 
-                                : 'text-slate-500 hover:text-white'
-                            }`}
-                        >
-                            {link.name}
-                        </button>
-                    ))}
-                </div>
-
-                {/* Right Side Actions */}
-                <div className="flex items-center gap-4">
-                    <a
-                        href="/resume.pdf"
-                        download="Kunal_Khaire_Resume.pdf"
-                        className="hidden lg:flex items-center gap-2 bg-white text-slate-900 px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-neon-teal transition-all duration-300"
+                    {/* Logo */}
+                    <div
+                        className="group flex items-center gap-2 md:gap-3 cursor-pointer"
+                        onClick={() => scrollToSection('home')}
                     >
-                        Resume
-                    </a>
+                        <div className="relative w-9 h-9 md:w-10 md:h-10 flex items-center justify-center bg-neon-teal/10 rounded-full border border-neon-teal/20 group-hover:border-neon-teal/50 transition-all duration-300">
+                            <FaRocket className="text-neon-teal group-hover:-rotate-12 transition-transform text-sm md:text-base" />
+                            <div className="absolute inset-0 bg-neon-teal rounded-full blur-lg opacity-0 group-hover:opacity-20 transition-opacity" />
+                        </div>
+                        <span className="text-white font-black tracking-tighter text-base md:text-lg">
+                            KUNAL<span className="text-neon-teal">.</span>DEV
+                        </span>
+                    </div>
 
-                    {/* Mobile Menu Toggle */}
-                    <div className="md:hidden">
+                    {/* Desktop Menu */}
+                    <div className="hidden lg:flex items-center gap-1">
+                        {navLinks.map((link) => (
+                            <button
+                                key={link.name}
+                                onClick={() => scrollToSection(link.to)}
+                                className={`relative px-4 py-2 text-[11px] font-black uppercase tracking-[0.15em] transition-all duration-300 rounded-full ${
+                                    activeSection === link.to 
+                                    ? 'text-slate-900' 
+                                    : 'text-slate-400 hover:text-white'
+                                }`}
+                            >
+                                <span className="relative z-10">{link.name}</span>
+                                {activeSection === link.to && (
+                                    <motion.div
+                                        layoutId="nav-pill"
+                                        className="absolute inset-0 bg-neon-teal rounded-full shadow-[0_0_20px_rgba(100,255,218,0.4)]"
+                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                    />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Right Actions */}
+                    <div className="flex items-center gap-2 md:gap-4">
+                        <a
+                            href="/resume.pdf"
+                            download="Kunal_Khaire_Resume.pdf"
+                            className="hidden sm:flex relative group overflow-hidden px-5 md:px-6 py-2 rounded-full border border-white/10 hover:border-neon-teal/50 transition-all duration-300"
+                        >
+                            <span className="relative z-10 text-[10px] font-black uppercase tracking-widest text-white group-hover:text-neon-teal transition-colors">Resume</span>
+                            <div className="absolute inset-0 bg-white/5 group-hover:bg-neon-teal/5 transition-colors" />
+                        </a>
+
+                        {/* Mobile Toggle */}
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="p-3 text-xl text-neon-teal bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-colors"
+                            className="lg:hidden p-2.5 text-lg text-neon-teal bg-white/5 rounded-full border border-white/10 hover:bg-white/10 transition-colors z-[110]"
                         >
                             {isOpen ? <FaTimes /> : <FaBars />}
                         </button>
                     </div>
-                </div>
-            </motion.nav>
+                </motion.nav>
+            </div>
 
-            {/* Mobile Menu Overlay */}
+            {/* Premium Full-Screen Mobile Menu */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        className="fixed inset-4 top-24 bottom-4 bg-[#0a192f]/95 backdrop-blur-3xl rounded-3xl border border-white/10 z-[60] flex flex-col p-8 md:hidden shadow-2xl"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[90] bg-[#030712]/95 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden"
                     >
-                        <div className="flex flex-col gap-4 overflow-y-auto">
-                            {navLinks.map((link) => (
-                                <button
-                                    key={link.name}
-                                    onClick={() => scrollToSection(link.to)}
-                                    className={`text-left py-4 px-6 rounded-2xl text-xl font-bold border transition-all ${
-                                        activeSection === link.to 
-                                        ? 'bg-neon-teal/10 border-neon-teal/30 text-neon-teal' 
-                                        : 'bg-white/5 border-transparent text-slate-400'
-                                    }`}
-                                >
-                                    {link.name}
-                                </button>
+                        {/* Background Stars Decoration */}
+                        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+                            {[...Array(20)].map((_, i) => (
+                                <div 
+                                    key={i}
+                                    className="absolute bg-white rounded-full"
+                                    style={{
+                                        width: Math.random() * 2 + 'px',
+                                        height: Math.random() * 2 + 'px',
+                                        top: Math.random() * 100 + '%',
+                                        left: Math.random() * 100 + '%',
+                                        boxShadow: '0 0 10px white'
+                                    }}
+                                />
                             ))}
                         </div>
-                        
-                        <div className="mt-auto pt-8">
-                            <a
-                                href="/resume.pdf"
-                                download="Kunal_Khaire_Resume.pdf"
-                                className="w-full flex justify-center items-center py-5 bg-neon-teal text-slate-900 rounded-2xl font-black uppercase tracking-widest"
+
+                        <nav className="relative z-10 flex flex-col items-center gap-4 w-full px-10">
+                            {navLinks.map((link, i) => (
+                                <motion.button
+                                    key={link.name}
+                                    initial={{ x: -50, opacity: 0 }}
+                                    animate={{ x: 0, opacity: 1 }}
+                                    transition={{ delay: i * 0.1, duration: 0.5 }}
+                                    onClick={() => scrollToSection(link.to)}
+                                    className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5"
+                                >
+                                    <span className={`text-2xl font-black uppercase tracking-tighter transition-all ${
+                                        activeSection === link.to ? 'text-neon-teal text-3xl' : 'text-slate-500 group-hover:text-white'
+                                    }`}>
+                                        {link.name}
+                                    </span>
+                                    <FaChevronRight className={`transition-transform ${
+                                        activeSection === link.to ? 'text-neon-teal translate-x-2' : 'text-slate-800'
+                                    }`} />
+                                </motion.button>
+                            ))}
+                            
+                            <motion.div
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.8 }}
+                                className="mt-12 w-full max-w-xs"
                             >
-                                Download Resume
-                            </a>
-                        </div>
+                                <a
+                                    href="/resume.pdf"
+                                    download="Kunal_Khaire_Resume.pdf"
+                                    className="w-full flex justify-center items-center py-5 bg-neon-teal text-slate-900 rounded-2xl font-black uppercase tracking-widest text-sm shadow-[0_0_40px_rgba(100,255,218,0.3)]"
+                                >
+                                    Download Resume
+                                </a>
+                            </motion.div>
+                        </nav>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </div>
+        </>
     );
 };
 
