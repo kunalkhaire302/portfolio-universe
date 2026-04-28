@@ -2,10 +2,38 @@ import React from 'react';
 import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
 import { motion } from 'framer-motion';
-import { FaGithub } from 'react-icons/fa';
+import { 
+    FaGithub, 
+    FaExternalLinkAlt, 
+    FaRocket, 
+    FaChartLine, 
+    FaShoppingCart, 
+    FaLock, 
+    FaUserShield, 
+    FaCog, 
+    FaChartBar, 
+    FaHome,
+    FaWallet,
+    FaLeaf,
+    FaUniversity 
+} from 'react-icons/fa';
 
 const ProjectsSection = () => {
     const { projects } = portfolioData;
+
+    const iconMap = {
+        'FaRocket': <FaRocket />,
+        'FaChartLine': <FaChartLine />,
+        'FaShoppingCart': <FaShoppingCart />,
+        'FaLock': <FaLock />,
+        'FaUserShield': <FaUserShield />,
+        'FaCog': <FaCog />,
+        'FaChartBar': <FaChartBar />,
+        'FaHome': <FaHome />,
+        'FaWallet': <FaWallet />,
+        'FaLeaf': <FaLeaf />,
+        'FaUniversity': <FaUniversity />,
+    };
 
     const colorVariants = {
         'electric-blue': 'border-electric-blue text-electric-blue',
@@ -36,11 +64,22 @@ const ProjectsSection = () => {
                     >
                         <div className="flex justify-between items-start mb-4">
                             <div className={`p-3 rounded-full bg-opacity-10 bg-white ${colorVariants[project.color] || ''}`}>
-                                <span className="text-2xl">🚀</span>
+                                <span className="text-2xl">
+                                    {iconMap[project.icon] || <FaRocket />}
+                                </span>
                             </div>
-                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-2xl text-slate-400 hover:text-white transition-colors">
-                                <FaGithub />
-                            </a>
+                            <div className="flex gap-4">
+                                {project.github && (
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-2xl text-slate-400 hover:text-white transition-colors" title="GitHub Repository">
+                                        <FaGithub />
+                                    </a>
+                                )}
+                                {project.live && (
+                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="text-2xl text-slate-400 hover:text-white transition-colors" title="Live Demo">
+                                        <FaExternalLinkAlt />
+                                    </a>
+                                )}
+                            </div>
                         </div>
 
                         <h3 className="text-xl font-bold text-star-white mb-2 capitalize">{project.title}</h3>
