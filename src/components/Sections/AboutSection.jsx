@@ -10,14 +10,23 @@ const AboutSection = () => {
         <SectionContainer id="about" className="min-h-screen">
             <div className="grid md:grid-cols-2 gap-12 items-center">
                 {/* Planet Image */}
-                <div className="relative h-64 md:h-96 w-full flex items-center justify-center">
-                    <div className="relative w-64 h-64 md:w-80 md:h-80 group">
-                        <div className="absolute inset-0 bg-blue-500 rounded-full blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-                        <img 
-                            src={planetImg} 
-                            alt="Planet" 
-                            className="w-full h-full object-cover rounded-full shadow-[0_0_50px_rgba(0,112,255,0.4)] animate-spin-slow"
-                        />
+                <div className="relative h-72 md:h-[450px] w-full flex items-center justify-center">
+                    <div className="relative w-64 h-64 md:w-[400px] md:h-[400px] group">
+                        {/* Multiple glow layers for depth */}
+                        <div className="absolute inset-0 bg-blue-600 rounded-full blur-[80px] opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
+                        <div className="absolute inset-[-20px] bg-blue-400 rounded-full blur-[40px] opacity-10" />
+                        
+                        {/* The Image */}
+                        <div className="relative w-full h-full rounded-full overflow-hidden shadow-[0_0_80px_rgba(30,144,255,0.3)] animate-spin-slow">
+                            <img 
+                                src={planetImg} 
+                                alt="Earth" 
+                                className="w-full h-full object-cover scale-110" 
+                            />
+                        </div>
+
+                        {/* Glossy Overlay for 3D effect */}
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
                     </div>
                 </div>
 
