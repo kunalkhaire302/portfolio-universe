@@ -10,6 +10,7 @@ const navLinks = [
     { name: 'Experience', to: 'experience' },
     { name: 'Certifications', to: 'certifications' },
     { name: 'Contact', to: 'contact' },
+    { name: 'Resume', isDownload: true, href: '/resume.pdf', downloadName: 'Kunal_Khaire_Resume.pdf' },
 ];
 
 const Navigation = () => {
@@ -38,7 +39,8 @@ const Navigation = () => {
 
         // Special case for bottom of the page
         if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
-            currentSection = navLinks[navLinks.length - 1].to;
+            const lastSection = [...navLinks].reverse().find(link => !link.isDownload);
+            if (lastSection) currentSection = lastSection.to;
         }
 
         setActiveSection(currentSection);
@@ -107,37 +109,40 @@ const Navigation = () => {
                     {/* Desktop Menu */}
                     <div className="hidden lg:flex items-center justify-center flex-1 px-1 xl:px-4 gap-0 xl:gap-1">
                         {navLinks.map((link) => (
-                            <button
-                                key={link.name}
-                                onClick={() => scrollToSection(link.to)}
-                                className={`relative px-2 lg:px-3 xl:px-4 py-2 text-[10px] xl:text-[11px] font-black uppercase tracking-[0.12em] xl:tracking-[0.15em] transition-all duration-300 rounded-full whitespace-nowrap ${
-                                    activeSection === link.to 
-                                    ? 'text-slate-900' 
-                                    : 'text-slate-400 hover:text-white'
-                                }`}
-                            >
-                                <span className="relative z-10">{link.name}</span>
-                                {activeSection === link.to && (
-                                    <motion.div
-                                        layoutId="nav-pill"
-                                        className="absolute inset-0 bg-neon-teal rounded-full shadow-[0_0_20px_rgba(100,255,218,0.4)]"
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                    />
-                                )}
-                            </button>
+                            link.isDownload ? (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    download={link.downloadName}
+                                    className="relative px-2 lg:px-3 xl:px-4 py-2 text-[10px] xl:text-[11px] font-black uppercase tracking-[0.12em] xl:tracking-[0.15em] transition-all duration-300 rounded-full whitespace-nowrap text-slate-400 hover:text-white"
+                                >
+                                    <span className="relative z-10">{link.name}</span>
+                                </a>
+                            ) : (
+                                <button
+                                    key={link.name}
+                                    onClick={() => scrollToSection(link.to)}
+                                    className={`relative px-2 lg:px-3 xl:px-4 py-2 text-[10px] xl:text-[11px] font-black uppercase tracking-[0.12em] xl:tracking-[0.15em] transition-all duration-300 rounded-full whitespace-nowrap ${
+                                        activeSection === link.to 
+                                        ? 'text-slate-900' 
+                                        : 'text-slate-400 hover:text-white'
+                                    }`}
+                                >
+                                    <span className="relative z-10">{link.name}</span>
+                                    {activeSection === link.to && (
+                                        <motion.div
+                                            layoutId="nav-pill"
+                                            className="absolute inset-0 bg-neon-teal rounded-full shadow-[0_0_20px_rgba(100,255,218,0.4)]"
+                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                        />
+                                    )}
+                                </button>
+                            )
                         ))}
                     </div>
 
                     {/* Right Actions */}
                     <div className="flex-shrink-0 flex items-center gap-2 md:gap-3">
-                        <a
-                            href="/resume.pdf"
-                            download="Kunal_Khaire_Resume.pdf"
-                            className="hidden sm:flex relative group overflow-hidden px-4 md:px-5 xl:px-6 py-2 rounded-full border border-white/10 hover:border-neon-teal/50 transition-all duration-300"
-                        >
-                            <span className="relative z-10 text-[9px] xl:text-[10px] font-black uppercase tracking-widest text-white group-hover:text-neon-teal transition-colors">Resume</span>
-                            <div className="absolute inset-0 bg-white/5 group-hover:bg-neon-teal/5 transition-colors" />
-                        </a>
 
                         {/* Mobile Toggle */}
                         <button
@@ -178,39 +183,41 @@ const Navigation = () => {
 
                         <nav className="relative z-10 flex flex-col items-center gap-4 w-full px-10">
                             {navLinks.map((link, i) => (
-                                <motion.button
-                                    key={link.name}
-                                    initial={{ x: -50, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ delay: i * 0.1, duration: 0.5 }}
-                                    onClick={() => scrollToSection(link.to)}
-                                    className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5"
-                                >
-                                    <span className={`text-2xl font-black uppercase tracking-tighter transition-all ${
-                                        activeSection === link.to ? 'text-neon-teal text-3xl' : 'text-slate-500 group-hover:text-white'
-                                    }`}>
-                                        {link.name}
-                                    </span>
-                                    <FaChevronRight className={`transition-transform ${
-                                        activeSection === link.to ? 'text-neon-teal translate-x-2' : 'text-slate-800'
-                                    }`} />
-                                </motion.button>
+                                link.isDownload ? (
+                                    <motion.a
+                                        key={link.name}
+                                        initial={{ x: -50, opacity: 0 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        transition={{ delay: i * 0.1, duration: 0.5 }}
+                                        href={link.href}
+                                        download={link.downloadName}
+                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5"
+                                    >
+                                        <span className="text-2xl font-black uppercase tracking-tighter transition-all text-slate-500 group-hover:text-white">
+                                            {link.name}
+                                        </span>
+                                        <FaChevronRight className="transition-transform text-slate-800 group-hover:text-white" />
+                                    </motion.a>
+                                ) : (
+                                    <motion.button
+                                        key={link.name}
+                                        initial={{ x: -50, opacity: 0 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        transition={{ delay: i * 0.1, duration: 0.5 }}
+                                        onClick={() => scrollToSection(link.to)}
+                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5"
+                                    >
+                                        <span className={`text-2xl font-black uppercase tracking-tighter transition-all ${
+                                            activeSection === link.to ? 'text-neon-teal text-3xl' : 'text-slate-500 group-hover:text-white'
+                                        }`}>
+                                            {link.name}
+                                        </span>
+                                        <FaChevronRight className={`transition-transform ${
+                                            activeSection === link.to ? 'text-neon-teal translate-x-2' : 'text-slate-800 group-hover:text-white'
+                                        }`} />
+                                    </motion.button>
+                                )
                             ))}
-                            
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.8 }}
-                                className="mt-12 w-full max-w-xs"
-                            >
-                                <a
-                                    href="/resume.pdf"
-                                    download="Kunal_Khaire_Resume.pdf"
-                                    className="w-full flex justify-center items-center py-5 bg-neon-teal text-slate-900 rounded-2xl font-black uppercase tracking-widest text-sm shadow-[0_0_40px_rgba(100,255,218,0.3)]"
-                                >
-                                    Download Resume
-                                </a>
-                            </motion.div>
                         </nav>
                     </motion.div>
                 )}
