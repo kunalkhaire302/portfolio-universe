@@ -46,6 +46,19 @@
   .glass-card {
     @apply bg-space-blue bg-opacity-30 backdrop-blur-md border border-star-white border-opacity-10 rounded-lg shadow-xl;
   }
+  .btn-outline {
+    @apply px-6 py-3 bg-transparent border-2 border-planet-orange text-planet-orange rounded hover:bg-planet-orange hover:bg-opacity-10 transition-all duration-300 font-medium tracking-wide;
+  }
+}
+
+/* Custom Animations */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 100s linear infinite;
 }
 
 /* Star twinkling animation */
@@ -59,6 +72,14 @@
   animation: twinkle var(--duration, 2s) infinite ease-in-out;
 }
 
+/* Glassmorphism utility */
+.glass-morphism {
+  background: rgba(13, 17, 23, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* Neon Glow Effects */
 .text-glow {
   text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
@@ -66,4 +87,12 @@
 
 .box-glow {
   box-shadow: 0 0 20px rgba(100, 255, 218, 0.1);
+}
+
+.glow-blue {
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+}
+
+.glow-orange {
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
+import planetImg from '../../assets/images/planet.png';
 
 const AboutSection = () => {
     const { objective, education } = portfolioData;
@@ -8,10 +9,15 @@ const AboutSection = () => {
     return (
         <SectionContainer id="about" className="min-h-screen">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-                {/* Planet/Globe Placeholder */}
+                {/* Planet Image */}
                 <div className="relative h-64 md:h-96 w-full flex items-center justify-center">
-                    <div className="w-48 h-48 md:w-80 md:h-80 rounded-full bg-gradient-to-tr from-blue-900 to-green-500 shadow-2xl animate-pulse box-glow flex items-center justify-center border-4 border-opacity-20 border-white">
-                        <span className="text-4xl">🌍</span>
+                    <div className="relative w-64 h-64 md:w-80 md:h-80 group">
+                        <div className="absolute inset-0 bg-blue-500 rounded-full blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+                        <img 
+                            src={planetImg} 
+                            alt="Planet" 
+                            className="w-full h-full object-cover rounded-full shadow-[0_0_50px_rgba(0,112,255,0.4)] animate-spin-slow"
+                        />
                     </div>
                 </div>
 

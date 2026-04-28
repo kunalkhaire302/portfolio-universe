@@ -32,11 +32,19 @@ const SkillsSection = () => {
                         <h3 className="text-xl font-bold text-neon-teal mb-6 border-b border-white/10 pb-2">{category}</h3>
                         <div className="flex flex-wrap gap-4">
                             {items.map((skill) => (
-                                <div key={skill.name} className="flex flex-col items-center gap-2 group cursor-pointer">
-                                    <div className="w-12 h-12 rounded-full bg-space-light/10 flex items-center justify-center text-2xl group-hover:bg-neon-teal group-hover:text-space-dark transition-all duration-300">
+                                <div key={skill.name} className="relative flex flex-col items-center gap-2 group cursor-pointer">
+                                    <motion.div 
+                                        whileHover={{ y: -5 }}
+                                        className="w-14 h-14 rounded-xl bg-space-light/10 flex items-center justify-center text-3xl group-hover:bg-neon-teal group-hover:text-space-dark group-hover:shadow-[0_0_20px_rgba(100,255,218,0.3)] transition-all duration-300"
+                                    >
                                         <IconComponent name={skill.icon} />
+                                    </motion.div>
+                                    <span className="text-xs text-slate-400 group-hover:text-star-white font-medium text-center">{skill.name}</span>
+                                    
+                                    {/* Skill Level Tooltip */}
+                                    <div className="absolute -top-10 scale-0 group-hover:scale-100 transition-transform duration-200 bg-space-dark border border-neon-teal text-neon-teal text-[10px] px-2 py-1 rounded-md whitespace-nowrap z-50">
+                                        {skill.level}
                                     </div>
-                                    <span className="text-sm text-slate-400 group-hover:text-star-white">{skill.name}</span>
                                 </div>
                             ))}
                         </div>

@@ -123,13 +123,56 @@ const HeroSection = () => {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.8, delay: 1.4 }}
-                    className="flex gap-6 relative z-30"
+                    className="flex flex-wrap gap-6 mt-8 relative z-30 justify-center md:justify-start"
+                >
+                    <button 
+                        onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
+                        className="btn-primary group flex items-center gap-2"
+                    >
+                        View My Work
+                        <motion.span
+                            animate={{ x: [0, 5, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                            →
+                        </motion.span>
+                    </button>
+                    <button 
+                        onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+                        className="btn-outline"
+                    >
+                        Contact Me
+                    </button>
+                </motion.div>
+
+                <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 1.6 }}
+                    className="flex gap-6 mt-8 relative z-30"
                 >
                     <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="text-3xl text-slate-400 hover:text-white transition-all duration-300 hover:scale-125 transform"><FaGithub /></a>
                     <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-3xl text-slate-400 hover:text-[#0077b5] transition-all duration-300 hover:scale-125 transform"><FaLinkedin /></a>
                     <a href={`mailto:${personalInfo.email}`} className="text-3xl text-slate-400 hover:text-planet-orange transition-all duration-300 hover:scale-125 transform"><FaEnvelope /></a>
                 </motion.div>
             </div>
+
+            {/* Scroll Indicator */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2, duration: 1 }}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2"
+            >
+                <span className="text-xs uppercase tracking-[0.3em] text-slate-500 font-medium">Scroll</span>
+                <div className="w-[30px] h-[50px] border-2 border-slate-700 rounded-full flex justify-center p-2">
+                    <motion.div
+                        animate={{ y: [0, 15, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                        className="w-1.5 h-1.5 bg-neon-teal rounded-full"
+                    />
+                </div>
+            </motion.div>
 
 
         </section>

@@ -29,19 +29,25 @@ const ExperienceSection = () => {
                         <div className="flex-1 w-full" />
 
                         {/* Center Node */}
-                        <div className="w-8 h-8 rounded-full bg-planet-orange border-4 border-space-dark z-10 hidden md:block mx-4" />
+                        <div className="relative z-10 hidden md:block mx-4">
+                            <div className="w-6 h-6 rounded-full bg-planet-orange border-4 border-space-dark" />
+                            <div className="absolute inset-0 bg-planet-orange rounded-full blur-[8px] opacity-30 animate-pulse" />
+                        </div>
 
                         {/* Content Card */}
-                        <div className="flex-1 w-full glass-card p-6 relative hover:border-planet-orange transition-colors duration-300">
+                        <motion.div 
+                            whileHover={{ scale: 1.02 }}
+                            className="flex-1 w-full glass-card p-6 relative hover:border-planet-orange/50 transition-all duration-300 group"
+                        >
                             <span className="text-xs font-mono text-planet-orange mb-2 block">{exp.duration}</span>
-                            <h3 className="text-xl font-bold text-white">{exp.position}</h3>
+                            <h3 className="text-xl font-bold text-white group-hover:text-planet-orange transition-colors">{exp.position}</h3>
                             <h4 className="text-lg text-slate-400 mb-4">{exp.company} • {exp.type}</h4>
-                            <ul className="list-disc list-inside text-sm text-slate-300 space-y-1">
+                            <ul className="list-disc list-inside text-sm text-slate-300 space-y-2">
                                 {exp.achievements.map((item, i) => (
-                                    <li key={i}>{item}</li>
+                                    <li key={i} className="leading-relaxed">{item}</li>
                                 ))}
                             </ul>
-                        </div>
+                        </motion.div>
                     </motion.div>
                 ))}
             </div>
