@@ -92,7 +92,7 @@ const Navigation = () => {
                 >
                     {/* Logo */}
                     <div
-                        className="group flex items-center gap-2 md:gap-3 cursor-pointer"
+                        className="flex-shrink-0 group flex items-center gap-2 md:gap-3 cursor-pointer"
                         onClick={() => scrollToSection('home')}
                     >
                         <div className="relative w-9 h-9 md:w-10 md:h-10 flex items-center justify-center bg-neon-teal/10 rounded-full border border-neon-teal/20 group-hover:border-neon-teal/50 transition-all duration-300">
@@ -105,12 +105,12 @@ const Navigation = () => {
                     </div>
 
                     {/* Desktop Menu */}
-                    <div className="hidden lg:flex items-center gap-1">
+                    <div className="hidden lg:flex items-center justify-center flex-1 px-4 gap-0.5 xl:gap-1">
                         {navLinks.map((link) => (
                             <button
                                 key={link.name}
                                 onClick={() => scrollToSection(link.to)}
-                                className={`relative px-4 py-2 text-[11px] font-black uppercase tracking-[0.15em] transition-all duration-300 rounded-full ${
+                                className={`relative px-4 py-2 text-[10px] xl:text-[11px] font-black uppercase tracking-[0.12em] xl:tracking-[0.15em] transition-all duration-300 rounded-full whitespace-nowrap ${
                                     activeSection === link.to 
                                     ? 'text-slate-900' 
                                     : 'text-slate-400 hover:text-white'
@@ -129,7 +129,7 @@ const Navigation = () => {
                     </div>
 
                     {/* Right Actions */}
-                    <div className="flex items-center gap-2 md:gap-4">
+                    <div className="flex-shrink-0 flex items-center gap-2 md:gap-4">
                         <a
                             href="/resume.pdf"
                             download="Kunal_Khaire_Resume.pdf"
