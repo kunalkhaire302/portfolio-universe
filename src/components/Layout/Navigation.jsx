@@ -48,7 +48,6 @@ const Navigation = () => {
     };
 
     return (
-    return (
         <div className="fixed top-6 left-0 w-full flex justify-center z-50 px-4">
             <motion.nav
                 initial={{ y: -100, opacity: 0 }}
