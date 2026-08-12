@@ -10,13 +10,49 @@ const navLinks = [
     { name: 'Experience', to: 'experience' },
     { name: 'Certifications', to: 'certifications' },
     { name: 'Contact', to: 'contact' },
-    { name: 'Resume', isDownload: true, href: '/resume.pdf', downloadName: 'Kunal_Khaire_Resume.pdf' },
+    { name: 'Resume', isDownload: true, href: '/Kunal_Khaire_Resume.pdf', downloadName: 'Kunal_Khaire_Resume.pdf' },
 ];
 
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
+
+    const handleDownload = async (e, href, downloadName) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(process.env.PUBLIC_URL + href);
+            const blob = await response.blob();
+
+            if (window.showSaveFilePicker) {
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: downloadName,
+                    types: [{
+                        description: 'PDF Document',
+                        accept: { 'application/pdf': ['.pdf'] },
+                    }],
+                });
+                const writable = await handle.createWritable();
+                await writable.write(blob);
+                await writable.close();
+                return;
+            }
+
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = downloadName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                console.error('Download failed, falling back to new tab', error);
+                window.open(process.env.PUBLIC_URL + href, '_blank');
+            }
+        }
+    };
 
     // Precision Scroll Spy logic
     const handleScroll = useCallback(() => {
@@ -86,10 +122,10 @@ const Navigation = () => {
                     initial={{ y: -100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 1, type: "spring", stiffness: 100 }}
-                    className={`pointer-events-auto flex items-center justify-between py-2 px-3 md:px-6 rounded-full border transition-all duration-500 w-full max-w-5xl ${
+                    className={`pointer-events-auto flex items-center justify-between py-3 px-5 md:px-8 rounded-full border transition-all duration-500 w-full max-w-5xl ${
                         scrolled 
-                        ? 'bg-space-dark/60 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)]' 
-                        : 'bg-white/5 backdrop-blur-md border-white/5'
+                        ? 'bg-space-dark/40 backdrop-blur-3xl border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.9),0_0_60px_rgba(100,255,218,0.05)]' 
+                        : 'bg-white/[0.02] backdrop-blur-2xl border-white/[0.05]'
                     }`}
                 >
                     {/* Logo */}
@@ -102,7 +138,7 @@ const Navigation = () => {
                             <div className="absolute inset-0 bg-neon-teal rounded-full blur-lg opacity-0 group-hover:opacity-20 transition-opacity" />
                         </div>
                         <span className="text-white font-black tracking-tighter text-base md:text-lg">
-                            KUNAL<span className="text-neon-teal">.</span>DEV
+                            kunal<span className="text-neon-teal">universe</span>
                         </span>
                     </div>
 
@@ -112,9 +148,10 @@ const Navigation = () => {
                             link.isDownload ? (
                                 <a
                                     key={link.name}
-                                    href={link.href}
+                                    href={process.env.PUBLIC_URL + link.href}
+                                    onClick={(e) => handleDownload(e, link.href, link.downloadName)}
                                     download={link.downloadName}
-                                    className="relative px-1.5 lg:px-2 xl:px-4 py-2 text-[9px] xl:text-[11px] font-black uppercase tracking-[0.08em] xl:tracking-[0.15em] transition-all duration-300 rounded-full whitespace-nowrap text-slate-400 hover:text-white"
+                                    className="relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-all duration-300 rounded-full whitespace-nowrap text-slate-400 hover:text-white"
                                 >
                                     <span className="relative z-10">{link.name}</span>
                                 </a>
@@ -122,9 +159,9 @@ const Navigation = () => {
                                 <button
                                     key={link.name}
                                     onClick={() => scrollToSection(link.to)}
-                                    className={`relative px-1.5 lg:px-2 xl:px-4 py-2 text-[9px] xl:text-[11px] font-black uppercase tracking-[0.08em] xl:tracking-[0.15em] transition-all duration-300 rounded-full whitespace-nowrap ${
+                                    className={`relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-all duration-300 rounded-full whitespace-nowrap ${
                                         activeSection === link.to 
-                                        ? 'text-slate-900' 
+                                        ? 'text-neon-teal text-glow' 
                                         : 'text-slate-400 hover:text-white'
                                     }`}
                                 >
@@ -132,7 +169,7 @@ const Navigation = () => {
                                     {activeSection === link.to && (
                                         <motion.div
                                             layoutId="nav-pill"
-                                            className="absolute inset-0 bg-neon-teal rounded-full shadow-[0_0_20px_rgba(100,255,218,0.4)]"
+                                            className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-neon-teal rounded-full shadow-[0_0_10px_rgba(100,255,218,0.8)]"
                                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                         />
                                     )}
@@ -189,7 +226,8 @@ const Navigation = () => {
                                         initial={{ x: -50, opacity: 0 }}
                                         animate={{ x: 0, opacity: 1 }}
                                         transition={{ delay: i * 0.1, duration: 0.5 }}
-                                        href={link.href}
+                                        href={process.env.PUBLIC_URL + link.href}
+                                        onClick={(e) => handleDownload(e, link.href, link.downloadName)}
                                         download={link.downloadName}
                                         className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5"
                                     >

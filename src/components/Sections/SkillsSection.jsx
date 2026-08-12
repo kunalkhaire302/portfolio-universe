@@ -27,15 +27,15 @@ const SkillsSection = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ delay: index * 0.1 }}
-                        className="glass-card p-6"
+                        className="glass-card p-6 relative group overflow-hidden border border-white/10 hover:border-neon-teal/50 hover:shadow-[0_0_30px_rgba(100,255,218,0.15)] hover:-translate-y-1 transition-all duration-300"
                     >
                         <h3 className="text-xl font-bold text-neon-teal mb-6 border-b border-white/10 pb-2">{category}</h3>
                         <div className="flex flex-wrap gap-4">
                             {items.map((skill) => (
                                 <div key={skill.name} className="relative flex flex-col items-center gap-2 group cursor-pointer">
                                     <motion.div 
-                                        whileHover={{ y: -5 }}
-                                        className="w-14 h-14 rounded-xl bg-space-light/10 flex items-center justify-center text-3xl group-hover:bg-neon-teal group-hover:text-space-dark group-hover:shadow-[0_0_20px_rgba(100,255,218,0.3)] transition-all duration-300"
+                                        whileHover={{ y: -5, scale: 1.1 }}
+                                        className="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-3xl group-hover:bg-gradient-to-br group-hover:from-neon-teal group-hover:to-teal-400 group-hover:text-slate-900 group-hover:border-transparent group-hover:shadow-[0_0_30px_rgba(100,255,218,0.6)] transition-all duration-300"
                                     >
                                         <IconComponent name={skill.icon} />
                                     </motion.div>

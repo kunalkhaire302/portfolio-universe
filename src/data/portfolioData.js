@@ -1,5 +1,9 @@
+import cbaForageCert from '../assets/images/certifications/cba-forage-new.jpg';
+import tataForageCert from '../assets/images/certifications/tata-forage.jpg';
+import jpmcForageCert from '../assets/images/certifications/jpmc-forage.jpg';
+
 // Portfolio data for Kunal Khaire
-export const portfolioData = {
+const portfolioData = {
     personalInfo: {
         name: "Kunal Khaire",
         title: "Web Developer & IT Undergraduate",
@@ -57,6 +61,19 @@ export const portfolioData = {
 
     experience: [
         {
+            id: 4,
+            position: "College Ambassador",
+            company: "Techfest, IIT Bombay",
+            duration: "Jul 2026 – Present",
+            type: "Mumbai, India",
+            achievements: [
+                "Represented Techfest, IIT Bombay and promoted its events and opportunities among students",
+                "Drove student engagement through outreach, communication, and peer networking",
+                "Promoted innovation, competitions, learning opportunities, and student participation",
+                "Supported Techfest initiatives focused on creativity, leadership, and innovation",
+            ],
+        },
+        {
             id: 1,
             position: "Web Development Intern",
             company: "EasyBytes Web Solutions",
@@ -105,34 +122,6 @@ export const portfolioData = {
             ],
             color: "project-purple",
             icon: "FaRocket",
-        },
-        {
-            id: 2,
-            title: "Stock Market Dashboard",
-            description: "Dynamic web application utilizing real-time data to visualize stock trends and market performance.",
-            technologies: ["JavaScript", "HTML5", "CSS3", "REST API"],
-            github: "https://github.com/kunalkhaire302/Stock-Market-Dashboard",
-            features: [
-                "Real-time stock data visualization",
-                "Interactive charts and graphs",
-                "User-friendly interface",
-            ],
-            color: "neon-teal",
-            icon: "FaChartLine",
-        },
-        {
-            id: 3,
-            title: "Craigslist Mumbai Redesign",
-            description: "Modern redesign of Craigslist Mumbai focusing on enhanced usability and mobile responsiveness.",
-            technologies: ["HTML5", "CSS3", "JavaScript", "UI/UX"],
-            github: "https://github.com/kunalkhaire302/Redesign-Online-Craigslist-Mumbai",
-            features: [
-                "Modern user-centric design",
-                "Improved navigation & search",
-                "Mobile-first responsive layout",
-            ],
-            color: "electric-blue",
-            icon: "FaShoppingCart",
         },
         {
             id: 4,
@@ -207,49 +196,65 @@ export const portfolioData = {
             icon: "FaHome",
         },
         {
-            id: 9,
-            title: "AI Money Mentor",
-            description: "AI-powered personal finance assistant that provides smart financial insights and guidance",
-            technologies: ["Python", "Machine Learning", "NLP", "Pandas", "NumPy", "Scikit-learn", "HTML", "CSS", "JavaScript", "Node.js"],
-            live: "https://ai-money-mentor-1.onrender.com/",
-            features: [
-                "Track and analyze spending patterns",
-                "Personalized financial advice using AI",
-                "Budget planning and expense categorization",
-                "Interactive chatbot for financial queries",
-            ],
-            color: "project-purple",
-            icon: "FaWallet",
-        },
-        {
             id: 10,
             title: "Carbon Footprint AI",
             description: "AI-powered system to analyze and estimate carbon emissions based on user activities and lifestyle patterns",
-            technologies: ["Python", "Machine Learning", "Data Analysis", "Pandas", "NumPy", "Scikit-learn", "HTML", "CSS", "JavaScript", "Node.js"],
+            technologies: [
+                "Python",
+                "Machine Learning",
+                "Data Analysis",
+                "Pandas",
+                "NumPy",
+                "Scikit-learn",
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Node.js"
+            ],
             live: "https://carbon-footprint-ai.onrender.com/",
+            featured: true,
             features: [
                 "Calculate carbon footprint from daily activities",
                 "AI-based emission prediction and analysis",
                 "Personalized sustainability recommendations",
-                "Interactive dashboard for tracking environmental impact",
+                "Interactive dashboard for tracking environmental impact"
             ],
             color: "neon-teal",
             icon: "FaLeaf",
         },
         {
-            id: 11,
-            title: "NEXBANK_DBA",
-            description: "Database-driven banking management system for handling transactions, accounts, and customer data efficiently",
-            technologies: ["SQL", "DBMS", "MySQL/PostgreSQL", "Python", "Java", "HTML", "CSS", "JavaScript"],
-            live: "https://nexbank-dba.onrender.com/",
-            features: [
-                "Manage customer accounts and banking records",
-                "Secure transaction processing and data handling",
-                "Relational database design and normalization",
-                "CRUD operations with backend integration",
+            id: 12,
+            title: "CapstoneX",
+            description: "Intelligent Campus Project Management and Decision Support Platform that streamlines student grouping, problem-statement selection, mentor allocation, project approvals, weekly submissions, and project tracking.",
+            technologies: [
+                "React",
+                "FastAPI",
+                "PostgreSQL",
+                "Python",
+                "Machine Learning",
+                "Recommendation System",
+                "TensorFlow",
+                "XGBoost",
+                "Docker",
+                "AWS",
+                "JavaScript",
+                "HTML",
+                "CSS"
             ],
-            color: "electric-blue",
-            icon: "FaUniversity",
+            live: "https://www.capstonex.me/",
+            features: [
+                "Student Group Management",
+                "AI-Powered Problem Statement Recommendations",
+                "Project Topic Selection",
+                "Admin Approval Workflow",
+                "Intelligent Mentor Allocation",
+                "Weekly Project Tracking",
+                "Role-Based Dashboards",
+                "End-to-End Capstone Workflow"
+            ],
+            color: "neon-teal",
+            icon: "FaGraduationCap",
+            featured: true
         },
     ],
 
@@ -260,6 +265,7 @@ export const portfolioData = {
             issuer: "Tata",
             date: "2025",
             description: "Completed comprehensive job simulation focused on GenAI-powered data analytics",
+            image: tataForageCert,
         },
         {
             id: 2,
@@ -267,6 +273,15 @@ export const portfolioData = {
             issuer: "JPMorgan Chase & Co.",
             date: "2026",
             description: "Awarded to Kunal Khaire for completing the Software Engineering Job Simulation on February 14, 2026, covering Project Setup, Kafka, H2, and REST API development.",
+            image: jpmcForageCert,
+        },
+        {
+            id: 3,
+            title: "Commonwealth Bank — Software Engineering Job Simulation",
+            issuer: "Forage",
+            date: "August 10, 2026",
+            description: "Awarded to Kunal Khaire for completing the Commonwealth Bank Software Engineering Job Simulation through Forage in August 2026, covering practical tasks including modifying an existing .NET backend, modifying an existing React/Redux frontend, modifying client requests, code coverage, and creating a pull request.",
+            image: cbaForageCert,
         },
     ],
 };

@@ -11,14 +11,12 @@ const ParticleBackground = () => {
         let animationFrameId;
         let particles = [];
 
-        // Set canvas size
         const handleResize = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             initParticles();
         };
 
-        // Mouse interaction
         let mouse = { x: null, y: null };
 
         const handleMouseMove = (event) => {
@@ -30,36 +28,40 @@ const ParticleBackground = () => {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.1;
+                this.size = Math.random() * 1.5 + 0.1;
                 this.baseX = this.x;
                 this.baseY = this.y;
                 this.density = (Math.random() * 30) + 1;
-                this.color = Math.random() > 0.8 ? '#64ffda' : '#e6f1ff'; // mix of teal and white tokens
-                this.opacity = Math.random() * 0.5 + 0.1;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.speedX = Math.random() * 0.5 - 0.25;
+                // Subtle color palette — mostly dim white with occasional teal
+                const roll = Math.random();
+                if (roll > 0.92) {
+                    this.color = '#64ffda';
+                    this.opacity = Math.random() * 0.3 + 0.05;
+                } else {
+                    this.color = '#e6f1ff';
+                    this.opacity = Math.random() * 0.3 + 0.05;
+                }
+                this.speedY = Math.random() * 0.3 - 0.15;
+                this.speedX = Math.random() * 0.3 - 0.15;
             }
 
             update() {
-                // Movement
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                // Wrap around screen
                 if (this.x > canvas.width) this.x = 0;
                 else if (this.x < 0) this.x = canvas.width;
 
                 if (this.y > canvas.height) this.y = 0;
                 else if (this.y < 0) this.y = canvas.height;
 
-                // Mouse interaction (parallax/repulsion)
                 if (mouse.x != null) {
                     let dx = mouse.x - this.x;
                     let dy = mouse.y - this.y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
                     let forceDirectionX = dx / distance;
                     let forceDirectionY = dy / distance;
-                    let maxDistance = 100;
+                    let maxDistance = 80;
                     let force = (maxDistance - distance) / maxDistance;
                     let directionX = forceDirectionX * force * this.density;
                     let directionY = forceDirectionY * force * this.density;
@@ -82,7 +84,8 @@ const ParticleBackground = () => {
 
         function initParticles() {
             particles = [];
-            const particleCount = Math.min(window.innerWidth * 0.1, 150); // Responsive count
+            // Reduced count — the 3D starfield handles the hero area
+            const particleCount = Math.min(window.innerWidth * 0.06, 80);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -94,10 +97,10 @@ const ParticleBackground = () => {
                 particles[i].update();
                 particles[i].draw();
             }
+            ctx.globalAlpha = 1;
             animationFrameId = requestAnimationFrame(animate);
         }
 
-        // Initialize
         handleResize();
         window.addEventListener('resize', handleResize);
         window.addEventListener('mousemove', handleMouseMove);
