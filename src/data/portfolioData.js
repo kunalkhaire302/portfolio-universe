@@ -67,8 +67,9 @@ const portfolioData = {
             duration: "Sep 2026",
             type: "Remote",
             achievements: [
-                "Developed full stack web applications",
-                "Contributed to both frontend and backend development",
+                "Engineered AutoMarket, a production-grade used-car marketplace for buying and selling vehicles",
+                "Implemented advanced search, filtering, seller workflows, and AI-powered intelligence",
+                "Built using Next.js, React, TypeScript, ASP.NET Core, PostgreSQL, and Supabase",
             ],
         },
         {
