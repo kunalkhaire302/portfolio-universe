@@ -61,6 +61,17 @@ const portfolioData = {
 
     experience: [
         {
+            id: 5,
+            position: "Full Stack Web Development Intern",
+            company: "ElevanceSkills",
+            duration: "Sep 2026",
+            type: "Remote",
+            achievements: [
+                "Developed full stack web applications",
+                "Contributed to both frontend and backend development",
+            ],
+        },
+        {
             id: 4,
             position: "College Ambassador",
             company: "Techfest, IIT Bombay",
