@@ -278,6 +278,24 @@ const portfolioData = {
 
     certifications: [
         {
+            id: 4,
+            title: "Managing Projects with AI",
+            issuer: "AI CERTs (Coursera)",
+            date: "Oct 3, 2026",
+            description: "Completed comprehensive online course authorized by AI CERTs and offered through Coursera.",
+            link: "https://coursera.org/verify/3KZ9BRWF4JGS",
+            // image: aiCertsImage, // Uncomment when image is added to assets
+        },
+        {
+            id: 5,
+            title: "AWS Academy Graduate - Cloud Architecting",
+            issuer: "AWS Academy",
+            date: "Sep 17, 2026",
+            description: "Completed 60 hours of Cloud Architecting training and earned the AWS Academy Graduate badge.",
+            link: "https://www.credly.com/go/kQ0nlb17",
+            // image: awsCertsImage, // Uncomment when image is added to assets
+        },
+        {
             id: 1,
             title: "Tata GenAI Powered Data Analytics Job Simulation",
             issuer: "Tata",

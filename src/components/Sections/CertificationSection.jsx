@@ -55,16 +55,28 @@ const CertificationSection = () => {
                                             {cert.description}
                                         </p>
                                         
-                                        {cert.image && (
-                                            <div className="pt-6 border-t border-white/10 w-full flex gap-4">
-                                                <a 
-                                                    href={cert.image} 
-                                                    target="_blank" 
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center justify-center px-6 py-2.5 bg-cert-gold/10 hover:bg-cert-gold/20 text-cert-gold border border-cert-gold/30 rounded-lg font-bold tracking-wide text-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:-translate-y-1"
-                                                >
-                                                    View Certificate
-                                                </a>
+                                        {(cert.image || cert.link) && (
+                                            <div className="pt-6 border-t border-white/10 w-full flex gap-4 flex-wrap">
+                                                {cert.image && (
+                                                    <a 
+                                                        href={cert.image} 
+                                                        target="_blank" 
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center justify-center px-6 py-2.5 bg-cert-gold/10 hover:bg-cert-gold/20 text-cert-gold border border-cert-gold/30 rounded-lg font-bold tracking-wide text-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:-translate-y-1"
+                                                    >
+                                                        View Certificate
+                                                    </a>
+                                                )}
+                                                {cert.link && (
+                                                    <a 
+                                                        href={cert.link} 
+                                                        target="_blank" 
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center justify-center px-6 py-2.5 bg-neon-teal/10 hover:bg-neon-teal/20 text-neon-teal border border-neon-teal/30 rounded-lg font-bold tracking-wide text-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(100,255,218,0.2)] hover:-translate-y-1"
+                                                    >
+                                                        Verify Certificate
+                                                    </a>
+                                                )}
                                             </div>
                                         )}
                                     </div>
