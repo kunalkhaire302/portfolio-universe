@@ -15,7 +15,7 @@ const SectionContainer = ({ id, children, className = "" }) => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="w-full max-w-7xl mx-auto"
+                className="w-full max-w-7xl mx-auto my-auto"
             >
                 {children}
             </motion.div>

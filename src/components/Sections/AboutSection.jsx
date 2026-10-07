@@ -8,9 +8,9 @@ const AboutSection = () => {
 
     return (
         <SectionContainer id="about">
-            {/* The Earth Scene serves as the massive interactive backdrop/focal point */}
+            {/* The Earth Scene serves as a supporting decorative visual */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
-                <div className="absolute inset-0 md:translate-x-1/4 scale-125 md:scale-150 transform-gpu opacity-90 transition-transform duration-1000 ease-out">
+                <div className="absolute inset-0 translate-x-1/4 md:translate-x-1/3 lg:translate-x-[40%] scale-110 md:scale-[1.15] transform-gpu opacity-70 transition-transform duration-1000 ease-out">
                     <EarthScene />
                 </div>
                 {/* Gradient mask to blend the edges into the dark background of the page */}
@@ -19,10 +19,10 @@ const AboutSection = () => {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-8 items-center pt-8">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 {/* Left Side Content */}
-                <div className="md:col-span-5 lg:col-span-4 space-y-4 md:space-y-6">
+                <div className="md:col-span-6 lg:col-span-5 xl:col-span-6 space-y-4 md:space-y-6">
                     <div>
                         <h3 className="text-3xl md:text-5xl font-black text-white tracking-tighter leading-tight mb-1">
                             About <span className="text-planet-orange">Me</span>
