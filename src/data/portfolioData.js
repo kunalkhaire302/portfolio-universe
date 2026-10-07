@@ -84,17 +84,7 @@ const portfolioData = {
                 "Optimized frontend code using HTML, CSS, and JavaScript",
             ],
         },
-        {
-            id: 2,
-            position: "Web Development Intern",
-            company: "Cognifyz Technologies",
-            duration: "Nov 2025",
-            type: "Remote",
-            achievements: [
-                "Built and improved web applications",
-                "Collaborated remotely with development teams",
-            ],
-        },
+
         {
             id: 3,
             position: "Web Development Intern",
