@@ -29,8 +29,8 @@ const ExperienceSection = () => {
                         <div className="flex-1 w-full" />
 
                         {/* Center Node */}
-                        <div className="relative z-10 hidden md:block mx-4">
-                            <div className="w-6 h-6 rounded-full bg-planet-orange border-4 border-space-dark" />
+                        <div className="relative z-10 hidden md:flex items-center mx-4">
+                            <div className="w-6 h-6 rounded-full bg-planet-orange border-4 border-space-dark relative z-10" />
                             <div className="absolute inset-0 bg-planet-orange rounded-full blur-[8px] opacity-30 animate-pulse" />
                         </div>
 
@@ -39,6 +39,13 @@ const ExperienceSection = () => {
                             whileHover={{ scale: 1.02 }}
                             className="flex-1 w-full glass-card p-6 relative hover:border-planet-orange/50 transition-all duration-300 group"
                         >
+                            {/* Triangle Arrow */}
+                            <div className={`absolute top-6 w-0 h-0 border-[10px] border-transparent ${
+                                index % 2 === 0 
+                                ? 'right-[-20px] border-l-space-blue/30' 
+                                : 'left-[-20px] border-r-space-blue/30'
+                            }`} />
+                            
                             <span className="text-xs font-mono text-planet-orange mb-2 block">{exp.duration}</span>
                             <h3 className="text-xl font-bold text-white group-hover:text-planet-orange transition-colors">{exp.position}</h3>
                             <h4 className="text-lg text-slate-400 mb-4">{exp.company} • {exp.type}</h4>
