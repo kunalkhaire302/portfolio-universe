@@ -6,13 +6,13 @@
 
 An immersive, 3D space-themed developer portfolio — built with React, Three.js, and Framer Motion — that turns a static resume into an interactive cosmic experience.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-kunal--universe.vercel.app-8B5CF6?style=for-the-badge&logo=vercel&logoColor=white)](https://kunal-universe.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-kunaluniverse.tech-8B5CF6?style=for-the-badge&logo=vercel&logoColor=white)](https://www.kunaluniverse.tech/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-[View Demo](https://kunal-universe.vercel.app/) · [Report Bug](https://github.com/kunalkhaire302/portfolio-universe/issues) · [Request Feature](https://github.com/kunalkhaire302/portfolio-universe/issues)
+[View Demo](https://www.kunaluniverse.tech/) · [Report Bug](https://github.com/kunalkhaire302/portfolio-universe/issues) · [Request Feature](https://github.com/kunalkhaire302/portfolio-universe/issues)
 
 </div>
 
@@ -39,16 +39,6 @@ An immersive, 3D space-themed developer portfolio — built with React, Three.js
 ## 💫 About the Project
 
 Tired of portfolios that feel like **black holes** — pulling in attention and giving nothing back? **Portfolio Universe** reimagines the personal portfolio as a **cosmic odyssey**, where skills orbit like planets, projects shine like constellations, and your career path unfolds like a rocket's journey through space.
-
-```js
-const portfolioUniverse = {
-  type: "interactive_experience",
-  vibe: "interstellar_professional",
-  problemItSolves: "boring_static_portfolios",
-  recruitersReaction: "minds_blown ✨",
-  deploymentTime: "~5 minutes"
-};
-```
 
 <br>
 
@@ -201,7 +191,7 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 **Kunal Khaire**
 
 [![GitHub](https://img.shields.io/badge/GitHub-kunalkhaire302-181717?style=flat-square&logo=github)](https://github.com/kunalkhaire302)
-[![Live Demo](https://img.shields.io/badge/Live-kunal--universe.vercel.app-8B5CF6?style=flat-square&logo=vercel)](https://kunal-universe.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live-kunaluniverse.tech-8B5CF6?style=flat-square&logo=vercel)](https://www.kunaluniverse.tech/)
 
 Project Link: [github.com/kunalkhaire302/portfolio-universe](https://github.com/kunalkhaire302/portfolio-universe)
 
