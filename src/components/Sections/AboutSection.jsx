@@ -7,7 +7,7 @@ const AboutSection = () => {
     const { objective, education } = portfolioData;
 
     return (
-        <SectionContainer id="about" className="min-h-screen relative flex items-center py-20">
+        <SectionContainer id="about">
             {/* The Earth Scene serves as the massive interactive backdrop/focal point */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
                 <div className="absolute inset-0 md:translate-x-1/4 scale-125 md:scale-150 transform-gpu opacity-90 transition-transform duration-1000 ease-out">
