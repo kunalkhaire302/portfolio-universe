@@ -74,17 +74,6 @@ const portfolioData = {
             ],
         },
         {
-            id: 1,
-            position: "Web Development Intern",
-            company: "EasyBytes Web Solutions",
-            duration: "Dec 2025",
-            type: "Remote",
-            achievements: [
-                "Developed responsive UI components",
-                "Optimized frontend code using HTML, CSS, and JavaScript",
-            ],
-        },
-        {
             id: 2,
             position: "Web Development Intern",
             company: "Cognifyz Technologies",
