@@ -27,7 +27,7 @@ function App() {
     if (loading) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto'; // Restore scroll
+      document.body.style.overflow = ''; // Restore scroll, let CSS handle overflow-x
     }
   }, [loading]);
 
@@ -46,7 +46,7 @@ function App() {
           <ParticleBackground />
           <Navigation />
 
-          <main className="relative z-10 w-full overflow-hidden">
+          <main className="relative z-10 w-full">
             <HeroSection />
             <AboutSection />
             <SkillsSection />
