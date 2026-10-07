@@ -111,6 +111,23 @@ const portfolioData = {
 
     projects: [
         {
+            id: 99,
+            title: "AutoMarket",
+            description: "Production-grade used-car marketplace for buying and selling vehicles with advanced search, filtering, bookings, seller workflows, secure authentication, and AI-powered intelligence.",
+            technologies: ["Next.js", "React", "TypeScript", "ASP.NET Core", "PostgreSQL", "Supabase", "Tailwind CSS", "Prisma"],
+            live: "https://automarket-self.vercel.app/",
+            github: "",
+            features: [
+                "Advanced search and filtering",
+                "Seller workflows and bookings",
+                "Secure authentication",
+                "AI-powered intelligence"
+            ],
+            color: "project-purple",
+            icon: "FaShoppingCart",
+            featured: true,
+        },
+        {
             id: 1,
             title: "Portfolio Universe",
             description: "Visually rich, space-themed personal portfolio showcasing skills and projects with interactive animations.",
