@@ -19,39 +19,38 @@ const AboutSection = () => {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-8 items-center">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-8 items-center pt-8">
                 
                 {/* Left Side Content */}
-                <div className="md:col-span-5 lg:col-span-4 space-y-10">
+                <div className="md:col-span-5 lg:col-span-4 space-y-4 md:space-y-6">
                     <div>
-
-                        <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight mb-2">
+                        <h3 className="text-3xl md:text-5xl font-black text-white tracking-tighter leading-tight mb-1">
                             About <span className="text-planet-orange">Me</span>
                         </h3>
-                        <p className="text-xl text-slate-400 font-light">
+                        <p className="text-lg text-slate-400 font-light">
                             Full Stack Developer <br/>
-                            <span className="text-white/50">Creative Technologist</span>
+                            <span className="text-white/50 text-sm">Creative Technologist</span>
                         </p>
                     </div>
 
-                    <div className="glass-card p-6 md:p-8 border border-white/5 bg-space-blue/30 backdrop-blur-md">
-                        <p className="text-lg leading-relaxed text-slate-300 font-light">
+                    <div className="glass-card p-4 md:p-6 border border-white/5 bg-space-blue/30 backdrop-blur-md">
+                        <p className="text-sm md:text-base leading-relaxed text-slate-300 font-light">
                             {objective}
                         </p>
                     </div>
 
-                    <div className="space-y-6">
-                        <h3 className="text-xl font-bold text-neon-teal flex items-center gap-2">
+                    <div className="space-y-4">
+                        <h3 className="text-lg font-bold text-neon-teal flex items-center gap-2">
                             <span className="w-8 h-[1px] bg-neon-teal inline-block"></span>
                             Education
                         </h3>
-                        <div className="space-y-6 pl-10 border-l border-white/10 ml-[15px]">
+                        <div className="space-y-4 pl-8 border-l border-white/10 ml-[10px]">
                             {education.map((edu, index) => (
                                 <div key={index} className="relative">
-                                    <div className="absolute w-2 h-2 bg-planet-orange rounded-full -left-[25px] top-2 ring-4 ring-space-dark"></div>
-                                    <h4 className="text-lg font-bold text-white">{edu.degree}</h4>
-                                    <p className="text-slate-400 text-sm mt-1">{edu.institution}, {edu.location}</p>
-                                    <p className="text-xs text-planet-orange font-mono mt-2 tracking-wider">{edu.duration}</p>
+                                    <div className="absolute w-2 h-2 bg-planet-orange rounded-full -left-[37px] top-1.5 ring-4 ring-space-dark"></div>
+                                    <h4 className="text-base font-bold text-white">{edu.degree}</h4>
+                                    <p className="text-slate-400 text-xs mt-1">{edu.institution}, {edu.location}</p>
+                                    <p className="text-[10px] text-planet-orange font-mono mt-1 tracking-wider">{edu.duration}</p>
                                 </div>
                             ))}
                         </div>
