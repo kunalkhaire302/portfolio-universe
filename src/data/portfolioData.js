@@ -1,6 +1,8 @@
 import cbaForageCert from '../assets/images/certifications/cba-forage-new.jpg';
 import tataForageCert from '../assets/images/certifications/tata-forage.jpg';
 import jpmcForageCert from '../assets/images/certifications/jpmc-forage.jpg';
+import aiCertsImage from '../assets/images/certifications/ai-certs.jpg';
+import awsCertsImage from '../assets/images/certifications/aws-academy.jpg';
 
 // Portfolio data for Kunal Khaire
 const portfolioData = {
@@ -285,7 +287,7 @@ const portfolioData = {
             date: "Oct 3, 2026",
             description: "Completed comprehensive online course authorized by AI CERTs and offered through Coursera.",
             link: "https://coursera.org/verify/3KZ9BRWF4JGS",
-            // image: aiCertsImage, // Uncomment when image is added to assets
+            image: aiCertsImage,
         },
         {
             id: 5,
@@ -294,7 +296,7 @@ const portfolioData = {
             date: "Sep 17, 2026",
             description: "Completed 60 hours of Cloud Architecting training and earned the AWS Academy Graduate badge.",
             link: "https://www.credly.com/go/kQ0nlb17",
-            // image: awsCertsImage, // Uncomment when image is added to assets
+            image: awsCertsImage,
         },
         {
             id: 1,
