@@ -165,14 +165,16 @@ const Navigation = () => {
                                         : 'text-slate-400 hover:text-white'
                                     }`}
                                 >
-                                    <span className="relative z-10">{link.name}</span>
-                                    {activeSection === link.to && (
-                                        <motion.div
-                                            layoutId="nav-pill"
-                                            className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-neon-teal rounded-full shadow-[0_0_10px_rgba(100,255,218,0.8)]"
-                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                        />
-                                    )}
+                                    <span className="relative z-10">
+                                        {link.name}
+                                        {activeSection === link.to && (
+                                            <motion.div
+                                                layoutId="nav-pill"
+                                                className="absolute -bottom-2 left-0 w-full h-[2px] bg-neon-teal rounded-full shadow-[0_0_10px_rgba(100,255,218,0.8)]"
+                                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                            />
+                                        )}
+                                    </span>
                                 </button>
                             )
                         ))}
