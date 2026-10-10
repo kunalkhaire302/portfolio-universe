@@ -119,7 +119,7 @@ const Saturn = ({
   }, []);
 
   const isSelected = selectedPlanet?.name === name;
-  const displayRadius = hovered ? radius * 1.1 : radius;
+  const displayRadius = radius * (hovered ? 1.3 : 1.18);
 
   return (
     <group ref={groupRef}>

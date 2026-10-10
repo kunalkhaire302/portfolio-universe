@@ -6,9 +6,9 @@ import HeroContent from './Hero/HeroContent';
 import HeroVisual from './Hero/HeroVisual';
 
 const HeroSection = () => (
-    <section id="home" className="hero-section relative z-10 min-h-screen w-full overflow-hidden px-5 pb-5 pt-28 sm:px-8 lg:h-screen lg:min-h-[600px] lg:px-12 lg:pb-4 lg:pt-24 xl:px-16">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_26%_44%,rgba(14,116,144,0.18),transparent_34%),radial-gradient(circle_at_76%_38%,rgba(30,64,175,0.08),transparent_30%),linear-gradient(90deg,transparent_43%,rgba(2,8,20,0.5)_66%,rgba(2,8,20,0.9)_100%)]" />
-        <div aria-hidden="true" className="absolute inset-0 opacity-[0.035] [background-image:linear-gradient(rgba(255,255,255,.35)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.35)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
+    <section id="home" className="hero-section relative z-10 min-h-screen w-full overflow-hidden bg-space-dark px-5 pb-5 pt-28 sm:px-8 lg:h-screen lg:min-h-[600px] lg:px-12 lg:pb-4 lg:pt-24 xl:px-16">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_28%_48%,rgba(6,182,212,0.12),transparent_32%),radial-gradient(circle_at_76%_35%,rgba(37,99,235,0.07),transparent_26%)]" />
+        <div aria-hidden="true" className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(255,255,255,.3)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.3)_1px,transparent_1px)] [background-size:52px_52px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]" />
 
         <aside className="absolute left-5 top-28 z-20 hidden h-[58%] flex-col justify-between border-l border-cyan-200/35 pl-4 text-[8px] font-bold uppercase tracking-[0.38em] text-slate-300 xl:flex">
             <div className="space-y-2"><p>Explore</p><p>Create</p><p>Build</p><p>Learn</p><p>Grow</p></div>
@@ -16,7 +16,7 @@ const HeroSection = () => (
         </aside>
 
         <div className="relative mx-auto grid min-h-[calc(100vh-8.25rem)] max-w-[1540px] gap-3 lg:h-[calc(100svh-7rem)] lg:min-h-[488px] lg:grid-rows-[minmax(0,1fr)_auto]">
-            <div className="grid min-h-0 grid-cols-1 items-stretch gap-2 lg:grid-cols-[56%_44%]">
+            <div className="grid min-h-0 grid-cols-1 items-stretch gap-4 lg:grid-cols-[57%_43%]">
                 <HeroVisual />
                 <HeroContent personalInfo={portfolioData.personalInfo} />
             </div>

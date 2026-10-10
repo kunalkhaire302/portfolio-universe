@@ -13,13 +13,14 @@ const HeroContent = ({ personalInfo }) => {
     ];
 
     return (
-        <div className="hero-content relative z-20 flex min-w-0 flex-col items-center justify-center text-center lg:items-start lg:pl-4 lg:text-left xl:pl-10">
+        <div className="hero-content relative z-20 flex min-w-0 flex-col items-center justify-center text-center lg:items-start lg:border-l lg:border-white/[0.06] lg:pl-8 lg:text-left xl:pl-12">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} className="hero-content__eyebrow mb-3 flex items-center gap-4">
                 <span className="font-mono text-[10px] font-bold uppercase tracking-[0.55em] text-cyan-300 text-glow sm:text-xs">Digital Architect</span>
                 <span className="hidden h-px w-14 bg-gradient-to-r from-cyan-200/80 to-transparent sm:block" />
             </motion.div>
 
-            <motion.h1 initial={{ x: 38, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="hero-content__name mb-4 text-6xl font-black leading-[0.8] tracking-[-0.075em] sm:text-7xl lg:text-[clamp(5rem,7vw,8.6rem)]">
+            <motion.h1 initial={{ x: 38, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="hero-content__name relative mb-4 text-6xl font-black leading-[0.8] tracking-[-0.075em] sm:text-7xl lg:text-[clamp(5rem,7vw,8.5rem)]">
+                <span aria-hidden="true" className="absolute -left-6 top-1/2 hidden h-32 w-32 -translate-y-1/2 rounded-full bg-cyan-400/10 blur-3xl lg:block" />
                 <span className="bg-gradient-to-b from-white via-slate-100 to-slate-400 bg-clip-text text-transparent drop-shadow-sm">{firstName}</span><br />
                 <span className="bg-gradient-to-r from-cyan-200 via-cyan-400 to-blue-600 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(34,211,238,0.24)]">{lastName}</span>
             </motion.h1>
