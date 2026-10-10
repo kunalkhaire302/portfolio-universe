@@ -25,7 +25,7 @@ const Orbit = ({ radius, inclination = 0, highlighted = false }) => {
       <lineBasicMaterial
         color={highlighted ? '#64ffda' : '#ffffff'}
         transparent
-        opacity={highlighted ? 0.25 : 0.06}
+        opacity={highlighted ? 0.75 : 0.14}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
       />

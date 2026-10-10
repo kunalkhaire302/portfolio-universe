@@ -134,13 +134,15 @@ const Saturn = ({
           scale={[displayRadius, displayRadius, displayRadius]}
         >
           <sphereGeometry args={[1, 48, 48]} />
-          <meshStandardMaterial
+          <meshPhysicalMaterial
             map={texture}
             color={texture ? '#ffffff' : color}
             emissive={hovered ? color : (emissive || color)}
-            emissiveIntensity={hovered ? 0.5 : 0.25}
-            roughness={0.85}
+            emissiveIntensity={hovered ? 0.42 : 0.16}
+            roughness={0.72}
             metalness={0.0}
+            clearcoat={0.1}
+            clearcoatRoughness={0.55}
           />
         </mesh>
 
@@ -197,7 +199,7 @@ const Saturn = ({
             borderRadius: '10px',
             padding: '10px 16px',
             color: '#e6f1ff',
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: 'Avenir Next, Segoe UI, sans-serif',
             whiteSpace: 'nowrap',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
           }}>

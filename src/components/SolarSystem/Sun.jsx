@@ -90,6 +90,7 @@ const Sun = ({ position = [0, 0, 0] }) => {
   const meshRef = useRef();
   const coronaRef = useRef();
   const corona2Ref = useRef();
+  const flareRef = useRef();
 
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
@@ -157,6 +158,10 @@ const Sun = ({ position = [0, 0, 0] }) => {
       const pulse2 = 1 + Math.sin(time * 0.8 + 1) * 0.08;
       corona2Ref.current.scale.set(10 * pulse2, 10 * pulse2, 1);
     }
+    if (flareRef.current) {
+      flareRef.current.rotation.z = time * 0.08;
+      flareRef.current.rotation.x = Math.sin(time * 0.18) * 0.16;
+    }
   });
 
   return (
@@ -176,6 +181,18 @@ const Sun = ({ position = [0, 0, 0] }) => {
 
       {/* Outer corona */}
       <sprite ref={corona2Ref} material={corona2Material} />
+
+      {/* Thin plasma arcs add structure to the corona without extra textures. */}
+      <group ref={flareRef}>
+        <mesh rotation={[Math.PI / 2, 0.25, 0]}>
+          <torusGeometry args={[2.25, 0.025, 8, 128, Math.PI * 1.35]} />
+          <meshBasicMaterial color="#ffb33b" transparent opacity={0.7} blending={THREE.AdditiveBlending} depthWrite={false} />
+        </mesh>
+        <mesh rotation={[0.35, Math.PI / 2, 1.1]}>
+          <torusGeometry args={[2.42, 0.018, 8, 128, Math.PI * 1.05]} />
+          <meshBasicMaterial color="#fff0a8" transparent opacity={0.5} blending={THREE.AdditiveBlending} depthWrite={false} />
+        </mesh>
+      </group>
 
       {/* Main sunlight — strong enough to illuminate all planets */}
       <pointLight

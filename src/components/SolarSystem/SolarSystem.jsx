@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useMemo, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
+import { Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
 
 import Sun from './Sun';
@@ -85,17 +86,23 @@ const SolarSystemScene = ({ selectedPlanet, onPlanetClick, reducedMotion }) => {
 
       {/* Starfield */}
       <Starfield count={starCount} reducedMotion={reducedMotion} />
-      {!isMobile && <NebulaHaze />}
+      {!isMobile && (
+        <>
+          <NebulaHaze />
+          <Sparkles count={90} scale={[48, 18, 48]} size={2.2} speed={0.12} opacity={0.45} color="#8be9ff" />
+        </>
+      )}
 
       {/* Post-processing */}
-      {/* <EffectComposer disableNormalPass alpha={true}>
+      <EffectComposer disableNormalPass multisampling={0}>
         <Bloom
-          intensity={1.2}
-          luminanceThreshold={0.3}
-          luminanceSmoothing={0.8}
+          intensity={1.35}
+          luminanceThreshold={0.42}
+          luminanceSmoothing={0.7}
           mipmapBlur
         />
-      </EffectComposer> */}
+        <Vignette eskil={false} offset={0.12} darkness={0.55} />
+      </EffectComposer>
     </>
   );
 };
@@ -127,7 +134,7 @@ const SolarSystem = () => {
         gl={{
           antialias: true,
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 0.8,
+          toneMappingExposure: 1.05,
           alpha: true,
           powerPreference: 'high-performance',
         }}

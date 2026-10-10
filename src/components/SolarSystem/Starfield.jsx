@@ -25,7 +25,12 @@ const Starfield = ({ count = 3000, reducedMotion = false }) => {
 
       // Subtle color variation (white to slight blue/warm)
       const colorVar = Math.random();
-      if (colorVar > 0.9) {
+      if (colorVar > 0.96) {
+        // Cyan accent (rare)
+        col[i * 3] = 0.4;
+        col[i * 3 + 1] = 1.0;
+        col[i * 3 + 2] = 0.85;
+      } else if (colorVar > 0.88) {
         // Subtle blue stars
         col[i * 3] = 0.7;
         col[i * 3 + 1] = 0.8;
@@ -35,11 +40,6 @@ const Starfield = ({ count = 3000, reducedMotion = false }) => {
         col[i * 3] = 1.0;
         col[i * 3 + 1] = 0.9;
         col[i * 3 + 2] = 0.7;
-      } else if (colorVar > 0.95) {
-        // Cyan accent (rare)
-        col[i * 3] = 0.4;
-        col[i * 3 + 1] = 1.0;
-        col[i * 3 + 2] = 0.85;
       } else {
         // White
         const brightness = 0.6 + Math.random() * 0.4;
@@ -121,11 +121,12 @@ export const NebulaHaze = () => {
     canvas.height = 512;
     const ctx = canvas.getContext('2d');
 
-    // Soft purple/blue nebula
+    // Saturated cyan-violet haze that stays behind the planets.
     const gradient = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
-    gradient.addColorStop(0, 'rgba(30, 20, 80, 0.08)');
-    gradient.addColorStop(0.5, 'rgba(20, 30, 60, 0.04)');
-    gradient.addColorStop(1, 'rgba(10, 15, 30, 0)');
+    gradient.addColorStop(0, 'rgba(52, 90, 190, 0.2)');
+    gradient.addColorStop(0.35, 'rgba(44, 35, 125, 0.13)');
+    gradient.addColorStop(0.7, 'rgba(12, 130, 155, 0.05)');
+    gradient.addColorStop(1, 'rgba(5, 10, 28, 0)');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 512, 512);
 
@@ -140,9 +141,9 @@ export const NebulaHaze = () => {
 
   return (
     <group>
-      <sprite material={spriteMaterial} position={[40, 20, -60]} scale={[80, 80, 1]} />
-      <sprite material={spriteMaterial} position={[-50, -10, -80]} scale={[60, 60, 1]} />
-      <sprite material={spriteMaterial} position={[10, -30, -90]} scale={[70, 70, 1]} />
+      <sprite material={spriteMaterial} position={[34, 18, -55]} scale={[92, 62, 1]} />
+      <sprite material={spriteMaterial} position={[-44, -8, -72]} scale={[76, 54, 1]} rotation={[0, 0, 0.8]} />
+      <sprite material={spriteMaterial} position={[6, -28, -82]} scale={[84, 50, 1]} rotation={[0, 0, -0.55]} />
     </group>
   );
 };
