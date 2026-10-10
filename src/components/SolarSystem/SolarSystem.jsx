@@ -126,8 +126,8 @@ const SolarSystem = () => {
     <div className="relative w-full h-full">
       <Canvas
         camera={{
-          position: [15, 20, 35],
-          fov: 45,
+          position: [11, 17, 33],
+          fov: 43,
           near: 0.1,
           far: 500,
         }}

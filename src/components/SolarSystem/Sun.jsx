@@ -152,11 +152,11 @@ const Sun = ({ position = [0, 0, 0] }) => {
     // Pulsating corona
     if (coronaRef.current) {
       const pulse = 1 + Math.sin(time * 1.5) * 0.06;
-      coronaRef.current.scale.set(7 * pulse, 7 * pulse, 1);
+      coronaRef.current.scale.set(8.2 * pulse, 8.2 * pulse, 1);
     }
     if (corona2Ref.current) {
       const pulse2 = 1 + Math.sin(time * 0.8 + 1) * 0.08;
-      corona2Ref.current.scale.set(10 * pulse2, 10 * pulse2, 1);
+      corona2Ref.current.scale.set(11.5 * pulse2, 11.5 * pulse2, 1);
     }
     if (flareRef.current) {
       flareRef.current.rotation.z = time * 0.08;
@@ -168,7 +168,7 @@ const Sun = ({ position = [0, 0, 0] }) => {
     <group position={position}>
       {/* Sun sphere with procedural shader */}
       <mesh ref={meshRef}>
-        <sphereGeometry args={[2, 64, 64]} />
+        <sphereGeometry args={[2.35, 64, 64]} />
         <shaderMaterial
           vertexShader={sunVertexShader}
           fragmentShader={sunFragmentShader}
@@ -185,11 +185,11 @@ const Sun = ({ position = [0, 0, 0] }) => {
       {/* Thin plasma arcs add structure to the corona without extra textures. */}
       <group ref={flareRef}>
         <mesh rotation={[Math.PI / 2, 0.25, 0]}>
-          <torusGeometry args={[2.25, 0.025, 8, 128, Math.PI * 1.35]} />
+          <torusGeometry args={[2.65, 0.03, 8, 128, Math.PI * 1.35]} />
           <meshBasicMaterial color="#ffb33b" transparent opacity={0.7} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
         <mesh rotation={[0.35, Math.PI / 2, 1.1]}>
-          <torusGeometry args={[2.42, 0.018, 8, 128, Math.PI * 1.05]} />
+          <torusGeometry args={[2.82, 0.022, 8, 128, Math.PI * 1.05]} />
           <meshBasicMaterial color="#fff0a8" transparent opacity={0.5} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
       </group>

@@ -4,7 +4,7 @@
 export const planetData = [
   {
     name: 'Mercury',
-    radius: 0.25,
+    radius: 0.32,
     orbitRadius: 4,
     orbitSpeed: 0.8,
     rotationSpeed: 0.005,
@@ -23,8 +23,8 @@ export const planetData = [
   },
   {
     name: 'Venus',
-    radius: 0.45,
-    orbitRadius: 6,
+    radius: 0.55,
+    orbitRadius: 5.7,
     orbitSpeed: 0.5,
     rotationSpeed: -0.002,
     orbitInclination: 0.06,
@@ -42,8 +42,8 @@ export const planetData = [
   },
   {
     name: 'Earth',
-    radius: 0.5,
-    orbitRadius: 8.5,
+    radius: 0.62,
+    orbitRadius: 7.5,
     orbitSpeed: 0.4,
     rotationSpeed: 0.01,
     orbitInclination: 0.0,
@@ -61,8 +61,8 @@ export const planetData = [
   },
   {
     name: 'Mars',
-    radius: 0.35,
-    orbitRadius: 11,
+    radius: 0.45,
+    orbitRadius: 9.3,
     orbitSpeed: 0.32,
     rotationSpeed: 0.009,
     orbitInclination: 0.03,
@@ -80,8 +80,8 @@ export const planetData = [
   },
   {
     name: 'Jupiter',
-    radius: 1.2,
-    orbitRadius: 15,
+    radius: 1.45,
+    orbitRadius: 12.5,
     orbitSpeed: 0.18,
     rotationSpeed: 0.02,
     orbitInclination: 0.02,
@@ -99,8 +99,8 @@ export const planetData = [
   },
   {
     name: 'Saturn',
-    radius: 1.0,
-    orbitRadius: 20,
+    radius: 1.25,
+    orbitRadius: 16.3,
     orbitSpeed: 0.12,
     rotationSpeed: 0.018,
     orbitInclination: 0.04,
@@ -122,8 +122,8 @@ export const planetData = [
   },
   {
     name: 'Uranus',
-    radius: 0.65,
-    orbitRadius: 25,
+    radius: 0.78,
+    orbitRadius: 20.2,
     orbitSpeed: 0.08,
     rotationSpeed: 0.012,
     orbitInclination: 0.01,
@@ -145,8 +145,8 @@ export const planetData = [
   },
   {
     name: 'Neptune',
-    radius: 0.6,
-    orbitRadius: 30,
+    radius: 0.74,
+    orbitRadius: 24,
     orbitSpeed: 0.06,
     rotationSpeed: 0.014,
     orbitInclination: 0.03,

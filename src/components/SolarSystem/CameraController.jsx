@@ -12,7 +12,7 @@ const CameraController = ({
   const { camera } = useThree();
 
   // Default camera position
-  const defaultPosition = useRef(new THREE.Vector3(15, 20, 35));
+  const defaultPosition = useRef(new THREE.Vector3(11, 17, 33));
   const defaultTarget = useRef(new THREE.Vector3(0, 0, 0));
 
   // Smooth camera transition
@@ -70,7 +70,7 @@ const CameraController = ({
 
     // Subtle auto-rotation when not focused and not transitioning
     if (!focusTarget && !isTransitioning.current && controlsRef.current && !reducedMotion) {
-      controlsRef.current.autoRotateSpeed = 0.3;
+      controlsRef.current.autoRotateSpeed = 0.22;
     } else if (controlsRef.current) {
       controlsRef.current.autoRotateSpeed = 0;
     }
@@ -87,7 +87,7 @@ const CameraController = ({
       maxPolarAngle={Math.PI * 0.85}
       minPolarAngle={Math.PI * 0.1}
       autoRotate={!focusTarget}
-      autoRotateSpeed={0.3}
+      autoRotateSpeed={0.22}
       rotateSpeed={0.5}
       zoomSpeed={0.8}
     />
