@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBars, FaTimes, FaRocket, FaChevronRight } from 'react-icons/fa';
+import { FaBars, FaTimes, FaRocket, FaChevronRight, FaEnvelope } from 'react-icons/fa';
 
 const navLinks = [
     { name: 'Home', to: 'home' },
@@ -122,7 +122,7 @@ const Navigation = () => {
                     initial={{ y: -100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 1, type: "spring", stiffness: 100 }}
-                    className={`pointer-events-auto flex items-center justify-between py-3 px-5 md:px-8 rounded-full border transition-all duration-500 w-full max-w-5xl ${
+                    className={`pointer-events-auto flex items-center justify-between py-3 px-5 md:px-7 rounded-full border transition-all duration-500 w-full max-w-6xl ${
                         scrolled 
                         ? 'bg-space-dark/40 backdrop-blur-3xl border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.9),0_0_60px_rgba(100,255,218,0.05)]' 
                         : 'bg-white/[0.02] backdrop-blur-2xl border-white/[0.05]'
@@ -181,7 +181,15 @@ const Navigation = () => {
                     </div>
 
                     {/* Right Actions */}
-                    <div className="flex-shrink-0 flex items-center">
+                    <div className="flex flex-shrink-0 items-center">
+                        <button
+                            onClick={() => scrollToSection('contact')}
+                            className="group hidden items-center gap-3 rounded-full border border-cyan-300 px-5 py-2.5 text-[10px] font-black tracking-[0.08em] text-white shadow-[0_0_18px_rgba(34,211,238,0.14)] transition-all hover:bg-cyan-300 hover:text-slate-950 lg:flex"
+                        >
+                            <FaEnvelope className="text-cyan-300 transition-colors group-hover:text-slate-950" />
+                            Let's connect
+                            <FaChevronRight className="text-[9px]" />
+                        </button>
 
                         {/* Mobile Toggle */}
                         <button

@@ -24,7 +24,7 @@
   
   body {
     @apply bg-space-dark text-star-white overflow-x-hidden antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Avenir Next', 'Segoe UI', sans-serif;
   }
 
   /* Custom Scrollbar */
