@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin, FaRocket } from 'react-icons/fa';
 
-const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+const scrollTo = (id) => document.getElementById(id)?.scrollIntoView();
 
 const HeroContent = ({ personalInfo }) => {
     const [firstName, lastName] = personalInfo.name.split(' ');
@@ -35,18 +35,18 @@ const HeroContent = ({ personalInfo }) => {
             </motion.p>
 
             <motion.div initial={{ y: 16, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, delay: 0.75 }} className="relative z-30 flex flex-wrap justify-center gap-3 lg:justify-start">
-                <button onClick={() => scrollTo('projects')} className="group flex items-center gap-3 rounded-xl bg-gradient-to-r from-cyan-300 to-cyan-400 px-7 py-3.5 text-[11px] font-black uppercase tracking-[0.14em] text-slate-950 shadow-[0_0_28px_rgba(34,211,238,0.22)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_38px_rgba(34,211,238,0.48)] sm:px-8">
-                    <FaRocket className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" /> Explore my work <FaArrowRight />
+                <button onClick={() => scrollTo('projects')} className="pressable fine-hover-lift group flex items-center gap-3 rounded-xl bg-gradient-to-r from-cyan-300 to-cyan-400 px-7 py-3.5 text-[11px] font-black uppercase tracking-[0.14em] text-slate-950 shadow-[0_0_28px_rgba(34,211,238,0.22)] transition-transform duration-[160ms] hover:shadow-[0_0_38px_rgba(34,211,238,0.48)] sm:px-8">
+                    <FaRocket className="fine-group-hero-rocket transition-transform duration-[160ms]" /> Explore my work <FaArrowRight />
                 </button>
-                <button onClick={() => scrollTo('contact')} className="group flex items-center gap-3 rounded-xl border border-slate-500/60 bg-slate-950/20 px-7 py-3.5 text-[11px] font-black uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/70 hover:bg-cyan-300/10 sm:px-8">
-                    <FaEnvelope /> Get in touch <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+                <button onClick={() => scrollTo('contact')} className="pressable fine-hover-lift group flex items-center gap-3 rounded-xl border border-slate-500/60 bg-slate-950/20 px-7 py-3.5 text-[11px] font-black uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-[background-color,border-color,transform] duration-[160ms] hover:border-cyan-300/70 hover:bg-cyan-300/10 sm:px-8">
+                    <FaEnvelope /> Get in touch <FaArrowRight className="fine-group-hero-arrow transition-transform duration-[160ms]" />
                 </button>
             </motion.div>
 
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 1 }} className="hero-content__socials mt-4 flex items-center gap-3">
                 <span className="mr-1 hidden text-[9px] font-bold uppercase tracking-[0.25em] text-slate-500 sm:block">Connect</span>
                 {socialLinks.map(({ icon: Icon, href, label }) => (
-                    <a key={label} href={href} target={label === 'Email' ? undefined : '_blank'} rel={label === 'Email' ? undefined : 'noopener noreferrer'} aria-label={label} className="grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/[0.025] text-base text-slate-400 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/60 hover:bg-cyan-300/10 hover:text-cyan-200">
+                    <a key={label} href={href} target={label === 'Email' ? undefined : '_blank'} rel={label === 'Email' ? undefined : 'noopener noreferrer'} aria-label={label} className="pressable fine-hover-lift grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/[0.025] text-base text-slate-400 transition-[color,background-color,border-color,transform] duration-[160ms] hover:border-cyan-300/60 hover:bg-cyan-300/10 hover:text-cyan-200">
                         <Icon />
                     </a>
                 ))}

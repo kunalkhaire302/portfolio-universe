@@ -20,10 +20,10 @@ const ContactSection = () => {
                     </p>
 
                     <div className="flex gap-4 mt-8">
-                        <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="p-4 bg-space-light/10 rounded-xl hover:bg-neon-teal hover:text-space-dark hover:scale-110 transition-all duration-300">
+                        <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="pressable fine-hover-scale p-4 bg-space-light/10 rounded-xl hover:bg-neon-teal hover:text-space-dark transition-[color,background-color,transform] duration-[160ms]">
                             <FaLinkedin className="text-2xl" />
                         </a>
-                        <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="p-4 bg-space-light/10 rounded-xl hover:bg-neon-teal hover:text-space-dark hover:scale-110 transition-all duration-300">
+                        <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="pressable fine-hover-scale p-4 bg-space-light/10 rounded-xl hover:bg-neon-teal hover:text-space-dark transition-[color,background-color,transform] duration-[160ms]">
                             <FaGithub className="text-2xl" />
                         </a>
                     </div>

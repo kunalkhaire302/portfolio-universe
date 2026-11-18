@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import { Sparkles } from '@react-three/drei';
+import { useReducedMotion } from 'framer-motion';
 import * as THREE from 'three';
 
 import Sun from './Sun';
@@ -12,12 +13,6 @@ import Starfield, { NebulaHaze } from './Starfield';
 import CameraController from './CameraController';
 import PlanetInfoPanel from './PlanetInfoPanel';
 import { planetData } from '../../data/planetData';
-
-// Detect reduced motion preference
-const prefersReducedMotion = () => {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-};
 
 // Detect if mobile
 const isMobileDevice = () => {
@@ -48,7 +43,7 @@ const SolarSystemScene = ({ selectedPlanet, onPlanetClick, reducedMotion }) => {
       <hemisphereLight args={['#445577', '#0a0a1a', 0.4]} />
 
       {/* Sun */}
-      <Sun position={[0, 0, 0]} />
+      <Sun position={[0, 0, 0]} reducedMotion={reducedMotion} />
 
       {/* Orbital paths */}
       {visiblePlanets.map((planet) => (
@@ -89,7 +84,7 @@ const SolarSystemScene = ({ selectedPlanet, onPlanetClick, reducedMotion }) => {
       {!isMobile && (
         <>
           <NebulaHaze />
-          <Sparkles count={90} scale={[48, 18, 48]} size={2.2} speed={0.12} opacity={0.45} color="#8be9ff" />
+          <Sparkles count={90} scale={[48, 18, 48]} size={2.2} speed={reducedMotion ? 0 : 0.12} opacity={0.45} color="#8be9ff" />
         </>
       )}
 
@@ -110,7 +105,7 @@ const SolarSystemScene = ({ selectedPlanet, onPlanetClick, reducedMotion }) => {
 const SolarSystem = () => {
   const [selectedPlanet, setSelectedPlanet] = useState(null);
   const [focusTarget, setFocusTarget] = useState(null);
-  const reducedMotion = useMemo(() => prefersReducedMotion(), []);
+  const reducedMotion = useReducedMotion() ?? false;
 
   const handlePlanetClick = useCallback((planetData, position) => {
     setSelectedPlanet(planetData);

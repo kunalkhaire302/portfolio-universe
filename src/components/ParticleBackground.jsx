@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
 
 const ParticleBackground = () => {
     const canvasRef = useRef(null);
+    const reducedMotion = useReducedMotion();
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -15,6 +17,7 @@ const ParticleBackground = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             initParticles();
+            if (reducedMotion) drawFrame(false);
         };
 
         let mouse = { x: null, y: null };
@@ -91,27 +94,33 @@ const ParticleBackground = () => {
             }
         }
 
-        function animate() {
+        function drawFrame(updateParticles = true) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
+                if (updateParticles) particles[i].update();
                 particles[i].draw();
             }
             ctx.globalAlpha = 1;
+        }
+
+        function animate() {
+            drawFrame();
             animationFrameId = requestAnimationFrame(animate);
         }
 
         handleResize();
         window.addEventListener('resize', handleResize);
-        window.addEventListener('mousemove', handleMouseMove);
-        animate();
+        if (!reducedMotion) {
+            window.addEventListener('mousemove', handleMouseMove);
+            animate();
+        }
 
         return () => {
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('mousemove', handleMouseMove);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [reducedMotion]);
 
     return (
         <canvas

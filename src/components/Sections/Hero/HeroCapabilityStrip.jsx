@@ -14,7 +14,7 @@ const HeroCapabilityStrip = () => (
         {capabilities.map(({ icon: Icon, number, title, detail }) => (
             <div key={title} className="group relative flex items-center justify-center gap-3 border-r border-white/[0.08] px-4 py-3 last:border-r-0">
                 <span className="absolute left-3 top-2 text-[8px] font-bold tracking-widest text-slate-600">{number}</span>
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-cyan-300/25 bg-cyan-300/[0.04] text-base text-cyan-300 transition-all duration-300 group-hover:border-cyan-200 group-hover:bg-cyan-300/12 group-hover:shadow-[0_0_22px_rgba(34,211,238,0.18)]"><Icon /></span>
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-cyan-300/25 bg-cyan-300/[0.04] text-base text-cyan-300 transition-[color,background-color,border-color] duration-200 group-hover:border-cyan-200 group-hover:bg-cyan-300/12 group-hover:shadow-[0_0_22px_rgba(34,211,238,0.18)]"><Icon /></span>
                 <span><strong className="block text-[10px] uppercase tracking-[0.17em] text-white">{title}</strong><small className="mt-0.5 block text-[10px] tracking-wide text-slate-500">{detail}</small></span>
             </div>
         ))}

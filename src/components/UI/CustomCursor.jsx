@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
+    const pointerX = useMotionValue(-100);
+    const pointerY = useMotionValue(-100);
+    const reducedMotion = useReducedMotion();
+    const spring = { stiffness: 150, damping: 15, mass: 0.5 };
+    const x = useSpring(pointerX, spring);
+    const y = useSpring(pointerY, spring);
 
     useEffect(() => {
+        if (reducedMotion) return undefined;
+
         const mouseMove = (e) => {
-            setMousePosition({
-                x: e.clientX,
-                y: e.clientY
-            });
+            pointerX.set(e.clientX);
+            pointerY.set(e.clientY);
         };
 
         const handleMouseOver = (e) => {
-            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
-                setIsHovering(true);
-            } else {
-                setIsHovering(false);
-            }
+            setIsHovering(Boolean(e.target.closest?.('a, button, [role="button"]')));
         };
 
         window.addEventListener("mousemove", mouseMove);
@@ -28,51 +29,29 @@ const CustomCursor = () => {
             window.removeEventListener("mousemove", mouseMove);
             window.removeEventListener("mouseover", handleMouseOver);
         };
-    }, []);
+    }, [pointerX, pointerY, reducedMotion]);
 
-    const variants = {
-        default: {
-            x: mousePosition.x - 16,
-            y: mousePosition.y - 16,
-            height: 32,
-            width: 32,
-            backgroundColor: "rgba(100, 255, 218, 0.1)",
-            border: "2px solid rgba(100, 255, 218, 0.5)",
-            mixBlendMode: "screen"
-        },
-        hover: {
-            x: mousePosition.x - 32,
-            y: mousePosition.y - 32,
-            height: 64,
-            width: 64,
-            backgroundColor: "rgba(100, 255, 218, 0.2)",
-            border: "2px solid rgba(100, 255, 218, 0.8)",
-            mixBlendMode: "screen"
-        }
-    };
+    if (reducedMotion) return null;
 
     return (
-        <>
-            {/* Main Cursor Ring */}
-            <motion.div
-                className="fixed top-0 left-0 rounded-full z-50 pointer-events-none hidden md:block"
-                variants={variants}
-                animate={isHovering ? "hover" : "default"}
-                transition={{
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 15,
-                    mass: 0.5
-                }}
-            />
-            {/* Center Dot */}
-            <div
-                className="fixed top-0 left-0 w-2 h-2 bg-neon-teal rounded-full pointer-events-none z-50 hidden md:block"
-                style={{
-                    transform: `translate(${mousePosition.x - 4}px, ${mousePosition.y - 4}px)`
-                }}
-            />
-        </>
+        <motion.div
+            className="custom-cursor fixed left-0 top-0 z-50 h-0 w-0 pointer-events-none"
+            style={{ x, y }}
+        >
+            <div className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2">
+                <motion.div
+                    className="h-16 w-16 rounded-full border-2"
+                    animate={{
+                        scale: isHovering ? 1 : 0.5,
+                        backgroundColor: isHovering ? "rgba(100, 255, 218, 0.2)" : "rgba(100, 255, 218, 0.1)",
+                        borderColor: isHovering ? "rgba(100, 255, 218, 0.8)" : "rgba(100, 255, 218, 0.5)"
+                    }}
+                    transition={spring}
+                    style={{ mixBlendMode: "screen" }}
+                />
+            </div>
+            <div className="absolute left-0 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-neon-teal" />
+        </motion.div>
     );
 };
 

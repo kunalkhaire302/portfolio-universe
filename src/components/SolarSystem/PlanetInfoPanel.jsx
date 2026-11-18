@@ -14,7 +14,7 @@ const PlanetInfoPanel = ({ planet, onClose }) => {
           initial={{ opacity: 0, x: 40, scale: 0.95 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           exit={{ opacity: 0, x: 40, scale: 0.95 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
           className="absolute right-6 top-1/2 -translate-y-1/2 z-30 w-72 md:w-80"
           style={{ pointerEvents: 'auto' }}
         >
@@ -43,7 +43,7 @@ const PlanetInfoPanel = ({ planet, onClose }) => {
               </div>
               <button
                 onClick={onClose}
-                className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+                className="pressable p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-[color,background-color,border-color,transform] duration-[160ms]"
                 aria-label="Close planet info"
               >
                 <FaTimes className="text-sm" />
@@ -77,7 +77,7 @@ const PlanetInfoPanel = ({ planet, onClose }) => {
             <div className="px-5 pb-5">
               <button
                 onClick={onClose}
-                className="w-full py-2.5 rounded-xl bg-neon-teal/10 border border-neon-teal/20 text-neon-teal text-xs font-bold uppercase tracking-widest hover:bg-neon-teal/20 hover:border-neon-teal/40 transition-all duration-300"
+                className="pressable w-full py-2.5 rounded-xl bg-neon-teal/10 border border-neon-teal/20 text-neon-teal text-xs font-bold uppercase tracking-widest hover:bg-neon-teal/20 hover:border-neon-teal/40 transition-[background-color,border-color,transform] duration-[160ms]"
               >
                 ← Back to Solar System
               </button>

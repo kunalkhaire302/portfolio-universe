@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes, FaRocket, FaChevronRight, FaEnvelope } from 'react-icons/fa';
 
@@ -17,6 +17,8 @@ const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
+    const mobileMenuRef = useRef(null);
+    const mobileToggleRef = useRef(null);
 
     const handleDownload = async (e, href, downloadName) => {
         e.preventDefault();
@@ -99,8 +101,7 @@ const Navigation = () => {
             const offsetPosition = elementPosition - offset;
 
             window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
+                top: offsetPosition
             });
             setIsOpen(false);
         }
@@ -108,39 +109,75 @@ const Navigation = () => {
 
     // Body scroll lock when mobile menu is open
     useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
+        if (!isOpen) return undefined;
+
+        const previousOverflow = document.body.style.overflow;
+        const menuToggle = mobileToggleRef.current;
+        document.body.style.overflow = 'hidden';
+
+        const focusableElements = mobileMenuRef.current?.querySelectorAll('a[href], button:not([disabled])') || [];
+        focusableElements[0]?.focus();
+
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                setIsOpen(false);
+                return;
+            }
+
+            if (event.key !== 'Tab' || focusableElements.length === 0) return;
+
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (event.shiftKey && document.activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+            } else if (!event.shiftKey && document.activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = previousOverflow;
+            menuToggle?.focus();
+        };
     }, [isOpen]);
 
     return (
         <>
-            <div className="fixed top-0 left-0 w-full flex justify-center z-[100] p-4 md:p-6 pointer-events-none">
+            <div className="navigation-shell fixed top-0 left-0 w-full flex justify-center z-[100] p-4 md:p-6 pointer-events-none">
                 <motion.nav
+                    aria-label="Primary navigation"
+                    aria-hidden={isOpen ? 'true' : undefined}
+                    inert={isOpen}
                     initial={{ y: -100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 1, type: "spring", stiffness: 100 }}
-                    className={`pointer-events-auto flex items-center justify-between py-3 px-5 md:px-7 rounded-full border transition-all duration-500 w-full max-w-6xl ${
+                    transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+                    className={`pointer-events-auto flex items-center justify-between py-3 px-5 md:px-7 rounded-full border transition-[background-color,border-color] duration-200 w-full max-w-6xl ${
                         scrolled 
                         ? 'bg-space-dark/40 backdrop-blur-3xl border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.9),0_0_60px_rgba(100,255,218,0.05)]' 
                         : 'bg-white/[0.02] backdrop-blur-2xl border-white/[0.05]'
                     }`}
                 >
                     {/* Logo */}
-                    <div
-                        className="flex-shrink-0 group flex items-center gap-2 md:gap-3 cursor-pointer"
+                    <button
+                        type="button"
+                        aria-label="Go to home"
+                        className="flex-shrink-0 group flex items-center gap-2 md:gap-3 cursor-pointer transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none"
                         onClick={() => scrollToSection('home')}
                     >
-                        <div className="relative w-9 h-9 md:w-10 md:h-10 flex items-center justify-center bg-neon-teal/10 rounded-full border border-neon-teal/20 group-hover:border-neon-teal/50 transition-all duration-300">
+                        <div className="relative w-9 h-9 md:w-10 md:h-10 flex items-center justify-center bg-neon-teal/10 rounded-full border border-neon-teal/20 group-hover:border-neon-teal/50 transition-colors duration-200">
                             <FaRocket className="text-neon-teal group-hover:-rotate-12 transition-transform text-sm md:text-base" />
                             <div className="absolute inset-0 bg-neon-teal rounded-full blur-lg opacity-0 group-hover:opacity-20 transition-opacity" />
                         </div>
                         <span className="text-white font-black tracking-tighter text-base md:text-lg">
                             kunal<span className="text-neon-teal">universe</span>
                         </span>
-                    </div>
+                    </button>
 
                     {/* Desktop Menu */}
                     <div className="hidden lg:flex items-center justify-center flex-1 px-0 xl:px-2 gap-0">
@@ -151,7 +188,7 @@ const Navigation = () => {
                                     href={process.env.PUBLIC_URL + link.href}
                                     onClick={(e) => handleDownload(e, link.href, link.downloadName)}
                                     download={link.downloadName}
-                                    className="relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-all duration-300 rounded-full whitespace-nowrap text-slate-400 hover:text-white"
+                                    className="relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-[color,transform] duration-150 ease-[var(--ease-out)] rounded-full whitespace-nowrap text-slate-400 hover:text-white active:scale-[0.97] motion-reduce:transform-none"
                                 >
                                     <span className="relative z-10">{link.name}</span>
                                 </a>
@@ -159,7 +196,7 @@ const Navigation = () => {
                                 <button
                                     key={link.name}
                                     onClick={() => scrollToSection(link.to)}
-                                    className={`relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-all duration-300 rounded-full whitespace-nowrap ${
+                                    className={`relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-[color,transform] duration-150 ease-[var(--ease-out)] rounded-full whitespace-nowrap active:scale-[0.97] motion-reduce:transform-none ${
                                         activeSection === link.to 
                                         ? 'text-neon-teal text-glow' 
                                         : 'text-slate-400 hover:text-white'
@@ -171,7 +208,7 @@ const Navigation = () => {
                                             <motion.div
                                                 layoutId="nav-pill"
                                                 className="absolute -bottom-2 left-0 w-full h-[2px] bg-neon-teal rounded-full shadow-[0_0_10px_rgba(100,255,218,0.8)]"
-                                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                                transition={{ type: "spring", bounce: 0.2, duration: 0.25 }}
                                             />
                                         )}
                                     </span>
@@ -184,7 +221,7 @@ const Navigation = () => {
                     <div className="flex flex-shrink-0 items-center">
                         <button
                             onClick={() => scrollToSection('contact')}
-                            className="group hidden items-center gap-3 rounded-full border border-cyan-300 px-5 py-2.5 text-[10px] font-black tracking-[0.08em] text-white shadow-[0_0_18px_rgba(34,211,238,0.14)] transition-all hover:bg-cyan-300 hover:text-slate-950 lg:flex"
+                            className="group hidden items-center gap-3 rounded-full border border-cyan-300 px-5 py-2.5 text-[10px] font-black tracking-[0.08em] text-white shadow-[0_0_18px_rgba(34,211,238,0.14)] transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-cyan-300 hover:text-slate-950 active:scale-[0.97] motion-reduce:transform-none lg:flex"
                         >
                             <FaEnvelope className="text-cyan-300 transition-colors group-hover:text-slate-950" />
                             Let's connect
@@ -193,8 +230,12 @@ const Navigation = () => {
 
                         {/* Mobile Toggle */}
                         <button
+                            ref={mobileToggleRef}
                             onClick={() => setIsOpen(!isOpen)}
-                            className="lg:hidden p-2.5 text-lg text-neon-teal bg-white/5 rounded-full border border-white/10 hover:bg-white/10 transition-colors z-[110]"
+                            aria-expanded={isOpen}
+                            aria-controls="mobile-navigation"
+                            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                            className="lg:hidden p-2.5 text-lg text-neon-teal bg-white/5 rounded-full border border-white/10 hover:bg-white/10 transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none z-[110]"
                         >
                             {isOpen ? <FaTimes /> : <FaBars />}
                         </button>
@@ -206,11 +247,25 @@ const Navigation = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
+                        ref={mobileMenuRef}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Mobile navigation"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[90] bg-[#030712]/95 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden"
+                        transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+                        className="fixed inset-0 z-[120] bg-[#030712]/95 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden"
                     >
+                        <button
+                            type="button"
+                            onClick={() => setIsOpen(false)}
+                            aria-label="Close navigation menu"
+                            className="pressable absolute right-4 top-[calc(1rem+env(safe-area-inset-top,0px))] z-20 rounded-full border border-white/10 bg-white/5 p-2.5 text-lg text-neon-teal transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-white/10 motion-reduce:transform-none"
+                        >
+                            <FaTimes />
+                        </button>
+
                         {/* Background Stars Decoration */}
                         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
                             {[...Array(20)].map((_, i) => (
@@ -228,42 +283,36 @@ const Navigation = () => {
                             ))}
                         </div>
 
-                        <nav className="relative z-10 flex flex-col items-center gap-4 w-full px-10">
-                            {navLinks.map((link, i) => (
+                        <nav id="mobile-navigation" aria-label="Mobile navigation links" className="relative z-10 flex flex-col items-center gap-4 w-full px-10">
+                            {navLinks.map((link) => (
                                 link.isDownload ? (
-                                    <motion.a
+                                    <a
                                         key={link.name}
-                                        initial={{ x: -50, opacity: 0 }}
-                                        animate={{ x: 0, opacity: 1 }}
-                                        transition={{ delay: i * 0.1, duration: 0.5 }}
                                         href={process.env.PUBLIC_URL + link.href}
                                         onClick={(e) => handleDownload(e, link.href, link.downloadName)}
                                         download={link.downloadName}
-                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5"
+                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5 transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none"
                                     >
-                                        <span className="text-2xl font-black uppercase tracking-tighter transition-all text-slate-500 group-hover:text-white">
+                                        <span className="text-2xl font-black uppercase tracking-tighter transition-colors duration-150 text-slate-500 group-hover:text-white">
                                             {link.name}
                                         </span>
-                                        <FaChevronRight className="transition-transform text-slate-800 group-hover:text-white" />
-                                    </motion.a>
+                                        <FaChevronRight className="transition-[color,transform] duration-150 text-slate-800 group-hover:text-white" />
+                                    </a>
                                 ) : (
-                                    <motion.button
+                                    <button
                                         key={link.name}
-                                        initial={{ x: -50, opacity: 0 }}
-                                        animate={{ x: 0, opacity: 1 }}
-                                        transition={{ delay: i * 0.1, duration: 0.5 }}
                                         onClick={() => scrollToSection(link.to)}
-                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5"
+                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5 transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none"
                                     >
-                                        <span className={`text-2xl font-black uppercase tracking-tighter transition-all ${
-                                            activeSection === link.to ? 'text-neon-teal text-3xl' : 'text-slate-500 group-hover:text-white'
+                                        <span className={`text-2xl font-black uppercase tracking-tighter transition-colors duration-150 ${
+                                            activeSection === link.to ? 'text-neon-teal' : 'text-slate-500 group-hover:text-white'
                                         }`}>
                                             {link.name}
                                         </span>
-                                        <FaChevronRight className={`transition-transform ${
+                                        <FaChevronRight className={`transition-[color,transform] duration-150 ${
                                             activeSection === link.to ? 'text-neon-teal translate-x-2' : 'text-slate-800 group-hover:text-white'
                                         }`} />
-                                    </motion.button>
+                                    </button>
                                 )
                             ))}
                         </nav>

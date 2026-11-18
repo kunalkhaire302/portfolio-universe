@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -7,6 +7,33 @@ import { FaAward } from 'react-icons/fa';
 const CertificationSection = () => {
     const { certifications } = portfolioData;
     const [selectedImage, setSelectedImage] = useState(null);
+    const closeButtonRef = useRef(null);
+    const openerRef = useRef(null);
+
+    useEffect(() => {
+        if (!selectedImage) return undefined;
+
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        closeButtonRef.current?.focus();
+
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                setSelectedImage(null);
+            } else if (event.key === 'Tab') {
+                event.preventDefault();
+                closeButtonRef.current?.focus();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = previousOverflow;
+            openerRef.current?.focus();
+        };
+    }, [selectedImage]);
 
     return (
         <SectionContainer id="certifications">
@@ -24,17 +51,22 @@ const CertificationSection = () => {
                         className={`glass-card p-8 w-full relative overflow-hidden group hover:border-cert-gold transition-colors duration-300 ${cert.image ? 'max-w-4xl' : 'max-w-2xl'}`}
                     >
                         {/* Shooting Star Decoration */}
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-cert-gold/20 to-transparent -mr-16 -mt-16 rounded-full blur-2xl group-hover:from-cert-gold/40 transition-all duration-500" />
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-cert-gold/20 to-transparent -mr-16 -mt-16 rounded-full blur-2xl group-hover:from-cert-gold/40" />
 
                         <div className={`flex flex-col ${cert.image ? 'md:flex-row' : ''} items-start gap-6`}>
                             {cert.image && (
-                                <div 
-                                    className="w-full md:w-2/5 shrink-0 rounded-xl overflow-hidden border border-white/10 relative group-hover:border-cert-gold/30 transition-all duration-300 bg-black/20 p-2 cursor-pointer"
-                                    onClick={() => setSelectedImage(cert.image)}
+                                <button
+                                    type="button"
+                                    aria-label={`Preview ${cert.title}`}
+                                    className="w-full md:w-2/5 shrink-0 rounded-xl overflow-hidden border border-white/10 relative group-hover:border-cert-gold/30 transition-colors duration-200 bg-black/20 p-2 cursor-pointer"
+                                    onClick={(event) => {
+                                        openerRef.current = event.currentTarget;
+                                        setSelectedImage(cert.image);
+                                    }}
                                 >
                                     <div className="absolute inset-0 bg-black/0 group-hover:bg-cert-gold/5 transition-colors z-10 pointer-events-none rounded-xl" />
                                     <img src={cert.image} alt={cert.title} className="w-full h-auto object-contain rounded-lg relative z-0" />
-                                </div>
+                                </button>
                             )}
                             
                             <div className="flex-1 flex flex-col justify-center w-full">
@@ -61,7 +93,7 @@ const CertificationSection = () => {
                                                     href={cert.image} 
                                                     target="_blank" 
                                                     rel="noopener noreferrer"
-                                                    className="inline-flex items-center justify-center px-6 py-2.5 bg-cert-gold/10 hover:bg-cert-gold/20 text-cert-gold border border-cert-gold/30 rounded-lg font-bold tracking-wide text-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:-translate-y-1"
+                                                    className="pressable fine-hover-lift inline-flex items-center justify-center px-6 py-2.5 bg-cert-gold/10 hover:bg-cert-gold/20 text-cert-gold border border-cert-gold/30 rounded-lg font-bold tracking-wide text-sm transition-[background-color,border-color,transform] duration-[160ms] hover:shadow-[0_0_20px_rgba(255,215,0,0.2)]"
                                                 >
                                                     View Certificate
                                                 </a>
@@ -79,6 +111,9 @@ const CertificationSection = () => {
             <AnimatePresence>
                 {selectedImage && (
                     <motion.div 
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Certificate preview"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -93,8 +128,10 @@ const CertificationSection = () => {
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button 
+                                ref={closeButtonRef}
                                 onClick={() => setSelectedImage(null)}
-                                className="absolute -top-12 right-0 md:-right-8 md:-top-12 text-white/50 hover:text-white text-4xl transition-colors"
+                                aria-label="Close certificate preview"
+                                className="pressable absolute -top-12 right-0 md:-right-8 md:-top-12 text-white/50 hover:text-white text-4xl transition-[color,transform] duration-[160ms]"
                             >
                                 &times;
                             </button>

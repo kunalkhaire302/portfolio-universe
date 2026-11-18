@@ -86,7 +86,7 @@ const sunFragmentShader = `
   }
 `;
 
-const Sun = ({ position = [0, 0, 0] }) => {
+const Sun = ({ position = [0, 0, 0], reducedMotion = false }) => {
   const meshRef = useRef();
   const coronaRef = useRef();
   const corona2Ref = useRef();
@@ -142,6 +142,8 @@ const Sun = ({ position = [0, 0, 0] }) => {
   }, []);
 
   useFrame((state) => {
+    if (reducedMotion) return;
+
     const time = state.clock.getElapsedTime();
     uniforms.uTime.value = time;
 
@@ -177,10 +179,10 @@ const Sun = ({ position = [0, 0, 0] }) => {
       </mesh>
 
       {/* Inner corona glow */}
-      <sprite ref={coronaRef} material={coronaMaterial} />
+      <sprite ref={coronaRef} material={coronaMaterial} scale={[8.2, 8.2, 1]} />
 
       {/* Outer corona */}
-      <sprite ref={corona2Ref} material={corona2Material} />
+      <sprite ref={corona2Ref} material={corona2Material} scale={[11.5, 11.5, 1]} />
 
       {/* Thin plasma arcs add structure to the corona without extra textures. */}
       <group ref={flareRef}>

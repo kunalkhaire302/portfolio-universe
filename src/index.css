@@ -3,10 +3,29 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
   html {
     scroll-behavior: smooth;
     /* Base font size for mobile */
     font-size: 16px;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  a,
+  button,
+  [role='button'] {
+    touch-action: manipulation;
+  }
+
+  button,
+  [role='button'] {
+    -webkit-user-select: none;
+    user-select: none;
   }
   
   /* Scale down the entire UI on laptops/desktops to prevent oversized components */
@@ -47,7 +66,7 @@
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-transparent border-2 border-neon-teal text-neon-teal rounded hover:bg-neon-teal hover:bg-opacity-10 transition-all duration-300 font-medium tracking-wide;
+    @apply px-6 py-3 bg-transparent border-2 border-neon-teal text-neon-teal rounded hover:bg-neon-teal hover:bg-opacity-10 transition-[color,background-color,border-color,transform] duration-[160ms] font-medium tracking-wide;
   }
 
   .section-container {
@@ -55,15 +74,94 @@
   }
 
   .nav-link {
-    @apply text-star-white opacity-70 hover:opacity-100 hover:text-neon-teal transition-all duration-300;
+    @apply text-star-white opacity-70 hover:opacity-100 hover:text-neon-teal transition-[color,opacity] duration-150;
   }
   
   .glass-card {
-    @apply bg-space-blue bg-opacity-20 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_0_rgba(100,255,218,0.1)];
+    @apply bg-space-blue bg-opacity-20 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] transition-[border-color,transform] duration-200 hover:border-white/20 hover:shadow-[0_8px_32px_0_rgba(100,255,218,0.1)];
   }
   .btn-outline {
-    @apply px-6 py-3 bg-transparent border-2 border-planet-orange text-planet-orange rounded hover:bg-planet-orange hover:bg-opacity-10 transition-all duration-300 font-medium tracking-wide;
+    @apply px-6 py-3 bg-transparent border-2 border-planet-orange text-planet-orange rounded hover:bg-planet-orange hover:bg-opacity-10 transition-[color,background-color,border-color,transform] duration-[160ms] font-medium tracking-wide;
   }
+}
+
+.navigation-shell {
+  padding-top: calc(1rem + env(safe-area-inset-top, 0px));
+}
+
+.custom-cursor {
+  display: none;
+}
+
+.skill-tooltip {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px) scale(0.97);
+  transform-origin: bottom center;
+  transition: opacity 125ms var(--ease-out), transform 125ms var(--ease-out);
+}
+
+.pressable,
+.btn-primary,
+.btn-outline {
+  transition-timing-function: var(--ease-out);
+}
+
+@media (min-width: 768px) {
+  .navigation-shell {
+    padding-top: calc(1.5rem + env(safe-area-inset-top, 0px));
+  }
+}
+
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .custom-cursor {
+    display: block;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fine-hover-lift:hover {
+    transform: translateY(-0.25rem);
+  }
+
+  .fine-hover-lift-lg:hover {
+    transform: translateY(-0.5rem);
+  }
+
+  .fine-hover-scale:hover {
+    transform: scale(1.1);
+  }
+
+  .fine-hover-scale-subtle:hover {
+    transform: scale(1.02);
+  }
+
+  .group:hover .fine-group-project-icon {
+    transform: scale(1.1) rotate(6deg);
+  }
+
+  .group:hover .fine-group-hero-rocket {
+    transform: translate(0.25rem, -0.25rem);
+  }
+
+  .group:hover .fine-group-hero-arrow {
+    transform: translateX(0.25rem);
+  }
+
+  .skill-item:hover .skill-icon {
+    transform: translateY(-3px) scale(1.1);
+  }
+
+  .skill-item:hover .skill-tooltip {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pressable:active,
+.btn-primary:active,
+.btn-outline:active {
+  transform: scale(0.97);
 }
 
 /* Custom Animations */
@@ -119,4 +217,33 @@
 
 .glow-orange {
   box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+
+  .pressable:active,
+  .btn-primary:active,
+  .btn-outline:active,
+  .fine-hover-lift:hover,
+  .fine-hover-lift-lg:hover,
+  .fine-hover-scale:hover,
+  .fine-hover-scale-subtle:hover,
+  .group:hover .fine-group-project-icon,
+  .group:hover .fine-group-hero-rocket,
+  .group:hover .fine-group-hero-arrow,
+  .skill-item:hover .skill-icon,
+  .skill-item:hover .skill-tooltip {
+    transform: none !important;
+  }
 }

@@ -36,8 +36,7 @@ const ExperienceSection = () => {
 
                         {/* Content Card */}
                         <motion.div 
-                            whileHover={{ scale: 1.02 }}
-                            className="flex-1 w-full glass-card p-6 relative hover:border-planet-orange/50 transition-all duration-300 group"
+                            className="flex-1 w-full glass-card p-6 relative hover:border-planet-orange/50 transition-[border-color,transform] duration-200 group"
                         >
                             {/* Triangle Arrow */}
                             <div className={`absolute top-6 w-0 h-0 border-[10px] border-transparent ${

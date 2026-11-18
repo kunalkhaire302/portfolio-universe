@@ -59,7 +59,7 @@ const ProjectsSection = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`group relative glass-morphism p-8 flex flex-col h-full rounded-2xl transition-all duration-500 hover:-translate-y-2 ${bgVariants[project.color] || ''} ${project.featured ? 'shadow-[0_0_40px_rgba(100,255,218,0.15)] ring-1 ring-neon-teal/30 bg-gradient-to-br from-space-blue/80 to-space-dark/90' : ''}`}
+            className={`group relative glass-morphism p-8 flex flex-col h-full rounded-2xl transition-transform duration-200 ${bgVariants[project.color] || ''} ${project.featured ? 'shadow-[0_0_40px_rgba(100,255,218,0.15)] ring-1 ring-neon-teal/30 bg-gradient-to-br from-space-blue/80 to-space-dark/90' : ''}`}
         >
             {project.featured && (
                 <div className="absolute -top-3 -right-3 bg-neon-teal text-space-dark text-xs font-bold uppercase tracking-widest py-1 px-3 rounded-full shadow-[0_0_20px_rgba(100,255,218,0.5)] z-10">
@@ -67,20 +67,20 @@ const ProjectsSection = () => {
                 </div>
             )}
             {/* Decorative Gradient Blob */}
-            <div className={`absolute -top-10 -right-10 w-32 h-32 blur-3xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-full ${project.color === 'electric-blue' ? 'bg-blue-500' : project.color === 'neon-teal' ? 'bg-teal-500' : 'bg-purple-500'}`} />
+            <div className={`absolute -top-10 -right-10 w-32 h-32 blur-3xl opacity-0 group-hover:opacity-10 transition-opacity duration-200 rounded-full ${project.color === 'electric-blue' ? 'bg-blue-500' : project.color === 'neon-teal' ? 'bg-teal-500' : 'bg-purple-500'}`} />
 
             <div className="flex justify-between items-start mb-8">
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl border border-white/10 bg-white/5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 ${colorVariants[project.color] || ''}`}>
+                <div className={`fine-group-project-icon w-14 h-14 rounded-2xl flex items-center justify-center text-3xl border border-white/10 bg-white/5 transition-[color,background-color,border-color,transform] duration-200 ${colorVariants[project.color] || ''}`}>
                     {iconMap[project.icon] || <FaRocket />}
                 </div>
                 <div className="flex gap-3">
                     {project.github && (
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all" title="GitHub">
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="pressable p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-[color,background-color,border-color,transform] duration-[160ms]" title="GitHub">
                             <FaGithub className="text-xl" />
                         </a>
                     )}
                     {project.live && !project.featured && (
-                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all" title="Live Demo">
+                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="pressable p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-[color,background-color,border-color,transform] duration-[160ms]" title="Live Demo">
                             <FaExternalLinkAlt className="text-xl" />
                         </a>
                     )}
@@ -107,7 +107,7 @@ const ProjectsSection = () => {
                 href={project.live || project.github} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className={`w-full py-3 rounded-xl border-2 text-center text-sm font-bold uppercase tracking-widest transition-all duration-300 ${
+                className={`pressable w-full py-3 rounded-xl border-2 text-center text-sm font-bold uppercase tracking-widest transition-[color,background-color,border-color,transform] duration-[160ms] ${
                     project.featured 
                     ? 'bg-neon-teal text-space-dark border-neon-teal hover:bg-neon-teal/80 hover:shadow-[0_0_20px_rgba(100,255,218,0.4)]'
                     : 'bg-transparent border-white/10 text-white hover:border-neon-teal/50 hover:bg-neon-teal/10 hover:text-neon-teal hover:shadow-[0_0_20px_rgba(100,255,218,0.2)]'

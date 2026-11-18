@@ -1,7 +1,8 @@
 import React, { useState, Suspense, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Preload } from '@react-three/drei';
-import { EffectComposer, Bloom, Vignette, ToneMapping } from '@react-three/postprocessing';
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
+import { useReducedMotion } from 'framer-motion';
 import * as THREE from 'three';
 
 import Earth from './Earth';
@@ -42,6 +43,7 @@ const EarthScene = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [infoPanelOpen, setInfoPanelOpen] = useState(false);
   const [resetTrigger, setResetTrigger] = useState(0);
+  const reducedMotion = useReducedMotion() ?? false;
 
   // Position the sun to create a beautiful terminator line (day/night transition)
   const sunPosition = new THREE.Vector3(5, 2, 3);
@@ -82,12 +84,12 @@ const EarthScene = () => {
           />
 
           <group onClick={() => setInfoPanelOpen(true)}>
-            <Earth isPaused={isPaused} sunPosition={sunPosition} />
-            <Clouds isPaused={isPaused} />
+            <Earth isPaused={isPaused || reducedMotion} sunPosition={sunPosition} />
+            <Clouds isPaused={isPaused || reducedMotion} />
             <Atmosphere sunPosition={sunPosition} />
           </group>
 
-          <Starfield count={1500} />
+          <Starfield count={1500} reducedMotion={reducedMotion} />
           <NebulaHaze />
 
           <CameraManager resetTrigger={resetTrigger} />

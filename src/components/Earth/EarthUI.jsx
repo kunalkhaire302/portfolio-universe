@@ -16,21 +16,21 @@ const EarthUI = ({
       <div className="flex justify-end gap-3 pointer-events-auto">
         <button 
           onClick={() => setInfoPanelOpen(!infoPanelOpen)}
-          className="w-10 h-10 rounded-full bg-space-blue/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-neon-teal/20 hover:text-neon-teal transition-all shadow-lg"
+          className="pressable w-10 h-10 rounded-full bg-space-blue/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-neon-teal/20 hover:text-neon-teal transition-[color,background-color,border-color,transform] duration-[160ms] shadow-lg"
           title="Info"
         >
           <FiInfo size={18} />
         </button>
         <button 
           onClick={() => setIsPaused(!isPaused)}
-          className="w-10 h-10 rounded-full bg-space-blue/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-neon-teal/20 hover:text-neon-teal transition-all shadow-lg"
+          className="pressable w-10 h-10 rounded-full bg-space-blue/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-neon-teal/20 hover:text-neon-teal transition-[color,background-color,border-color,transform] duration-[160ms] shadow-lg"
           title={isPaused ? "Play Rotation" : "Pause Rotation"}
         >
           {isPaused ? <FiPlay size={18} /> : <FiPause size={18} />}
         </button>
         <button 
           onClick={resetView}
-          className="w-10 h-10 rounded-full bg-space-blue/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-neon-teal/20 hover:text-neon-teal transition-all shadow-lg"
+          className="pressable w-10 h-10 rounded-full bg-space-blue/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-neon-teal/20 hover:text-neon-teal transition-[color,background-color,border-color,transform] duration-[160ms] shadow-lg"
           title="Reset View"
         >
           <FiRefreshCcw size={18} />
@@ -44,12 +44,13 @@ const EarthUI = ({
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
             className="absolute bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-80 bg-space-blue/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 pointer-events-auto shadow-2xl"
           >
             <button 
               onClick={() => setInfoPanelOpen(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors"
+              aria-label="Close Earth information"
+              className="pressable absolute top-4 right-4 text-slate-400 hover:text-white transition-[color,transform] duration-[160ms]"
             >
               <FiX size={20} />
             </button>
