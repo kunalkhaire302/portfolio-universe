@@ -9,8 +9,8 @@ const capabilities = [
     { icon: FaAward, number: '04', title: 'Achievements', detail: 'See credentials', href: '#certifications' },
 ];
 
-const HeroCapabilityStrip = () => (
-    <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1, duration: 0.7 }} className="relative z-20 hidden grid-cols-4 border-t border-white/10 bg-gradient-to-r from-transparent via-slate-950/20 to-transparent lg:grid">
+const HeroCapabilityStrip = ({ reducedMotion, scrollStyle }) => (
+    <motion.div style={reducedMotion ? undefined : scrollStyle} className="hero-capabilities relative z-20 hidden grid-cols-4 border-t border-white/10 bg-gradient-to-r from-transparent via-slate-950/20 to-transparent lg:grid">
         {capabilities.map(({ icon: Icon, number, title, detail, href }) => (
             <a key={title} href={href} className="capability-link group relative flex items-center justify-center gap-3 border-r border-white/[0.08] px-4 py-3 last:border-r-0">
                 <span className="absolute left-3 top-2 text-[8px] font-bold tracking-widest text-slate-600">{number}</span>

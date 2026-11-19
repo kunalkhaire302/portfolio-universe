@@ -1,26 +1,120 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { FaArrowDown } from 'react-icons/fa';
 import portfolioData from '../../data/portfolioData';
+import HeroArchitecture from './Hero/HeroArchitecture';
 import HeroCapabilityStrip from './Hero/HeroCapabilityStrip';
 import HeroContent from './Hero/HeroContent';
 
-const HeroSection = () => (
-    <section id="home" className="hero-section relative z-10 min-h-[100svh] w-full overflow-hidden px-5 pb-6 pt-28 sm:px-8 lg:px-12 lg:pb-4 lg:pt-24 xl:px-16">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_28%_48%,rgba(6,182,212,0.12),transparent_32%),radial-gradient(circle_at_76%_35%,rgba(37,99,235,0.07),transparent_26%)]" />
-        <div aria-hidden="true" className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(255,255,255,.3)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.3)_1px,transparent_1px)] [background-size:52px_52px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]" />
+const HeroSection = () => {
+    const heroRef = useRef(null);
+    const pointerGlowRef = useRef(null);
+    const pointerFrameRef = useRef(null);
+    const pointerBoundsRef = useRef(null);
+    const reducedMotion = useReducedMotion();
+    const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+    const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.25 });
 
-        <div className="relative mx-auto grid min-h-[calc(100svh-8.25rem)] max-w-[1540px] gap-6 lg:grid-rows-[minmax(0,1fr)_auto]">
-            <div className="grid min-h-0 place-items-center py-8">
-                <HeroContent personalInfo={portfolioData.personalInfo} />
+    const firstNameY = useTransform(progress, [0, 1], [0, -76]);
+    const lastNameY = useTransform(progress, [0, 1], [0, -56]);
+    const nameScale = useTransform(progress, [0, 1], [1, 0.91]);
+    const nameOpacity = useTransform(progress, [0, 0.72, 1], [1, 0.7, 0.28]);
+    const supportY = useTransform(progress, [0, 1], [0, -46]);
+    const supportOpacity = useTransform(progress, [0, 0.65, 1], [1, 0.82, 0.24]);
+    const badgeY = useTransform(progress, [0, 1], [0, -30]);
+    const badgeOpacity = useTransform(progress, [0, 0.72, 1], [1, 0.78, 0.18]);
+    const actionY = useTransform(progress, [0, 1], [0, -24]);
+    const actionOpacity = useTransform(progress, [0, 0.7, 1], [1, 0.72, 0]);
+    const socialOpacity = useTransform(progress, [0, 0.62, 0.9], [1, 0.7, 0]);
+    const architectureY = useTransform(progress, [0, 0.55, 1], [0, -16, -72]);
+    const architectureScale = useTransform(progress, [0, 0.42, 0.72, 1], [1, 1.055, 0.99, 0.94]);
+    const architectureOpacity = useTransform(progress, [0, 0.7, 1], [1, 0.84, 0.12]);
+    const cyanY = useTransform(progress, [0, 1], [0, -70]);
+    const blueY = useTransform(progress, [0, 1], [0, -34]);
+    const ambientOpacity = useTransform(progress, [0, 0.72, 1], [1, 0.74, 0]);
+    const gridY = useTransform(progress, [0, 1], [0, -24]);
+    const invitationOpacity = useTransform(progress, [0, 0.08, 0.22], [1, 0.58, 0]);
+    const progressScale = useTransform(progress, [0, 1], [0, 1]);
+    const dividerScale = useTransform(progress, [0.72, 0.9], [0, 1]);
+    const dividerOpacity = useTransform(progress, [0.72, 0.86, 1], [0, 0.55, 0]);
+
+    useEffect(() => () => {
+        if (pointerFrameRef.current) cancelAnimationFrame(pointerFrameRef.current);
+    }, []);
+
+    const handlePointerEnter = (event) => {
+        if (event.pointerType === 'mouse') pointerBoundsRef.current = event.currentTarget.getBoundingClientRect();
+    };
+
+    const handlePointerMove = (event) => {
+        if (event.pointerType !== 'mouse' || !pointerGlowRef.current) return;
+        const bounds = pointerBoundsRef.current || event.currentTarget.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+        if (pointerFrameRef.current) cancelAnimationFrame(pointerFrameRef.current);
+        pointerFrameRef.current = requestAnimationFrame(() => {
+            pointerGlowRef.current?.style.setProperty('transform', `translate3d(calc(-50% + ${x * 42}px), calc(-50% + ${y * 30}px), 0)`);
+            pointerFrameRef.current = null;
+        });
+    };
+
+    const handlePointerLeave = () => {
+        pointerBoundsRef.current = null;
+        pointerGlowRef.current?.style.setProperty('transform', 'translate3d(-50%, -50%, 0)');
+    };
+
+    const scrollStyles = reducedMotion ? {} : {
+        firstName: { y: firstNameY, scale: nameScale, opacity: nameOpacity },
+        lastName: { y: lastNameY, scale: nameScale, opacity: nameOpacity },
+        support: { y: supportY, opacity: supportOpacity },
+        badges: { y: badgeY, opacity: badgeOpacity },
+        actions: { y: actionY, opacity: actionOpacity },
+        socials: { y: actionY, opacity: socialOpacity },
+        architecture: { y: architectureY, scale: architectureScale, opacity: architectureOpacity },
+        capabilities: { y: actionY, opacity: actionOpacity },
+    };
+
+    return (
+        <section
+            ref={heroRef}
+            id="home"
+            className="hero-section"
+            onPointerEnter={handlePointerEnter}
+            onPointerMove={handlePointerMove}
+            onPointerLeave={handlePointerLeave}
+        >
+            <motion.div aria-hidden="true" className="hero-ambient hero-ambient--cyan" style={reducedMotion ? undefined : { y: cyanY, opacity: ambientOpacity }}>
+                <div ref={pointerGlowRef} className="hero-pointer-glow" />
+            </motion.div>
+            <motion.div aria-hidden="true" className="hero-ambient hero-ambient--blue" style={reducedMotion ? undefined : { y: blueY, opacity: ambientOpacity }} />
+            <motion.div aria-hidden="true" className="hero-grid" style={reducedMotion ? undefined : { y: gridY, opacity: ambientOpacity }} />
+            <div aria-hidden="true" className="hero-vignette" />
+
+            <div className="hero-shell">
+                <div className="hero-layout">
+                    <HeroContent personalInfo={portfolioData.personalInfo} reducedMotion={reducedMotion} scrollStyles={scrollStyles} />
+                    <HeroArchitecture reducedMotion={reducedMotion} scrollStyle={scrollStyles.architecture} />
+                </div>
+                <HeroCapabilityStrip reducedMotion={reducedMotion} scrollStyle={scrollStyles.capabilities} />
             </div>
-            <HeroCapabilityStrip />
-        </div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.4 }} className="absolute bottom-7 right-4 z-20 hidden flex-col items-center gap-2 lg:flex xl:right-7">
-            <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-slate-500 [writing-mode:vertical-rl]">Scroll</span>
-            <div className="h-10 w-px overflow-hidden bg-gradient-to-b from-cyan-300 to-transparent"><motion.div animate={{ y: [-42, 42] }} transition={{ duration: 1.8, repeat: Infinity, ease: 'linear' }} className="h-3 w-full bg-white" /></div>
-        </motion.div>
-    </section>
-);
+            <motion.div aria-hidden="true" className="hero-progress" style={reducedMotion ? undefined : { opacity: invitationOpacity }}>
+                <span><motion.i style={reducedMotion ? undefined : { scaleY: progressScale }} /></span>
+            </motion.div>
+
+            <motion.a
+                href="#about"
+                className="hero-scroll-invitation"
+                style={reducedMotion ? undefined : { opacity: invitationOpacity }}
+            >
+                <span>Scroll to explore</span>
+                <FaArrowDown aria-hidden="true" />
+            </motion.a>
+
+            <motion.div aria-hidden="true" className="hero-exit-divider" style={reducedMotion ? undefined : { scaleX: dividerScale, opacity: dividerOpacity }} />
+        </section>
+    );
+};
 
 export default HeroSection;
