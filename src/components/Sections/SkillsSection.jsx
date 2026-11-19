@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import {
-    FaAws, FaBrain, FaChartLine, FaCode, FaCss3Alt, FaDatabase, FaDocker,
-    FaFigma, FaGitAlt, FaGithub, FaHtml5, FaJava, FaJs, FaNode, FaPython, FaReact,
+    FaAws, FaBrain, FaCode, FaCss3Alt, FaDatabase, FaGitAlt,
+    FaGithub, FaHtml5, FaJs, FaNode, FaPython, FaReact,
 } from 'react-icons/fa';
 import {
-    SiDotnet, SiFastapi, SiNextdotjs, SiPostgresql,
-    SiScikitlearn, SiSupabase, SiTensorflow, SiUnrealengine,
+    SiDotnet, SiFastapi, SiNextdotjs, SiPostgresql, SiTensorflow,
 } from 'react-icons/si';
 import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
 
 const icons = {
-    FaAws, FaBrain, FaChartLine, FaCode, FaCss3Alt, FaDatabase, FaDocker,
-    FaFigma, FaGitAlt, FaGithub, FaHtml5, FaJava, FaJs, FaNode, FaPython, FaReact,
-    SiDotnet, SiFastapi, SiNextdotjs, SiPostgresql, SiPowerbi: FaChartLine,
-    SiScikitlearn, SiSupabase, SiTensorflow, SiUnrealengine,
+    FaAws, FaBrain, FaCode, FaCss3Alt, FaDatabase, FaGitAlt,
+    FaGithub, FaHtml5, FaJs, FaNode, FaPython, FaReact,
+    SiDotnet, SiFastapi, SiNextdotjs, SiPostgresql, SiTensorflow,
 };
 
 const SkillIcon = ({ name }) => {
