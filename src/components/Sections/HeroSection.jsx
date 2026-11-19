@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import portfolioData from '../../data/portfolioData';
 import HeroCapabilityStrip from './Hero/HeroCapabilityStrip';
 import HeroContent from './Hero/HeroContent';
-import HeroVisual from './Hero/HeroVisual';
 
 const HeroSection = () => (
     <section id="home" className="hero-section relative z-10 min-h-[100svh] w-full overflow-hidden px-5 pb-6 pt-28 sm:px-8 lg:px-12 lg:pb-4 lg:pt-24 xl:px-16">
@@ -11,9 +10,8 @@ const HeroSection = () => (
         <div aria-hidden="true" className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(255,255,255,.3)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.3)_1px,transparent_1px)] [background-size:52px_52px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]" />
 
         <div className="relative mx-auto grid min-h-[calc(100svh-8.25rem)] max-w-[1540px] gap-6 lg:grid-rows-[minmax(0,1fr)_auto]">
-            <div className="grid min-h-0 grid-cols-1 items-stretch gap-8 lg:grid-cols-[46%_54%] lg:gap-6">
+            <div className="grid min-h-0 place-items-center py-8">
                 <HeroContent personalInfo={portfolioData.personalInfo} />
-                <HeroVisual projects={portfolioData.projects} />
             </div>
             <HeroCapabilityStrip />
         </div>

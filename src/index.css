@@ -223,7 +223,8 @@ img {
 }
 
 .hero-content {
-  max-width: 690px;
+  max-width: 920px;
+  margin-inline: auto;
   padding-block: 2rem;
 }
 
@@ -237,7 +238,7 @@ img {
 
 .hero-name {
   margin: 1.2rem 0 1.4rem;
-  font-size: clamp(4.5rem, 9.2vw, 9.5rem);
+  font-size: clamp(4.5rem, 11.5vw, 11rem);
   font-weight: 900;
   letter-spacing: -0.085em;
   line-height: 0.78;
@@ -274,7 +275,7 @@ img {
 
 .hero-intro p {
   max-width: 570px;
-  margin: 0.9rem 0 0;
+  margin: 0.9rem auto 0;
   color: var(--muted);
   font-size: 0.98rem;
   line-height: 1.75;
@@ -288,6 +289,10 @@ img {
   margin: 1.3rem 0 0;
   padding: 0;
   list-style: none;
+}
+
+.hero-tech {
+  justify-content: center;
 }
 
 .hero-tech li,
@@ -305,6 +310,7 @@ img {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.65rem;
   margin-top: 1.45rem;
 }
@@ -312,6 +318,7 @@ img {
 .hero-socials {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.55rem;
   margin-top: 1.25rem;
 }
@@ -342,29 +349,6 @@ img {
   transition: background-color 160ms ease;
 }
 
-.hero-visual {
-  min-width: 0;
-}
-
-.constellation-panel {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  overflow: hidden;
-  grid-template-rows: auto minmax(270px, 1fr) auto;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background:
-    linear-gradient(rgba(96, 209, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(96, 209, 255, 0.025) 1px, transparent 1px),
-    radial-gradient(circle at 50% 48%, rgba(39, 217, 243, 0.12), transparent 38%),
-    rgba(5, 18, 32, 0.82);
-  background-size: 32px 32px, 32px 32px, auto, auto;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.04), 0 32px 80px rgba(1, 8, 17, 0.42);
-}
-
-.constellation-panel__header,
-.constellation-preview__meta,
 .featured-project__meta,
 .contact-panel__header,
 .certification-card__meta {
@@ -379,162 +363,6 @@ img {
   text-transform: uppercase;
 }
 
-.constellation-panel__header {
-  padding: 1rem 1.2rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.constellation-panel__header span:first-child {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  color: #b8d3e9;
-}
-
-.constellation-panel__header i {
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 12px var(--cyan);
-}
-
-.constellation-map {
-  position: relative;
-  min-height: 300px;
-}
-
-.constellation-lines {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.constellation-lines line {
-  stroke: rgba(130, 190, 230, 0.15);
-  stroke-width: 0.2;
-  vector-effect: non-scaling-stroke;
-  transition: stroke 180ms ease, stroke-width 180ms ease;
-}
-
-.constellation-lines line.is-active {
-  stroke: rgba(39, 217, 243, 0.7);
-  stroke-width: 0.45;
-}
-
-.constellation-node {
-  position: absolute;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.8rem;
-  transform: translate(-50%, -50%);
-  color: #b9cde0;
-  font-size: 0.68rem;
-  font-weight: 750;
-  white-space: nowrap;
-  transition: color 180ms ease, opacity 180ms ease, transform 180ms var(--ease-out);
-}
-
-.constellation-node__label {
-  display: none;
-}
-
-.constellation-map[data-active] .constellation-node:not(.is-active) {
-  opacity: 0.46;
-}
-
-.constellation-node__core {
-  position: relative;
-  display: block;
-  width: 0.78rem;
-  height: 0.78rem;
-  flex: 0 0 auto;
-  border: 2px solid #bdefff;
-  border-radius: 50%;
-  background: #0b263a;
-  box-shadow: 0 0 0 5px rgba(39, 217, 243, 0.08), 0 0 18px rgba(39, 217, 243, 0.35);
-  animation: node-float 5s var(--ease-in-out) var(--node-delay, 0s) infinite;
-}
-
-.constellation-node.is-active {
-  z-index: 4;
-  color: white;
-}
-
-.constellation-node.is-active .constellation-node__core {
-  background: var(--cyan);
-  box-shadow: 0 0 0 8px rgba(39, 217, 243, 0.1), 0 0 28px rgba(39, 217, 243, 0.75);
-}
-
-.constellation-particles i {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: #bceeff;
-  box-shadow: 0 0 8px #bceeff;
-  animation: particle-drift 7s linear infinite;
-}
-
-.constellation-preview {
-  min-height: 158px;
-  border-top: 1px solid var(--line);
-  background: rgba(7, 24, 42, 0.9);
-  padding: 1.05rem 1.2rem 1.15rem;
-}
-
-.constellation-preview h2 {
-  margin: 0.55rem 0 0.35rem;
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
-
-.constellation-preview p {
-  display: -webkit-box;
-  overflow: hidden;
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.78rem;
-  line-height: 1.55;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.constellation-preview__footer {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 0.8rem;
-}
-
-.constellation-preview__footer ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.constellation-preview__footer li {
-  color: var(--dim);
-  font-family: "Cascadia Code", monospace;
-  font-size: 0.58rem;
-}
-
-.constellation-preview__footer li:not(:last-child)::after {
-  margin-left: 0.35rem;
-  color: rgba(39, 217, 243, 0.5);
-  content: "/";
-}
-
-.constellation-preview__footer a,
 .project-actions a,
 .certification-card__actions a,
 .certification-card__actions button {
@@ -1325,17 +1153,6 @@ footer {
   padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
 }
 
-@keyframes node-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-@keyframes particle-drift {
-  0% { opacity: 0; transform: translate3d(0, 10px, 0); }
-  30%, 70% { opacity: 0.75; }
-  100% { opacity: 0; transform: translate3d(18px, -16px, 0); }
-}
-
 @media (min-width: 640px) {
   .project-grid,
   .certification-grid,
@@ -1377,9 +1194,6 @@ footer {
     padding-left: 4.5rem;
   }
 
-  .hero-visual {
-    min-height: 570px;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -1394,9 +1208,6 @@ footer {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .hero-visual {
-    min-height: 0;
-  }
 }
 
 @media (min-width: 768px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
@@ -1419,10 +1230,6 @@ footer {
     border-color: rgba(39, 217, 243, 0.5);
     background: rgba(39, 217, 243, 0.08);
     color: white;
-  }
-
-  .constellation-node:hover {
-    transform: translate(-50%, -50%) scale(1.05);
   }
 
   .capability-link:hover {
@@ -1458,53 +1265,6 @@ footer {
     flex-basis: 100%;
   }
 
-  .hero-visual {
-    min-height: 650px;
-  }
-
-  .constellation-panel {
-    grid-template-rows: auto auto auto;
-  }
-
-  .constellation-map {
-    display: grid;
-    min-height: auto;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.55rem;
-    padding: 1rem;
-  }
-
-  .constellation-lines,
-  .constellation-particles {
-    display: none;
-  }
-
-  .constellation-node {
-    position: relative;
-    top: auto !important;
-    left: auto !important;
-    justify-content: flex-start;
-    transform: none;
-    border: 1px solid rgba(130, 190, 230, 0.13);
-    border-radius: 0.8rem;
-    background: rgba(10, 34, 54, 0.64);
-    padding: 0.7rem;
-    white-space: normal;
-  }
-
-  .constellation-node__label {
-    display: inline;
-  }
-
-  .constellation-map[data-active] .constellation-node:not(.is-active) {
-    opacity: 0.72;
-  }
-
-  .constellation-preview__footer {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
   .featured-project__visual {
     min-height: 290px;
     padding-top: 0;
@@ -1524,10 +1284,6 @@ footer {
     flex-basis: 100%;
   }
 
-  .constellation-node__label {
-    font-size: 0.62rem;
-  }
-
   .project-archive-heading {
     align-items: flex-start;
     flex-direction: column;
@@ -1545,18 +1301,12 @@ footer {
     scroll-behavior: auto !important;
   }
 
-  .constellation-node__core,
-  .constellation-particles i {
-    animation: none !important;
-  }
-
   .pressable:active,
   .button:active,
   .button:hover,
   .hero-socials a:hover,
   .contact-socials a:hover,
-  .project-actions a:hover,
-  .constellation-node:hover {
+  .project-actions a:hover {
     transform: none !important;
   }
 }

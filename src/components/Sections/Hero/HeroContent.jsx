@@ -33,7 +33,7 @@ const HeroContent = ({ personalInfo }) => {
             variants={group}
             initial="hidden"
             animate="visible"
-            className="hero-content relative z-20 flex min-w-0 flex-col justify-center text-left"
+            className="hero-content relative z-20 flex min-w-0 flex-col items-center justify-center text-center"
         >
             <motion.div variants={support} className="hero-eyebrow">
                 <span className="hero-eyebrow__dot" />
