@@ -231,16 +231,16 @@ img {
 .hero-shell {
   position: relative;
   z-index: 2;
-  display: grid;
+  display: flex;
   width: min(100%, 1540px);
   min-height: calc(100svh - clamp(8rem, 11vw, 10rem));
-  grid-template-rows: minmax(0, 1fr) auto;
-  gap: 1.5rem;
+  align-items: center;
   margin-inline: auto;
 }
 
 .hero-layout {
   display: grid;
+  width: 100%;
   min-height: 0;
   grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
   align-items: center;
@@ -626,15 +626,6 @@ img {
   line-height: 1.55;
 }
 
-.hero-capabilities {
-  transform-origin: center bottom;
-}
-
-.capability-link {
-  min-height: 4.4rem;
-  transition: background-color 160ms ease;
-}
-
 .hero-progress {
   position: absolute;
   top: 50%;
@@ -671,7 +662,7 @@ img {
 
 .hero-scroll-invitation {
   position: absolute;
-  bottom: 6.2rem;
+  bottom: 1.35rem;
   left: 50%;
   z-index: 4;
   display: inline-flex;
@@ -1602,10 +1593,6 @@ footer {
     transform: translateY(-3px);
   }
 
-  .capability-link:hover {
-    background: rgba(39, 217, 243, 0.04);
-  }
-
   .project-card:hover,
   .skill-node:hover,
   .certification-card:hover {
@@ -1626,12 +1613,11 @@ footer {
 
   .hero-shell {
     min-height: calc(100svh - 6.75rem);
-    gap: 0.75rem;
   }
 
   .hero-layout {
-    gap: clamp(2rem, 4vw, 4.5rem);
-    padding-block: 0.5rem;
+    gap: clamp(3rem, 5vw, 5.5rem);
+    padding-block: 1.25rem 2.25rem;
   }
 
   .hero-name {
@@ -1661,9 +1647,9 @@ footer {
   }
 
   .architecture-map {
-    min-height: 300px;
-    gap: 4rem clamp(1.5rem, 5vw, 4rem);
-    padding: 1.35rem clamp(1rem, 2.5vw, 2rem);
+    min-height: 315px;
+    gap: 4.5rem clamp(1.5rem, 5vw, 4rem);
+    padding: 1.5rem clamp(1rem, 2.5vw, 2rem);
   }
 
   .architecture-node {
@@ -1672,13 +1658,8 @@ footer {
   }
 
   .architecture-detail {
-    min-height: 4.35rem;
-    padding: 0.65rem 1.1rem 0.75rem;
-  }
-
-  .capability-link {
-    min-height: 3.8rem;
-    padding-block: 0.55rem;
+    min-height: 4.6rem;
+    padding: 0.75rem 1.1rem 0.85rem;
   }
 }
 

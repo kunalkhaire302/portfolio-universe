@@ -3,7 +3,6 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'fr
 import { FaArrowDown } from 'react-icons/fa';
 import portfolioData from '../../data/portfolioData';
 import HeroArchitecture from './Hero/HeroArchitecture';
-import HeroCapabilityStrip from './Hero/HeroCapabilityStrip';
 import HeroContent from './Hero/HeroContent';
 
 const HeroSection = () => {
@@ -71,7 +70,6 @@ const HeroSection = () => {
         actions: { y: actionY, opacity: actionOpacity },
         socials: { y: actionY, opacity: socialOpacity },
         architecture: { y: architectureY, scale: architectureScale, opacity: architectureOpacity },
-        capabilities: { y: actionY, opacity: actionOpacity },
     };
 
     return (
@@ -94,7 +92,6 @@ const HeroSection = () => {
                     <HeroContent personalInfo={portfolioData.personalInfo} reducedMotion={reducedMotion} scrollStyles={scrollStyles} />
                     <HeroArchitecture reducedMotion={reducedMotion} scrollStyle={scrollStyles.architecture} />
                 </div>
-                <HeroCapabilityStrip reducedMotion={reducedMotion} scrollStyle={scrollStyles.capabilities} />
             </div>
 
             <motion.div aria-hidden="true" className="hero-progress" style={reducedMotion ? undefined : { opacity: invitationOpacity }}>
