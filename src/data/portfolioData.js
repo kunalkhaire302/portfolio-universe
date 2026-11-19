@@ -3,6 +3,7 @@ import tataForageCert from '../assets/images/certifications/tata-forage.jpg';
 import jpmcForageCert from '../assets/images/certifications/jpmc-forage.jpg';
 import aiCertsImage from '../assets/images/certifications/ai-certs.jpg';
 import awsCertsImage from '../assets/images/certifications/aws-academy.jpg';
+import calartsUiuxCert from '../assets/images/certifications/calarts-uiux.jpg';
 
 // Portfolio data for Kunal Khaire
 const portfolioData = {
@@ -127,6 +128,23 @@ const portfolioData = {
     ],
 
     projects: [
+        {
+            id: 13,
+            title: "PlacementX",
+            description: "Campus placement automation platform connecting students, placement teams, coordinators, and recruiters across web and mobile.",
+            technologies: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma", "React Native", "Redis"],
+            live: "https://placementx-ten.vercel.app/",
+            github: "https://github.com/kunalkhaire302/PlacementX",
+            features: [
+                "Role-based student, coordinator, admin, and recruiter workflows",
+                "Placement-drive eligibility and application tracking",
+                "Real-time notifications, analytics, and exportable reports",
+                "Responsive web experience with a companion mobile application"
+            ],
+            color: "electric-blue",
+            icon: "FaGraduationCap",
+            featured: true,
+        },
         {
             id: 99,
             title: "AutoMarket",
@@ -294,6 +312,15 @@ const portfolioData = {
     ],
 
     certifications: [
+        {
+            id: 6,
+            title: "Visual Elements of User Interface Design",
+            issuer: "California Institute of the Arts (Coursera)",
+            date: "Nov 5, 2026",
+            description: "Completed an online course authorized by California Institute of the Arts and offered through Coursera.",
+            link: "https://coursera.org/verify/NQ9CW22KA7OQ",
+            image: calartsUiuxCert,
+        },
         {
             id: 4,
             title: "Managing Projects with AI",
