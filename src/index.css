@@ -430,12 +430,17 @@ img {
   display: flex;
   align-items: center;
   gap: 0.55rem;
+  padding: 0.8rem;
   transform: translate(-50%, -50%);
   color: #b9cde0;
   font-size: 0.68rem;
   font-weight: 750;
   white-space: nowrap;
   transition: color 180ms ease, opacity 180ms ease, transform 180ms var(--ease-out);
+}
+
+.constellation-node__label {
+  display: none;
 }
 
 .constellation-map[data-active] .constellation-node:not(.is-active) {
@@ -1485,6 +1490,10 @@ footer {
     background: rgba(10, 34, 54, 0.64);
     padding: 0.7rem;
     white-space: normal;
+  }
+
+  .constellation-node__label {
+    display: inline;
   }
 
   .constellation-map[data-active] .constellation-node:not(.is-active) {
