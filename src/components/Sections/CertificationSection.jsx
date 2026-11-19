@@ -1,145 +1,122 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FaArrowUpRightFromSquare, FaXmark } from 'react-icons/fa6';
 import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaAward } from 'react-icons/fa';
 
 const CertificationSection = () => {
-    const { certifications } = portfolioData;
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedCertificate, setSelectedCertificate] = useState(null);
     const closeButtonRef = useRef(null);
     const openerRef = useRef(null);
 
     useEffect(() => {
-        if (!selectedImage) return undefined;
+        if (!selectedCertificate) return undefined;
 
         const previousOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
         closeButtonRef.current?.focus();
 
-        const handleKeyDown = (event) => {
-            if (event.key === 'Escape') {
-                setSelectedImage(null);
-            } else if (event.key === 'Tab') {
+        const closeOnEscape = (event) => {
+            if (event.key === 'Escape') setSelectedCertificate(null);
+            if (event.key === 'Tab') {
                 event.preventDefault();
                 closeButtonRef.current?.focus();
             }
         };
 
-        document.addEventListener('keydown', handleKeyDown);
-
+        document.addEventListener('keydown', closeOnEscape);
         return () => {
-            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('keydown', closeOnEscape);
             document.body.style.overflow = previousOverflow;
             openerRef.current?.focus();
         };
-    }, [selectedImage]);
+    }, [selectedCertificate]);
 
     return (
-        <SectionContainer id="certifications">
-            <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center text-star-white">
-                Certification <span className="text-cert-gold">Star</span>
-            </h2>
+        <SectionContainer id="certifications" className="section--certifications">
+            <div className="section-heading section-heading--split">
+                <div>
+                    <span className="section-eyebrow">05 / Achievements</span>
+                    <h2>Learning made <span>visible.</span></h2>
+                </div>
+                <p>Selected certifications and practical simulations that extend my engineering, cloud, and applied-AI foundation.</p>
+            </div>
 
-            <div className="flex flex-col items-center gap-8">
-                {certifications.map((cert, index) => (
-                    <motion.div
-                        key={cert.id}
-                        initial={{ opacity: 0, y: 50, scale: 0.95, rotate: 0 }}
-                        whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
-                        transition={{ type: "spring", stiffness: 100, damping: 20, delay: index * 0.1 }}
-                        className={`glass-card p-8 w-full relative overflow-hidden group hover:border-cert-gold transition-colors duration-300 ${cert.image ? 'max-w-4xl' : 'max-w-2xl'}`}
+            <div className="certification-grid">
+                {portfolioData.certifications.map((certificate, index) => (
+                    <motion.article
+                        key={certificate.id}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                        className="certification-card"
                     >
-                        {/* Shooting Star Decoration */}
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-cert-gold/20 to-transparent -mr-16 -mt-16 rounded-full blur-2xl group-hover:from-cert-gold/40" />
-
-                        <div className={`flex flex-col ${cert.image ? 'md:flex-row' : ''} items-start gap-6`}>
-                            {cert.image && (
+                        <button
+                            type="button"
+                            aria-label={`Preview ${certificate.title}`}
+                            onClick={(event) => {
+                                openerRef.current = event.currentTarget;
+                                setSelectedCertificate(certificate);
+                            }}
+                            className="certification-card__image"
+                        >
+                            <img src={certificate.image} alt="" loading="lazy" />
+                            <span>Preview credential</span>
+                        </button>
+                        <div className="certification-card__body">
+                            <div className="certification-card__meta">
+                                <span>{String(index + 1).padStart(2, '0')}</span>
+                                <time>{certificate.date}</time>
+                            </div>
+                            <p>{certificate.issuer}</p>
+                            <h3>{certificate.title}</h3>
+                            <div className="certification-card__actions">
                                 <button
                                     type="button"
-                                    aria-label={`Preview ${cert.title}`}
-                                    className="w-full md:w-2/5 shrink-0 rounded-xl overflow-hidden border border-white/10 relative group-hover:border-cert-gold/30 transition-colors duration-200 bg-black/20 p-2 cursor-pointer"
                                     onClick={(event) => {
                                         openerRef.current = event.currentTarget;
-                                        setSelectedImage(cert.image);
+                                        setSelectedCertificate(certificate);
                                     }}
                                 >
-                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-cert-gold/5 transition-colors z-10 pointer-events-none rounded-xl" />
-                                    <img src={cert.image} alt={cert.title} className="w-full h-auto object-contain rounded-lg relative z-0" />
+                                    View image
                                 </button>
-                            )}
-                            
-                            <div className="flex-1 flex flex-col justify-center w-full">
-                                <div className="flex items-start gap-4">
-                                    {!cert.image && (
-                                        <div className="p-4 bg-cert-gold/10 rounded-full text-cert-gold text-3xl shrink-0">
-                                            <FaAward />
-                                        </div>
-                                    )}
-                                    <div className="w-full">
-                                        <h3 className="text-2xl font-bold text-white mb-2">{cert.title}</h3>
-                                        <div className="flex items-center gap-2 text-planet-orange mb-4 font-mono text-sm flex-wrap">
-                                            <span className="font-semibold text-cert-gold">{cert.issuer}</span>
-                                            <span className="text-white/50">•</span>
-                                            <span>{cert.date}</span>
-                                        </div>
-                                        <p className="text-slate-300 leading-relaxed mb-6">
-                                            {cert.description}
-                                        </p>
-                                        
-                                        {cert.image && (
-                                            <div className="pt-6 border-t border-white/10 w-full flex gap-4">
-                                                <a 
-                                                    href={cert.image} 
-                                                    target="_blank" 
-                                                    rel="noopener noreferrer"
-                                                    className="pressable fine-hover-lift inline-flex items-center justify-center px-6 py-2.5 bg-cert-gold/10 hover:bg-cert-gold/20 text-cert-gold border border-cert-gold/30 rounded-lg font-bold tracking-wide text-sm transition-[background-color,border-color,transform] duration-[160ms] hover:shadow-[0_0_20px_rgba(255,215,0,0.2)]"
-                                                >
-                                                    View Certificate
-                                                </a>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
+                                {certificate.link && (
+                                    <a href={certificate.link} target="_blank" rel="noopener noreferrer">
+                                        Verify <FaArrowUpRightFromSquare aria-hidden="true" />
+                                    </a>
+                                )}
                             </div>
                         </div>
-                    </motion.div>
+                    </motion.article>
                 ))}
             </div>
 
-            {/* Certificate Image Modal */}
             <AnimatePresence>
-                {selectedImage && (
-                    <motion.div 
+                {selectedCertificate && (
+                    <motion.div
                         role="dialog"
                         aria-modal="true"
-                        aria-label="Certificate preview"
+                        aria-label={`${selectedCertificate.title} preview`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
-                        onClick={() => setSelectedImage(null)}
+                        transition={{ duration: 0.2 }}
+                        className="certificate-dialog"
+                        onClick={() => setSelectedCertificate(null)}
                     >
-                        <motion.div 
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            className="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center"
-                            onClick={(e) => e.stopPropagation()}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.96 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.96 }}
+                            transition={{ duration: 0.24, ease: [0.23, 1, 0.32, 1] }}
+                            className="certificate-dialog__content"
+                            onClick={(event) => event.stopPropagation()}
                         >
-                            <button 
-                                ref={closeButtonRef}
-                                onClick={() => setSelectedImage(null)}
-                                aria-label="Close certificate preview"
-                                className="pressable absolute -top-12 right-0 md:-right-8 md:-top-12 text-white/50 hover:text-white text-4xl transition-[color,transform] duration-[160ms]"
-                            >
-                                &times;
+                            <button ref={closeButtonRef} type="button" onClick={() => setSelectedCertificate(null)} aria-label="Close certificate preview">
+                                <FaXmark aria-hidden="true" />
                             </button>
-                            <img 
-                                src={selectedImage} 
-                                alt="Certificate Full View" 
-                                className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-[0_0_50px_rgba(255,215,0,0.15)] border border-white/10"
-                            />
+                            <img src={selectedCertificate.image} alt={`${selectedCertificate.title} certificate`} />
                         </motion.div>
                     </motion.div>
                 )}

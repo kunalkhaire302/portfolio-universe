@@ -5,10 +5,10 @@ import { FaBars, FaTimes, FaRocket, FaChevronRight, FaEnvelope } from 'react-ico
 const navLinks = [
     { name: 'Home', to: 'home' },
     { name: 'About', to: 'about' },
-    { name: 'Skills', to: 'skills' },
     { name: 'Projects', to: 'projects' },
+    { name: 'Skills', to: 'skills' },
     { name: 'Experience', to: 'experience' },
-    { name: 'Certifications', to: 'certifications' },
+    { name: 'Achievements', to: 'certifications' },
     { name: 'Contact', to: 'contact' },
     { name: 'Resume', isDownload: true, href: '/Kunal_Khaire_Resume.pdf', downloadName: 'Kunal_Khaire_Resume.pdf' },
 ];

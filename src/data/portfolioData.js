@@ -8,7 +8,8 @@ import awsCertsImage from '../assets/images/certifications/aws-academy.jpg';
 const portfolioData = {
     personalInfo: {
         name: "Kunal Khaire",
-        title: "Web Developer & IT Undergraduate",
+        title: "Full-Stack Developer & AI Application Builder",
+        summary: "I build intelligent web applications, scalable backend systems, and meaningful digital experiences that turn complex ideas into practical solutions.",
         location: "Shirpur, Maharashtra, India",
         phone: "+91-9307056355",
         email: "kunalkhaire302@gmail.com",
@@ -36,25 +37,38 @@ const portfolioData = {
     ],
 
     skills: {
-        "Web Technologies": [
+        "Frontend Development": [
             { name: "HTML5", level: "advanced", icon: "FaHtml5" },
             { name: "CSS3", level: "advanced", icon: "FaCss3Alt" },
             { name: "JavaScript", level: "advanced", icon: "FaJs" },
             { name: "React.js", level: "intermediate", icon: "FaReact" },
+            { name: "Next.js", level: "intermediate", icon: "SiNextdotjs" },
         ],
-        "Backend": [
+        "Backend Development": [
             { name: "Node.js", level: "intermediate", icon: "FaNode" },
-        ],
-        "Programming": [
             { name: "Python", level: "advanced", icon: "FaPython" },
             { name: "Java", level: "intermediate", icon: "FaJava" },
+            { name: "FastAPI", level: "intermediate", icon: "SiFastapi" },
+            { name: "ASP.NET Core", level: "intermediate", icon: "SiDotnet" },
         ],
-        "Database": [
+        "Databases": [
+            { name: "PostgreSQL", level: "intermediate", icon: "SiPostgresql" },
+            { name: "Supabase", level: "intermediate", icon: "SiSupabase" },
             { name: "Oracle Database", level: "intermediate", icon: "FaDatabase" },
         ],
-        "Tools": [
+        "AI / Machine Learning": [
+            { name: "Machine Learning", level: "intermediate", icon: "FaBrain" },
+            { name: "Scikit-learn", level: "intermediate", icon: "SiScikitlearn" },
+            { name: "TensorFlow", level: "intermediate", icon: "SiTensorflow" },
+            { name: "XGBoost", level: "intermediate", icon: "FaChartLine" },
+        ],
+        "Cloud & DevOps": [
+            { name: "AWS", level: "intermediate", icon: "FaAws" },
+            { name: "Docker", level: "intermediate", icon: "FaDocker" },
             { name: "Git", level: "advanced", icon: "FaGitAlt" },
             { name: "GitHub", level: "advanced", icon: "FaGithub" },
+        ],
+        "Development Tools": [
             { name: "Power BI", level: "intermediate", icon: "SiPowerbi" },
             { name: "Figma", level: "intermediate", icon: "FaFigma" },
             { name: "Unreal Engine", level: "beginner", icon: "SiUnrealengine" },

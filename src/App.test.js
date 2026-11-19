@@ -3,7 +3,6 @@ import App from './App';
 
 jest.mock('./components/UI/CustomCursor', () => function CustomCursor() { return null; });
 jest.mock('./components/UI/ScrollProgress', () => function ScrollProgress() { return null; });
-jest.mock('./components/ParticleBackground', () => function ParticleBackground() { return null; });
 jest.mock('./components/Layout/Navigation', () => function Navigation() { return <nav aria-label="Primary" />; });
 jest.mock('./components/Layout/Footer', () => function Footer() { return <footer />; });
 jest.mock('./components/Sections/HeroSection', () => function HeroSection() {

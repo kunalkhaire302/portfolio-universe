@@ -1,141 +1,121 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import {
+    FaChartBar, FaCog, FaGraduationCap, FaHome, FaLeaf, FaLock,
+    FaRocket, FaShoppingCart, FaUserShield,
+} from 'react-icons/fa';
+import { FaArrowUpRightFromSquare, FaGithub } from 'react-icons/fa6';
 import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
-import { motion } from 'framer-motion';
-import { 
-    FaGithub, 
-    FaExternalLinkAlt, 
-    FaRocket, 
-    FaChartLine, 
-    FaShoppingCart, 
-    FaLock, 
-    FaUserShield, 
-    FaCog, 
-    FaChartBar, 
-    FaHome,
-    FaWallet,
-    FaLeaf,
-    FaUniversity,
-    FaGraduationCap
-} from 'react-icons/fa';
 
-const ProjectsSection = () => {
-    const { projects } = portfolioData;
+const iconMap = {
+    FaRocket, FaShoppingCart, FaLock, FaUserShield, FaCog,
+    FaChartBar, FaHome, FaLeaf, FaGraduationCap,
+};
 
-    const iconMap = {
-        'FaRocket': <FaRocket />,
-        'FaChartLine': <FaChartLine />,
-        'FaShoppingCart': <FaShoppingCart />,
-        'FaLock': <FaLock />,
-        'FaUserShield': <FaUserShield />,
-        'FaCog': <FaCog />,
-        'FaChartBar': <FaChartBar />,
-        'FaHome': <FaHome />,
-        'FaWallet': <FaWallet />,
-        'FaLeaf': <FaLeaf />,
-        'FaUniversity': <FaUniversity />,
-        'FaGraduationCap': <FaGraduationCap />,
-    };
-
-    const colorVariants = {
-        'electric-blue': 'border-electric-blue text-electric-blue',
-        'neon-teal': 'border-neon-teal text-neon-teal',
-        'project-purple': 'border-project-purple text-project-purple',
-    };
-
-    const bgVariants = {
-        'electric-blue': 'hover:shadow-[0_0_30px_rgba(0,212,255,0.3)]',
-        'neon-teal': 'hover:shadow-[0_0_30px_rgba(100,255,218,0.3)]',
-        'project-purple': 'hover:shadow-[0_0_30px_rgba(123,44,191,0.3)]',
-    };
-
-    const featuredProjects = projects.filter(p => p.featured);
-    const normalProjects = projects.filter(p => !p.featured);
-
-    const ProjectCard = ({ project, index }) => (
-        <motion.div
-            key={project.id}
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`group relative glass-morphism p-8 flex flex-col h-full rounded-2xl transition-transform duration-200 ${bgVariants[project.color] || ''} ${project.featured ? 'shadow-[0_0_40px_rgba(100,255,218,0.15)] ring-1 ring-neon-teal/30 bg-gradient-to-br from-space-blue/80 to-space-dark/90' : ''}`}
-        >
-            {project.featured && (
-                <div className="absolute -top-3 -right-3 bg-neon-teal text-space-dark text-xs font-bold uppercase tracking-widest py-1 px-3 rounded-full shadow-[0_0_20px_rgba(100,255,218,0.5)] z-10">
-                    Featured
-                </div>
-            )}
-            {/* Decorative Gradient Blob */}
-            <div className={`absolute -top-10 -right-10 w-32 h-32 blur-3xl opacity-0 group-hover:opacity-10 transition-opacity duration-200 rounded-full ${project.color === 'electric-blue' ? 'bg-blue-500' : project.color === 'neon-teal' ? 'bg-teal-500' : 'bg-purple-500'}`} />
-
-            <div className="flex justify-between items-start mb-8">
-                <div className={`fine-group-project-icon w-14 h-14 rounded-2xl flex items-center justify-center text-3xl border border-white/10 bg-white/5 transition-[color,background-color,border-color,transform] duration-200 ${colorVariants[project.color] || ''}`}>
-                    {iconMap[project.icon] || <FaRocket />}
-                </div>
-                <div className="flex gap-3">
-                    {project.github && (
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="pressable p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-[color,background-color,border-color,transform] duration-[160ms]" title="GitHub">
-                            <FaGithub className="text-xl" />
-                        </a>
-                    )}
-                    {project.live && !project.featured && (
-                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="pressable p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-[color,background-color,border-color,transform] duration-[160ms]" title="Live Demo">
-                            <FaExternalLinkAlt className="text-xl" />
-                        </a>
-                    )}
-                </div>
-            </div>
-
-            <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-neon-teal transition-colors">{project.title}</h3>
-            <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">{project.description}</p>
-
-            <div className="flex flex-wrap gap-2 mb-6">
-                {project.technologies.slice(0, project.featured ? 8 : 4).map((tech) => (
-                    <span key={tech} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">
-                        {tech}
-                    </span>
-                ))}
-                {project.technologies.length > (project.featured ? 8 : 4) && (
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md bg-white/5 border border-white/10 text-slate-400">
-                        +{project.technologies.length - (project.featured ? 8 : 4)}
-                    </span>
-                )}
-            </div>
-
-            <a 
-                href={project.live || project.github} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={`pressable w-full py-3 rounded-xl border-2 text-center text-sm font-bold uppercase tracking-widest transition-[color,background-color,border-color,transform] duration-[160ms] ${
-                    project.featured 
-                    ? 'bg-neon-teal text-space-dark border-neon-teal hover:bg-neon-teal/80 hover:shadow-[0_0_20px_rgba(100,255,218,0.4)]'
-                    : 'bg-transparent border-white/10 text-white hover:border-neon-teal/50 hover:bg-neon-teal/10 hover:text-neon-teal hover:shadow-[0_0_20px_rgba(100,255,218,0.2)]'
-                }`}
-            >
-                {project.featured ? "Live Demo" : "Explore Project"}
+const ProjectActions = ({ project }) => (
+    <div className="project-actions">
+        {project.live && (
+            <a href={project.live} target="_blank" rel="noopener noreferrer">
+                Live demo <FaArrowUpRightFromSquare aria-hidden="true" />
             </a>
-        </motion.div>
-    );
+        )}
+        {project.github && (
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-actions__secondary">
+                Source <FaGithub aria-hidden="true" />
+            </a>
+        )}
+    </div>
+);
+
+const FeaturedProject = ({ project, index }) => {
+    const Icon = iconMap[project.icon] || FaRocket;
 
     return (
-        <SectionContainer id="projects">
-            <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center text-star-white">
-                Project <span className="text-electric-blue">Nebula</span>
-            </h2>
-
-            {featuredProjects.length > 0 && (
-                <div className="grid md:grid-cols-2 gap-10 mb-10">
-                    {featuredProjects.map((project, index) => (
-                        <ProjectCard key={project.id} project={project} index={index} />
-                    ))}
+        <article className="featured-project" style={{ '--stack-index': index }}>
+            <div className="featured-project__content">
+                <div className="featured-project__meta">
+                    <span>Featured build / 0{index + 1}</span>
+                    <span>{project.technologies.length} technologies</span>
                 </div>
-            )}
+                <div>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                </div>
+                <ul className="feature-list" aria-label={`${project.title} capabilities`}>
+                    {project.features.slice(0, 4).map((feature) => <li key={feature}>{feature}</li>)}
+                </ul>
+                <ul className="technology-list" aria-label={`${project.title} technologies`}>
+                    {project.technologies.slice(0, 7).map((technology) => <li key={technology}>{technology}</li>)}
+                </ul>
+                <ProjectActions project={project} />
+            </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                {normalProjects.map((project, index) => (
-                    <ProjectCard key={project.id} project={project} index={index + featuredProjects.length} />
-                ))}
+            <div className="featured-project__visual" aria-hidden="true">
+                <div className="project-blueprint">
+                    <span className="project-blueprint__label">System blueprint</span>
+                    <Icon />
+                    <i className="project-blueprint__line project-blueprint__line--one" />
+                    <i className="project-blueprint__line project-blueprint__line--two" />
+                    <i className="project-blueprint__node project-blueprint__node--one" />
+                    <i className="project-blueprint__node project-blueprint__node--two" />
+                    <i className="project-blueprint__node project-blueprint__node--three" />
+                    <span className="project-blueprint__status">Operational</span>
+                </div>
+            </div>
+        </article>
+    );
+};
+
+const ProjectCard = ({ project }) => {
+    const Icon = iconMap[project.icon] || FaRocket;
+
+    return (
+        <motion.article
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+            className="project-card"
+        >
+            <div className="project-card__topline">
+                <span><Icon aria-hidden="true" /></span>
+                <span>{String(project.id).padStart(2, '0')}</span>
+            </div>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <ul className="technology-list" aria-label={`${project.title} technologies`}>
+                {project.technologies.slice(0, 4).map((technology) => <li key={technology}>{technology}</li>)}
+            </ul>
+            <ProjectActions project={project} />
+        </motion.article>
+    );
+};
+
+const ProjectsSection = () => {
+    const featuredProjects = portfolioData.projects.filter((project) => project.featured);
+    const otherProjects = portfolioData.projects.filter((project) => !project.featured);
+
+    return (
+        <SectionContainer id="projects" className="section--projects">
+            <div className="section-heading section-heading--split">
+                <div>
+                    <span className="section-eyebrow">02 / Selected work</span>
+                    <h2>Products built for <span>real use.</span></h2>
+                </div>
+                <p>Full-stack platforms, intelligent workflows, and data products built with practical constraints in mind.</p>
+            </div>
+
+            <div className="featured-projects">
+                {featuredProjects.map((project, index) => <FeaturedProject key={project.id} project={project} index={index} />)}
+            </div>
+
+            <div className="project-archive-heading">
+                <h3>Project archive</h3>
+                <span>{otherProjects.length} additional builds</span>
+            </div>
+            <div className="project-grid">
+                {otherProjects.map((project) => <ProjectCard key={project.id} project={project} />)}
             </div>
         </SectionContainer>
     );

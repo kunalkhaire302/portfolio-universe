@@ -1,66 +1,70 @@
 import React from 'react';
+import { FaBrain, FaCodeBranch, FaLayerGroup } from 'react-icons/fa';
 import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
-import EarthScene from '../Earth/EarthScene';
+
+const disciplines = [
+    {
+        icon: FaLayerGroup,
+        title: 'Full-stack systems',
+        copy: 'Responsive interfaces, secure application flows, backend services, and data-driven product experiences.',
+    },
+    {
+        icon: FaBrain,
+        title: 'Applied intelligence',
+        copy: 'Machine-learning features and practical AI workflows designed around real user and operational needs.',
+    },
+    {
+        icon: FaCodeBranch,
+        title: 'Product engineering',
+        copy: 'Clear architecture, maintainable code, and thoughtful iteration from an initial idea to a working application.',
+    },
+];
 
 const AboutSection = () => {
     const { objective, education } = portfolioData;
 
     return (
-        <SectionContainer id="about">
-            {/* The Earth Scene serves as a supporting decorative visual */}
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
-                <div className="absolute inset-0 translate-x-1/4 md:translate-x-1/3 lg:translate-x-[40%] scale-110 md:scale-[1.15] transform-gpu opacity-70 transition-transform duration-1000 ease-out">
-                    <EarthScene />
+        <SectionContainer id="about" className="section--about">
+            <div className="section-heading section-heading--split">
+                <div>
+                    <span className="section-eyebrow">01 / About</span>
+                    <h2>Engineering with <span>purpose.</span></h2>
                 </div>
-                {/* Gradient mask to blend the edges into the dark background of the page */}
-                <div className="absolute inset-0 bg-gradient-to-r from-space-dark via-space-dark/80 to-transparent pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-b from-space-dark via-transparent to-space-dark pointer-events-none" />
+                <p>{objective}</p>
             </div>
 
-            {/* Content Container */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-8 lg:gap-12 items-center">
-                
-                {/* Left Side Content */}
-                <div className="md:col-span-6 lg:col-span-5 xl:col-span-6 space-y-4 md:space-y-6">
-                    <div>
-                        <h3 className="text-3xl md:text-5xl font-black text-white tracking-tighter leading-tight mb-1">
-                            About <span className="text-planet-orange">Me</span>
-                        </h3>
-                        <p className="text-lg text-slate-400 font-light">
-                            Full Stack Developer <br/>
-                            <span className="text-white/50 text-sm">Creative Technologist</span>
-                        </p>
-                    </div>
-
-                    <div className="glass-card p-4 md:p-6 border border-white/5 bg-space-blue/30 backdrop-blur-md">
-                        <p className="text-sm md:text-base leading-relaxed text-slate-300 font-light">
-                            {objective}
-                        </p>
-                    </div>
-
-                    <div className="space-y-4">
-                        <h3 className="text-lg font-bold text-neon-teal flex items-center gap-2">
-                            <span className="w-8 h-[1px] bg-neon-teal inline-block"></span>
-                            Education
-                        </h3>
-                        <div className="space-y-4 pl-8 border-l border-white/10 ml-[10px]">
-                            {education.map((edu, index) => (
-                                <div key={index} className="relative">
-                                    <div className="absolute w-2 h-2 bg-planet-orange rounded-full -left-[37px] top-1.5 ring-4 ring-space-dark"></div>
-                                    <h4 className="text-base font-bold text-white">{edu.degree}</h4>
-                                    <p className="text-slate-400 text-xs mt-1">{edu.institution}, {edu.location}</p>
-                                    <p className="text-[10px] text-planet-orange font-mono mt-1 tracking-wider">{edu.duration}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+            <div className="about-layout">
+                <div className="about-disciplines">
+                    {disciplines.map(({ icon: Icon, title, copy }, index) => (
+                        <article key={title} className="about-discipline">
+                            <span className="about-discipline__number">0{index + 1}</span>
+                            <Icon aria-hidden="true" />
+                            <div>
+                                <h3>{title}</h3>
+                                <p>{copy}</p>
+                            </div>
+                        </article>
+                    ))}
                 </div>
 
-                {/* Right Side is intentionally left empty to let the Earth shine */}
-                <div className="hidden md:block md:col-span-7 lg:col-span-8 pointer-events-none">
-                </div>
-
+                <aside className="education-panel" aria-labelledby="education-heading">
+                    <div className="education-panel__header">
+                        <span>Academic trajectory</span>
+                        <span>{education.length} milestones</span>
+                    </div>
+                    <h3 id="education-heading">Education</h3>
+                    <ol>
+                        {education.map((item) => (
+                            <li key={item.degree}>
+                                <span className="education-panel__marker" />
+                                <time>{item.duration}</time>
+                                <h4>{item.degree}</h4>
+                                <p>{item.institution} · {item.location}</p>
+                            </li>
+                        ))}
+                    </ol>
+                </aside>
             </div>
         </SectionContainer>
     );

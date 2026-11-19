@@ -4,7 +4,6 @@ import React from 'react';
 import CustomCursor from './components/UI/CustomCursor';
 import ScrollProgress from './components/UI/ScrollProgress';
 import Navigation from './components/Layout/Navigation';
-import ParticleBackground from './components/ParticleBackground';
 import Footer from './components/Layout/Footer';
 
 // Sections
@@ -22,14 +21,13 @@ function App() {
     <div className="bg-space-dark min-h-screen text-star-white selection:bg-neon-teal selection:text-space-dark">
       <CustomCursor />
       <ScrollProgress />
-      <ParticleBackground />
       <Navigation />
 
       <main className="relative z-10 w-full">
         <HeroSection />
         <AboutSection />
-        <SkillsSection />
         <ProjectsSection />
+        <SkillsSection />
         <ExperienceSection />
         <CertificationSection />
         <ContactSection />

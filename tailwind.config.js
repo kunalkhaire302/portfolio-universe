@@ -9,11 +9,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'space-dark': '#0a192f',
-        'space-blue': '#112240',
-        'neon-teal': '#64ffda',
-        'electric-blue': '#00d4ff',
-        'star-white': '#e6f1ff',
+        'space-dark': '#061426',
+        'space-blue': '#102b44',
+        'neon-teal': '#27d9f3',
+        'electric-blue': '#4d7cff',
+        'star-white': '#f4f8ff',
         'planet-orange': '#ff6b35',
         'project-purple': '#7b2cbf',
         'cert-gold': '#ffd700',
@@ -27,7 +27,7 @@ module.exports = {
         '2xl': '1536px',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Avenir Next', 'Segoe UI Variable', 'Segoe UI', 'sans-serif'],
       },
       animation: {
         'spin-slow': 'spin 20s linear infinite',
