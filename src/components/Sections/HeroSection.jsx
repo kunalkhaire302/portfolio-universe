@@ -32,7 +32,6 @@ const HeroSection = () => {
     const cyanY = useTransform(progress, [0, 1], [0, -70]);
     const blueY = useTransform(progress, [0, 1], [0, -34]);
     const ambientOpacity = useTransform(progress, [0, 0.72, 1], [1, 0.74, 0]);
-    const gridY = useTransform(progress, [0, 1], [0, -24]);
     const invitationOpacity = useTransform(progress, [0, 0.08, 0.22], [1, 0.58, 0]);
     const progressScale = useTransform(progress, [0, 1], [0, 1]);
     const dividerScale = useTransform(progress, [0.72, 0.9], [0, 1]);
@@ -88,7 +87,6 @@ const HeroSection = () => {
                 <div ref={pointerGlowRef} className="hero-pointer-glow" />
             </motion.div>
             <motion.div aria-hidden="true" className="hero-ambient hero-ambient--blue" style={reducedMotion ? undefined : { y: blueY, opacity: ambientOpacity }} />
-            <motion.div aria-hidden="true" className="hero-grid" style={reducedMotion ? undefined : { y: gridY, opacity: ambientOpacity }} />
             <div aria-hidden="true" className="hero-vignette" />
 
             <div className="hero-shell">

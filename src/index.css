@@ -249,7 +249,6 @@ img {
 }
 
 .hero-ambient,
-.hero-grid,
 .hero-vignette {
   position: absolute;
   pointer-events: none;
@@ -279,17 +278,6 @@ img {
 
 .hero-ambient--blue {
   background: radial-gradient(circle at 82% 36%, rgba(70, 137, 255, 0.12), transparent 34%);
-}
-
-.hero-grid {
-  inset: 0;
-  z-index: -2;
-  opacity: 0.035;
-  background-image:
-    linear-gradient(rgba(175, 224, 255, 0.6) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(175, 224, 255, 0.6) 1px, transparent 1px);
-  background-size: 52px 52px;
-  mask-image: linear-gradient(to bottom, black 10%, transparent 92%);
 }
 
 .hero-vignette {
