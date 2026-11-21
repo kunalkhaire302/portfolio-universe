@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 
 afterEach(() => {
     document.body.style.overflow = '';
+    window.innerWidth = 1024;
 });
 
 test('closes the mobile menu with Escape and restores focus', () => {
@@ -44,4 +45,17 @@ test('restores the existing body overflow when unmounted', () => {
     unmount();
 
     expect(document.body.style.overflow).toBe('clip');
+});
+
+test('closes the mobile menu when the viewport reaches desktop navigation', () => {
+    render(<Navigation />);
+    const toggle = screen.getByRole('button', { name: /open navigation menu/i });
+
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+
+    window.innerWidth = 1280;
+    fireEvent(window, new Event('resize'));
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
 });

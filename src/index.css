@@ -48,7 +48,6 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  overflow-x: hidden;
   background:
     radial-gradient(circle at 12% 12%, rgb(var(--color-accent) / 0.07), transparent 26rem),
     radial-gradient(circle at 90% 42%, rgb(var(--color-accent-active) / 0.08), transparent 32rem),
@@ -99,7 +98,9 @@ button:focus-visible,
 }
 
 img {
+  display: block;
   max-width: 100%;
+  height: auto;
 }
 
 ::-webkit-scrollbar {
@@ -626,6 +627,11 @@ img {
 .architecture-node strong {
   color: inherit;
   font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.architecture-node > span:last-child {
+  min-width: 0;
 }
 
 .architecture-node small {
@@ -725,6 +731,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.5rem 1rem;
   color: var(--dim);
   font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
   font-size: 0.62rem;
@@ -1538,10 +1545,6 @@ footer {
   .skill-network__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .experience-entry {
-    grid-template-columns: 12rem 1fr;
-  }
 }
 
 @media (min-width: 768px) {
@@ -1570,6 +1573,7 @@ footer {
   }
 
   .experience-entry {
+    grid-template-columns: 12rem minmax(0, 1fr);
     padding-left: 4.5rem;
   }
 
@@ -1696,16 +1700,28 @@ footer {
 
 @media (max-width: 1023px) {
   .hero-section {
-    padding-top: 7rem;
+    min-height: auto;
+    padding: 7rem clamp(1.25rem, 5vw, 3rem) 4.5rem;
+  }
+
+  .hero-shell {
+    min-height: auto;
   }
 
   .hero-layout {
-    grid-template-columns: minmax(0, 0.88fr) minmax(360px, 1.12fr);
-    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+    padding-block: 1rem 2rem;
+  }
+
+  .hero-content,
+  .hero-architecture {
+    width: min(100%, 48rem);
+    margin-inline: auto;
   }
 
   .hero-name {
-    font-size: clamp(4.7rem, 10vw, 7.5rem);
+    font-size: clamp(4.7rem, 13vw, 7.5rem);
   }
 
   .architecture-map {
@@ -1721,16 +1737,33 @@ footer {
   .hero-scroll-invitation {
     bottom: 1.25rem;
   }
+
+  .hero-progress {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
-  .hero-section {
+  .section-container {
     min-height: auto;
-    padding: 6.75rem 1.25rem 5.5rem;
+    padding: clamp(4.75rem, 14vw, 6rem) 1.25rem;
   }
 
-  .hero-shell {
-    min-height: auto;
+  .section-heading {
+    margin-bottom: clamp(2rem, 9vw, 3rem);
+  }
+
+  .section-heading--split {
+    gap: 1rem;
+  }
+
+  .section-heading h2,
+  .contact-copy h2 {
+    font-size: clamp(2.15rem, 11vw, 3.4rem);
+  }
+
+  .hero-section {
+    padding: 6.75rem 1.25rem 5.5rem;
   }
 
   .hero-layout {
@@ -1774,7 +1807,6 @@ footer {
 
   .hero-architecture {
     width: min(100%, 42rem);
-    margin-inline: auto;
   }
 
   .architecture-map {
@@ -1799,13 +1831,44 @@ footer {
     height: 3.4rem;
   }
 
-  .hero-progress {
-    right: 0.45rem;
+  .featured-project__visual {
+    min-height: 250px;
+    padding-top: 0;
   }
 
-  .featured-project__visual {
-    min-height: 290px;
-    padding-top: 0;
+  .project-blueprint {
+    min-height: 250px;
+  }
+
+  .skill-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-tabs button {
+    min-width: 0;
+  }
+
+  .skill-network {
+    min-height: auto;
+  }
+
+  .experience-entry {
+    padding: 0 0 2.25rem 3rem;
+  }
+
+  .experience-entry__marker {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .experience-timeline__line {
+    left: 0.98rem;
+  }
+
+  .featured-project__meta,
+  .contact-panel__header,
+  .certification-card__meta {
+    flex-wrap: wrap;
   }
 
   .contact-panel li {
@@ -1818,6 +1881,48 @@ footer {
 }
 
 @media (max-width: 420px) {
+  .hero-name {
+    font-size: clamp(3rem, 17vw, 4.4rem);
+  }
+
+  .hero-eyebrow {
+    letter-spacing: 0.12em;
+  }
+
+  .architecture-header,
+  .architecture-detail {
+    padding-inline: 0.85rem;
+  }
+
+  .architecture-map {
+    gap: 4rem 0.5rem;
+    padding-inline: 0.5rem;
+  }
+
+  .architecture-node {
+    gap: 0.45rem;
+    padding: 0.55rem;
+  }
+
+  .about-discipline {
+    grid-template-columns: 1.5rem 2rem minmax(0, 1fr);
+    gap: 0.65rem;
+  }
+
+  .project-card {
+    min-height: auto;
+  }
+
+  .project-actions a,
+  .contact-socials a {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .contact-cta {
+    width: 100%;
+  }
+
   .hero-actions .button {
     flex-basis: 100%;
   }

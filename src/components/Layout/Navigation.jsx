@@ -22,6 +22,7 @@ const Navigation = () => {
 
     const handleDownload = async (e, href, downloadName) => {
         e.preventDefault();
+        setIsOpen(false);
         try {
             const response = await fetch(process.env.PUBLIC_URL + href);
             const blob = await response.blob();
@@ -90,6 +91,15 @@ const Navigation = () => {
         handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, [handleScroll]);
+
+    useEffect(() => {
+        const closeDesktopMenu = () => {
+            if (window.innerWidth >= 1280) setIsOpen(false);
+        };
+
+        window.addEventListener('resize', closeDesktopMenu);
+        return () => window.removeEventListener('resize', closeDesktopMenu);
+    }, []);
 
     const scrollToSection = (id) => {
         const element = document.getElementById(id);
@@ -180,7 +190,7 @@ const Navigation = () => {
                     </button>
 
                     {/* Desktop Menu */}
-                    <div className="hidden lg:flex items-center justify-center flex-1 px-0 xl:px-2 gap-0">
+                    <div className="hidden xl:flex items-center justify-center flex-1 px-2 gap-0">
                         {navLinks.map((link) => (
                             link.isDownload ? (
                                 <a
@@ -221,7 +231,7 @@ const Navigation = () => {
                     <div className="flex flex-shrink-0 items-center">
                         <button
                             onClick={() => scrollToSection('contact')}
-                            className="group hidden items-center gap-3 rounded-full border border-border-interactive px-5 py-2.5 text-[10px] font-black tracking-[0.08em] text-ivory shadow-[0_0_18px_rgb(var(--color-accent)/0.14)] transition-[color,background-color,border-color,transform] duration-150 ease-[var(--ease-out)] hover:border-tangerine hover:bg-espresso-hover active:scale-[0.97] motion-reduce:transform-none lg:flex"
+                            className="group hidden items-center gap-3 rounded-full border border-border-interactive px-5 py-2.5 text-[10px] font-black tracking-[0.08em] text-ivory shadow-[0_0_18px_rgb(var(--color-accent)/0.14)] transition-[color,background-color,border-color,transform] duration-150 ease-[var(--ease-out)] hover:border-tangerine hover:bg-espresso-hover active:scale-[0.97] motion-reduce:transform-none xl:flex"
                         >
                             <FaEnvelope className="text-tangerine transition-colors group-hover:text-tangerine-hover" />
                             Let's connect
@@ -235,7 +245,7 @@ const Navigation = () => {
                             aria-expanded={isOpen}
                             aria-controls="mobile-navigation"
                             aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
-                            className="lg:hidden p-2.5 text-lg text-tangerine bg-espresso-elevated rounded-full border border-border-interactive hover:bg-espresso-hover transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none z-[110]"
+                            className="xl:hidden p-2.5 text-lg text-tangerine bg-espresso-elevated rounded-full border border-border-interactive hover:bg-espresso-hover transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none z-[110]"
                         >
                             {isOpen ? <FaTimes /> : <FaBars />}
                         </button>
@@ -255,7 +265,7 @@ const Navigation = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-                        className="fixed inset-0 z-[120] bg-espresso/95 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden"
+                        className="fixed inset-0 z-[120] flex flex-col items-center overflow-y-auto bg-espresso/95 px-4 pb-[calc(2rem_+_env(safe-area-inset-bottom))] pt-[calc(5.5rem_+_env(safe-area-inset-top))] backdrop-blur-2xl xl:hidden"
                     >
                         <button
                             type="button"
@@ -283,7 +293,7 @@ const Navigation = () => {
                             ))}
                         </div>
 
-                        <nav id="mobile-navigation" aria-label="Mobile navigation links" className="relative z-10 flex flex-col items-center gap-4 w-full px-10">
+                        <nav id="mobile-navigation" aria-label="Mobile navigation links" className="relative z-10 my-auto flex w-full flex-col items-center px-4 sm:px-10">
                             {navLinks.map((link) => (
                                 link.isDownload ? (
                                     <a
@@ -291,9 +301,9 @@ const Navigation = () => {
                                         href={process.env.PUBLIC_URL + link.href}
                                         onClick={(e) => handleDownload(e, link.href, link.downloadName)}
                                         download={link.downloadName}
-                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-border-subtle transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none"
+                                        className="group flex min-h-11 w-full max-w-xs items-center justify-between border-b border-border-subtle py-2.5 transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none sm:py-4"
                                     >
-                                        <span className="text-2xl font-black uppercase tracking-tighter transition-colors duration-150 text-muted group-hover:text-ivory">
+                                        <span className="text-xl font-black uppercase tracking-tighter transition-colors duration-150 text-muted group-hover:text-ivory sm:text-2xl">
                                             {link.name}
                                         </span>
                                         <FaChevronRight className="transition-[color,transform] duration-150 text-muted group-hover:text-ivory" />
@@ -302,9 +312,9 @@ const Navigation = () => {
                                     <button
                                         key={link.name}
                                         onClick={() => scrollToSection(link.to)}
-                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-border-subtle transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none"
+                                        className="group flex min-h-11 w-full max-w-xs items-center justify-between border-b border-border-subtle py-2.5 transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none sm:py-4"
                                     >
-                                        <span className={`text-2xl font-black uppercase tracking-tighter transition-colors duration-150 ${
+                                        <span className={`text-xl font-black uppercase tracking-tighter transition-colors duration-150 sm:text-2xl ${
                                             activeSection === link.to ? 'text-tangerine' : 'text-muted group-hover:text-ivory'
                                         }`}>
                                             {link.name}
