@@ -159,8 +159,8 @@ const Navigation = () => {
                     transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
                     className={`pointer-events-auto flex items-center justify-between py-3 px-5 md:px-7 rounded-full border transition-[background-color,border-color] duration-200 w-full max-w-6xl ${
                         scrolled 
-                        ? 'bg-space-dark/40 backdrop-blur-3xl border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.9),0_0_60px_rgba(100,255,218,0.05)]' 
-                        : 'bg-white/[0.02] backdrop-blur-2xl border-white/[0.05]'
+                        ? 'border-border-subtle bg-espresso-secondary/80 backdrop-blur-3xl shadow-[0_8px_40px_rgb(var(--color-bg-primary)/0.9),0_0_60px_rgb(var(--color-accent)/0.05)]'
+                        : 'border-border-subtle/60 bg-espresso-secondary/30 backdrop-blur-2xl'
                     }`}
                 >
                     {/* Logo */}
@@ -170,12 +170,12 @@ const Navigation = () => {
                         className="flex-shrink-0 group flex items-center gap-2 md:gap-3 cursor-pointer transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none"
                         onClick={() => scrollToSection('home')}
                     >
-                        <div className="relative w-9 h-9 md:w-10 md:h-10 flex items-center justify-center bg-neon-teal/10 rounded-full border border-neon-teal/20 group-hover:border-neon-teal/50 transition-colors duration-200">
-                            <FaRocket className="text-neon-teal group-hover:-rotate-12 transition-transform text-sm md:text-base" />
-                            <div className="absolute inset-0 bg-neon-teal rounded-full blur-lg opacity-0 group-hover:opacity-20 transition-opacity" />
+                        <div className="relative w-9 h-9 md:w-10 md:h-10 flex items-center justify-center bg-tangerine/10 rounded-full border border-tangerine/20 group-hover:border-tangerine/50 transition-colors duration-200">
+                            <FaRocket className="text-tangerine group-hover:-rotate-12 transition-transform text-sm md:text-base" />
+                            <div className="absolute inset-0 bg-tangerine rounded-full blur-lg opacity-0 group-hover:opacity-20 transition-opacity" />
                         </div>
-                        <span className="text-white font-black tracking-tighter text-base md:text-lg">
-                            kunal<span className="text-neon-teal">universe</span>
+                        <span className="text-ivory font-black tracking-tighter text-base md:text-lg">
+                            kunal<span className="text-tangerine">universe</span>
                         </span>
                     </button>
 
@@ -188,7 +188,7 @@ const Navigation = () => {
                                     href={process.env.PUBLIC_URL + link.href}
                                     onClick={(e) => handleDownload(e, link.href, link.downloadName)}
                                     download={link.downloadName}
-                                    className="relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-[color,transform] duration-150 ease-[var(--ease-out)] rounded-full whitespace-nowrap text-slate-400 hover:text-white active:scale-[0.97] motion-reduce:transform-none"
+                                    className="relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-[color,transform] duration-150 ease-[var(--ease-out)] rounded-full whitespace-nowrap text-taupe hover:text-ivory active:scale-[0.97] motion-reduce:transform-none"
                                 >
                                     <span className="relative z-10">{link.name}</span>
                                 </a>
@@ -198,8 +198,8 @@ const Navigation = () => {
                                     onClick={() => scrollToSection(link.to)}
                                     className={`relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-[color,transform] duration-150 ease-[var(--ease-out)] rounded-full whitespace-nowrap active:scale-[0.97] motion-reduce:transform-none ${
                                         activeSection === link.to 
-                                        ? 'text-neon-teal text-glow' 
-                                        : 'text-slate-400 hover:text-white'
+                                        ? 'text-tangerine text-glow'
+                                        : 'text-taupe hover:text-ivory'
                                     }`}
                                 >
                                     <span className="relative z-10">
@@ -207,7 +207,7 @@ const Navigation = () => {
                                         {activeSection === link.to && (
                                             <motion.div
                                                 layoutId="nav-pill"
-                                                className="absolute -bottom-2 left-0 w-full h-[2px] bg-neon-teal rounded-full shadow-[0_0_10px_rgba(100,255,218,0.8)]"
+                                                className="absolute -bottom-2 left-0 w-full h-[2px] bg-tangerine rounded-full shadow-[0_0_10px_rgb(var(--color-accent)/0.8)]"
                                                 transition={{ type: "spring", bounce: 0.2, duration: 0.25 }}
                                             />
                                         )}
@@ -221,9 +221,9 @@ const Navigation = () => {
                     <div className="flex flex-shrink-0 items-center">
                         <button
                             onClick={() => scrollToSection('contact')}
-                            className="group hidden items-center gap-3 rounded-full border border-cyan-300 px-5 py-2.5 text-[10px] font-black tracking-[0.08em] text-white shadow-[0_0_18px_rgba(34,211,238,0.14)] transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-cyan-300 hover:text-slate-950 active:scale-[0.97] motion-reduce:transform-none lg:flex"
+                            className="group hidden items-center gap-3 rounded-full border border-border-interactive px-5 py-2.5 text-[10px] font-black tracking-[0.08em] text-ivory shadow-[0_0_18px_rgb(var(--color-accent)/0.14)] transition-[color,background-color,border-color,transform] duration-150 ease-[var(--ease-out)] hover:border-tangerine hover:bg-espresso-hover active:scale-[0.97] motion-reduce:transform-none lg:flex"
                         >
-                            <FaEnvelope className="text-cyan-300 transition-colors group-hover:text-slate-950" />
+                            <FaEnvelope className="text-tangerine transition-colors group-hover:text-tangerine-hover" />
                             Let's connect
                             <FaChevronRight className="text-[9px]" />
                         </button>
@@ -235,7 +235,7 @@ const Navigation = () => {
                             aria-expanded={isOpen}
                             aria-controls="mobile-navigation"
                             aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
-                            className="lg:hidden p-2.5 text-lg text-neon-teal bg-white/5 rounded-full border border-white/10 hover:bg-white/10 transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none z-[110]"
+                            className="lg:hidden p-2.5 text-lg text-tangerine bg-espresso-elevated rounded-full border border-border-interactive hover:bg-espresso-hover transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none z-[110]"
                         >
                             {isOpen ? <FaTimes /> : <FaBars />}
                         </button>
@@ -255,13 +255,13 @@ const Navigation = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-                        className="fixed inset-0 z-[120] bg-[#030712]/95 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden"
+                        className="fixed inset-0 z-[120] bg-espresso/95 backdrop-blur-2xl flex flex-col items-center justify-center lg:hidden"
                     >
                         <button
                             type="button"
                             onClick={() => setIsOpen(false)}
                             aria-label="Close navigation menu"
-                            className="pressable absolute right-4 top-[calc(1rem+env(safe-area-inset-top,0px))] z-20 rounded-full border border-white/10 bg-white/5 p-2.5 text-lg text-neon-teal transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-white/10 motion-reduce:transform-none"
+                            className="pressable absolute right-4 top-[calc(1rem+env(safe-area-inset-top,0px))] z-20 rounded-full border border-border-interactive bg-espresso-elevated p-2.5 text-lg text-tangerine transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-espresso-hover motion-reduce:transform-none"
                         >
                             <FaTimes />
                         </button>
@@ -271,13 +271,13 @@ const Navigation = () => {
                             {[...Array(20)].map((_, i) => (
                                 <div 
                                     key={i}
-                                    className="absolute bg-white rounded-full"
+                                    className="absolute bg-tangerine rounded-full"
                                     style={{
                                         width: Math.random() * 2 + 'px',
                                         height: Math.random() * 2 + 'px',
                                         top: Math.random() * 100 + '%',
                                         left: Math.random() * 100 + '%',
-                                        boxShadow: '0 0 10px white'
+                                        boxShadow: '0 0 10px rgb(var(--color-accent) / 0.5)'
                                     }}
                                 />
                             ))}
@@ -291,26 +291,26 @@ const Navigation = () => {
                                         href={process.env.PUBLIC_URL + link.href}
                                         onClick={(e) => handleDownload(e, link.href, link.downloadName)}
                                         download={link.downloadName}
-                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5 transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none"
+                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-border-subtle transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none"
                                     >
-                                        <span className="text-2xl font-black uppercase tracking-tighter transition-colors duration-150 text-slate-500 group-hover:text-white">
+                                        <span className="text-2xl font-black uppercase tracking-tighter transition-colors duration-150 text-muted group-hover:text-ivory">
                                             {link.name}
                                         </span>
-                                        <FaChevronRight className="transition-[color,transform] duration-150 text-slate-800 group-hover:text-white" />
+                                        <FaChevronRight className="transition-[color,transform] duration-150 text-muted group-hover:text-ivory" />
                                     </a>
                                 ) : (
                                     <button
                                         key={link.name}
                                         onClick={() => scrollToSection(link.to)}
-                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-white/5 transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none"
+                                        className="group w-full max-w-xs flex items-center justify-between py-4 border-b border-border-subtle transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none"
                                     >
                                         <span className={`text-2xl font-black uppercase tracking-tighter transition-colors duration-150 ${
-                                            activeSection === link.to ? 'text-neon-teal' : 'text-slate-500 group-hover:text-white'
+                                            activeSection === link.to ? 'text-tangerine' : 'text-muted group-hover:text-ivory'
                                         }`}>
                                             {link.name}
                                         </span>
                                         <FaChevronRight className={`transition-[color,transform] duration-150 ${
-                                            activeSection === link.to ? 'text-neon-teal translate-x-2' : 'text-slate-800 group-hover:text-white'
+                                            activeSection === link.to ? 'text-tangerine translate-x-2' : 'text-muted group-hover:text-ivory'
                                         }`} />
                                     </button>
                                 )
