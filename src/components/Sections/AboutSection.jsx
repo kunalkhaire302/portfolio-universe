@@ -28,7 +28,6 @@ const AboutSection = () => {
         <SectionContainer id="about" className="section--about">
             <div className="section-heading section-heading--split">
                 <div>
-                    <span className="section-eyebrow">01 / About</span>
                     <h2>Engineering with <span>purpose.</span></h2>
                 </div>
                 <p>{objective}</p>

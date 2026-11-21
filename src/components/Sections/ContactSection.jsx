@@ -11,7 +11,6 @@ const ContactSection = () => {
             <div aria-hidden="true" className="contact-aura" />
             <div className="contact-layout">
                 <div className="contact-copy">
-                    <span className="section-eyebrow">06 / Start a conversation</span>
                     <h2>Let&apos;s build something <span>meaningful.</span></h2>
                     <p>I&apos;m open to thoughtful conversations about software engineering, intelligent applications, product ideas, and collaborative technical work.</p>
                     <a href={`mailto:${personalInfo.email}`} className="button button--primary contact-cta">

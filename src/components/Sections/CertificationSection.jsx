@@ -36,7 +36,6 @@ const CertificationSection = () => {
         <SectionContainer id="certifications" className="section--certifications">
             <div className="section-heading section-heading--split">
                 <div>
-                    <span className="section-eyebrow">05 / Achievements</span>
                     <h2>Learning made <span>visible.</span></h2>
                 </div>
                 <p>Selected certifications and practical simulations that extend my engineering, cloud, and applied-AI foundation.</p>

@@ -29,7 +29,6 @@ const SkillsSection = () => {
         <SectionContainer id="skills" className="section--skills">
             <div className="section-heading section-heading--split">
                 <div>
-                    <span className="section-eyebrow">03 / Technical range</span>
                     <h2>A connected <span>technology stack.</span></h2>
                 </div>
                 <p>Tools are grouped by the role they play in shipping a product—from interface and API design to data, intelligence, and delivery.</p>

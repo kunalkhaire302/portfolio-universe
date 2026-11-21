@@ -100,7 +100,6 @@ const ProjectsSection = () => {
         <SectionContainer id="projects" className="section--projects">
             <div className="section-heading section-heading--split">
                 <div>
-                    <span className="section-eyebrow">02 / Selected work</span>
                     <h2>Products built for <span>real use.</span></h2>
                 </div>
                 <p>Full-stack platforms, intelligent workflows, and data products built with practical constraints in mind.</p>
