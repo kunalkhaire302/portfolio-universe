@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import ProjectStudy, { resolveProject } from './components/ProjectStudy';
 
 // Components
 import CustomCursor from './components/UI/CustomCursor';
@@ -17,13 +18,19 @@ import ContactSection from './components/Sections/ContactSection';
 
 
 function App() {
+  const isHome = window.location.pathname === '/';
+  useEffect(() => {
+    if (window.location.hash) {
+      document.getElementById(window.location.hash.slice(1))?.scrollIntoView();
+    }
+  }, []);
   return (
     <div className="min-h-screen bg-canvas text-porcelain selection:bg-coral selection:text-canvas">
       <CustomCursor />
       <ScrollProgress />
-      <Navigation />
+      <Navigation projectPage={!isHome} />
 
-      <main className="relative z-10 w-full">
+      {isHome ? <main className="relative z-10 w-full">
         <HeroSection />
         <AboutSection />
         <ProjectsSection />
@@ -31,7 +38,7 @@ function App() {
         <ExperienceSection />
         <CertificationSection />
         <ContactSection />
-      </main>
+      </main> : <ProjectStudy project={resolveProject(window.location.pathname)} />}
 
       <Footer />
     </div>

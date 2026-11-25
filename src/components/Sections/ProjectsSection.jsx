@@ -15,14 +15,15 @@ const iconMap = {
 
 const ProjectActions = ({ project }) => (
     <div className="project-actions">
+        <a href={`/projects/${project.slug}`} aria-label={`View case study for ${project.title}`}>View case study →</a>
         {project.live && (
-            <a href={project.live} target="_blank" rel="noopener noreferrer">
+            <a className="project-actions__secondary" href={project.live} target="_blank" rel="noopener noreferrer">
                 Live demo <FaArrowUpRightFromSquare aria-hidden="true" />
             </a>
         )}
         {project.github && (
             <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-actions__secondary">
-                Source <FaGithub aria-hidden="true" />
+                GitHub <FaGithub aria-hidden="true" />
             </a>
         )}
     </div>
@@ -60,7 +61,7 @@ const FeaturedProject = ({ project, index }) => {
                     <i className="project-blueprint__node project-blueprint__node--one" />
                     <i className="project-blueprint__node project-blueprint__node--two" />
                     <i className="project-blueprint__node project-blueprint__node--three" />
-                    <span className="project-blueprint__status">Operational</span>
+                    <span className="project-blueprint__status">{project.category}</span>
                 </div>
             </div>
         </article>

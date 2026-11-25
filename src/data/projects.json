@@ -1,0 +1,490 @@
+[
+  {
+    "id": 13,
+    "slug": "placementx",
+    "title": "PlacementX",
+    "category": "Campus recruitment",
+    "status": "Single-college pilot",
+    "live": "https://placementx-ten.vercel.app/",
+    "description": "One placement drive connects a recruiter’s brief, a student’s verified profile and the placement office’s selection record.",
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Express",
+      "Prisma",
+      "PostgreSQL",
+      "Expo",
+      "Redis"
+    ],
+    "team": "NMIMS capstone project. This repository is a fork of YashChaudhari999/PlacementX.",
+    "upstream": "https://github.com/YashChaudhari999/PlacementX",
+    "problem": "At NMIMS, staff coordinated recruitment across spreadsheets, email and WhatsApp. A student’s marks, a recruiter’s criteria and the latest application status lived in different places.",
+    "solution": "The placement office publishes a drive against verified student records. Coordinators review records within their department, while students can follow their applications through selection.",
+    "features": [
+      "Profile and academic record verification",
+      "Eligibility checks for each drive",
+      "Recruiter submissions and staff review",
+      "Application tracking and report exports"
+    ],
+    "journey": [
+      "A recruiter submits a drive brief through a token-based form.",
+      "The placement office reviews the brief and publishes the eligibility criteria.",
+      "A verified student checks eligibility and applies.",
+      "Staff record selection rounds and offers. The student can follow the application’s status."
+    ],
+    "architecture": "React and Expo clients share an Express API. Prisma reads and writes placement records in PostgreSQL. Socket.IO delivers live updates, while BullMQ and Redis handle queued notifications.",
+    "decision": "Recruiters can submit a brief through a scoped link. This keeps occasional external users outside the college account-provisioning workflow while giving staff a review step.",
+    "results": "The maintainers report a web and API pilot for a single college. The mobile bundle passed their build check. APK and physical-device testing remain pending.",
+    "limitations": "An earlier Python service handled placement predictions and résumé parsing. The current implementation removed that service and its database fields.",
+    "heroImage": {
+      "src": "/case-studies/placementx.webp",
+      "width": 1200,
+      "height": 750,
+      "alt": "PlacementX university sign-in page with a campus identity panel and login form.",
+      "caption": "The public entry point for students and placement staff."
+    },
+    "icon": "FaGraduationCap",
+    "featured": true,
+    "github": "https://github.com/kunalkhaire302/PlacementX",
+    "sources": {
+      "branch": "main",
+      "retrieved": "2026-11-25",
+      "commit": "f08938d836d72ec0b9b2da523cc1447a7f06893f",
+      "paths": [
+        "README.md",
+        "ML_REMOVAL_REPORT.md"
+      ],
+      "media": "https://placementx-ten.vercel.app/"
+    },
+    "requestPath": [
+      "Web or mobile client",
+      "Express API",
+      "Prisma",
+      "PostgreSQL"
+    ]
+  },
+  {
+    "id": 99,
+    "slug": "automarket",
+    "title": "AutoMarket",
+    "category": "Vehicle marketplace",
+    "status": "Active development",
+    "live": "https://automarket-self.vercel.app/",
+    "description": "A used-car marketplace that connects vehicle discovery, seller intake and appointment booking.",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "ASP.NET Core",
+      "PostgreSQL",
+      "FastAPI"
+    ],
+    "problem": "A buyer can narrow a catalogue to one car and still lose the appointment if another request reserves the same slot. Sellers also need a review step before their vehicles enter the catalogue.",
+    "solution": "Buyers search and compare inventory before booking. Operations staff review seller submissions and manage the service centres where appointments take place.",
+    "features": [
+      "Filtered catalogue and fuzzy search",
+      "Saved cars and comparison lists",
+      "Seller intake and listing approval",
+      "Conflict checks for active bookings"
+    ],
+    "journey": [
+      "Search the catalogue by model or city and narrow the results.",
+      "Compare vehicles and open a listing to review its details.",
+      "Choose an appointment. The API checks ownership and the database enforces booking conflicts."
+    ],
+    "architecture": "The Next.js frontend sends requests to ASP.NET Core. The API owns access to a private PostgreSQL schema and calls an internal FastAPI service for optional intelligence.",
+    "decision": "Two buyers can request the same slot concurrently. A database constraint enforces exclusivity inside the transaction, so correctness survives simultaneous requests.",
+    "results": "The implementation-status report records unit tests, database checks and a live end-to-end exercise. Deterministic pricing and recommendation scoring are implemented.",
+    "limitations": "Photo storage, push delivery and transactional email still require provider configuration. Learned valuation, semantic search and image-condition models await approved data or artifacts.",
+    "heroImage": {
+      "src": "/case-studies/automarket.webp",
+      "width": 1200,
+      "height": 750,
+      "alt": "AutoMarket homepage showing vehicle search, quick filters and the road illustration.",
+      "caption": "Buyers enter the catalogue through a model or city search."
+    },
+    "icon": "FaShoppingCart",
+    "featured": true,
+    "github": "https://github.com/kunalkhaire302/automarket",
+    "sources": {
+      "branch": "main",
+      "retrieved": "2026-11-25",
+      "commit": "cfd291a588ed5fce88941aa5b43c9b24f92989f9",
+      "paths": [
+        "README.md",
+        "docs/implementation-status.md"
+      ],
+      "media": "https://automarket-self.vercel.app/"
+    },
+    "requestPath": [
+      "Next.js client",
+      "ASP.NET Core API",
+      "Private PostgreSQL schema"
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "carbon-footprint-ai",
+    "title": "Carbon Footprint AI",
+    "category": "Climate analytics",
+    "status": "Educational estimator",
+    "live": "https://carbon-footprint-ai.onrender.com/",
+    "description": "A lifestyle calculator that estimates annual emissions and explains which changes could reduce them.",
+    "technologies": [
+      "Python",
+      "Flask",
+      "XGBoost",
+      "scikit-learn",
+      "Chart.js"
+    ],
+    "problem": "A household footprint total gives a reader little guidance about what to change. Energy use, travel and consumption need to be compared on a common annual scale.",
+    "solution": "The calculator pairs a model estimate with a separate category breakdown. Readers can compare the result with configured benchmarks and inspect possible reductions.",
+    "features": [
+      "Validated lifestyle inputs",
+      "Annual estimate in tonnes of CO₂ equivalent",
+      "Category breakdown and benchmarks",
+      "Ranked actions with approximate savings"
+    ],
+    "journey": [
+      "Enter household energy, travel and consumption habits.",
+      "Calculate an annual estimate and inspect the category chart.",
+      "Review the suggested changes in order of estimated savings."
+    ],
+    "architecture": "Flask serves both the static interface and the prediction API. A validated request feeds an XGBoost pipeline for the total and deterministic calculations for categories and recommended actions.",
+    "decision": "A single stateless service handles the calculation without storing lifestyle responses. Optional recent summaries stay in the browser. Category calculations remain separate so readers can trace how the explanation was produced.",
+    "results": "The repository documents separate training, validation and test partitions drawn from formula-generated synthetic data. This evaluates how well the pipeline reproduces the generator.",
+    "limitations": "Real-world emissions accuracy has not been established. The estimate and suggested savings are educational approximations.",
+    "heroImage": {
+      "src": "/case-studies/carbon-input.webp",
+      "width": 1200,
+      "height": 675,
+      "alt": "Repository demo showing the energy, transport and lifestyle input groups.",
+      "caption": "Calculator inputs in the project’s demonstration video."
+    },
+    "screenshots": [
+      {
+        "src": "/case-studies/carbon-result.webp",
+        "width": 1200,
+        "height": 675,
+        "alt": "Demo result with an annual estimate and category comparison chart.",
+        "caption": "An example estimate from the demo. The breakdown uses deterministic factors."
+      }
+    ],
+    "icon": "FaLeaf",
+    "featured": true,
+    "github": "https://github.com/kunalkhaire302/carbon-footprint-ai",
+    "sources": {
+      "branch": "main",
+      "retrieved": "2026-11-25",
+      "commit": "f93599766e774c6e47b43af38d074389bdf6744c",
+      "paths": [
+        "README.md",
+        "docs/ARCHITECTURE.md",
+        "docs/API.md",
+        "frontend/assets/carbon-footprint-demo.mp4"
+      ],
+      "media": "frontend/assets/carbon-footprint-demo.mp4"
+    },
+    "role": "Kunal Khaire · credited developer"
+  },
+  {
+    "id": 12,
+    "slug": "capstonex",
+    "title": "CapstoneX",
+    "category": "Academic project governance",
+    "status": "Development stage",
+    "live": "https://www.capstonex.me/",
+    "role": "Kunal Khaire · credited author",
+    "description": "A shared review workflow for capstone students, mentors and administrators, from team formation to evaluation.",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "Express",
+      "PostgreSQL",
+      "FastAPI"
+    ],
+    "problem": "A proposed topic, its approval history and a mentor’s weekly feedback belong to the same project. Each participant needs access to the part they can act on.",
+    "solution": "Role-specific screens connect group formation, topic review, mentor allocation and progress reporting. Administrators can review recommendations alongside the supporting evidence.",
+    "features": [
+      "Team formation and topic submissions",
+      "Approval workflows",
+      "Mentor allocation",
+      "Weekly progress and evaluation"
+    ],
+    "journey": [
+      "Students form a group and submit a project topic.",
+      "The proposed topic enters review and the group receives a mentor.",
+      "The group submits progress updates for mentor review and evaluation."
+    ],
+    "architecture": "Next.js presents the role-specific interfaces. Express handles governance rules and PostgreSQL persistence. Separate FastAPI runtimes serve decision-support requests.",
+    "decision": "The governed AI workflow records evidence and confidence and retains human approval. A reviewer can inspect a recommendation before it changes a project decision.",
+    "results": "The readiness matrix records passing backend assertions and frontend type and lint checks. The README documents deployment evidence for the backend and focused AI Team runtime.",
+    "limitations": "Full-lifecycle authenticated browser coverage, migration and restore verification, and independently reviewed model quality remain open. Deployment of the complete ML workload is unverified.",
+    "heroImage": {
+      "src": "/case-studies/capstone-review.webp",
+      "width": 1200,
+      "height": 675,
+      "alt": "CapstoneX demo illustration of project movement and an audit trail.",
+      "caption": "Governance dashboard from the repository’s demo video, with illustrative figures."
+    },
+    "icon": "FaGraduationCap",
+    "featured": true,
+    "github": "https://github.com/kunalkhaire302/CapstoneX-Powered-Academic-Project-Governance-and-Intelligence-Platform",
+    "sources": {
+      "branch": "main",
+      "retrieved": "2026-11-25",
+      "commit": "03e65422e0281a4e46ef769d806f7e6b49152b93",
+      "paths": [
+        "README.md",
+        "docs/PRODUCTION_READINESS_MATRIX.md",
+        "docs/capstoneX.mp4"
+      ],
+      "media": "docs/capstoneX.mp4"
+    },
+    "requestPath": [
+      "Next.js client",
+      "Express governance API",
+      "PostgreSQL"
+    ]
+  },
+  {
+    "id": 1,
+    "slug": "portfolio-universe",
+    "title": "Portfolio Universe",
+    "category": "Personal portfolio",
+    "status": "Published portfolio",
+    "live": "https://www.kunaluniverse.tech/",
+    "description": "A responsive portfolio that brings projects, technical skills and credentials into one reading experience.",
+    "technologies": [
+      "React",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
+    "problem": "A reviewer needs a quick route from a project summary to the work itself, with the same information accessible on a phone.",
+    "solution": "Featured projects lead into a compact archive. Section navigation also takes visitors directly to skills, experience and credentials.",
+    "journey": [
+      "Browse the featured projects.",
+      "Open a project’s source or demo.",
+      "Return to download the résumé or use the contact section."
+    ],
+    "heroImage": {
+      "src": "/case-studies/portfolio.webp",
+      "width": 1200,
+      "height": 750,
+      "alt": "Portfolio homepage with Kunal Khaire’s introduction and project navigation.",
+      "caption": "Desktop homepage of Portfolio Universe."
+    },
+    "icon": "FaRocket",
+    "featured": false,
+    "github": "https://github.com/kunalkhaire302/portfolio-universe",
+    "sources": {
+      "branch": "master",
+      "retrieved": "2026-11-25",
+      "commit": "54874a2f02e3fbf70b021079d05721ce4426bbc2",
+      "paths": [
+        "README.md",
+        "src/components/Sections/ProjectsSection.jsx"
+      ],
+      "media": "https://www.kunaluniverse.tech/"
+    }
+  },
+  {
+    "id": 4,
+    "slug": "file-sharing",
+    "title": "File Sharing Website",
+    "category": "File transfer",
+    "status": "Repository implementation",
+    "live": "https://fileshared.onrender.com/",
+    "team": "Yash Chaudhari, Kunal Khaire and Chetan Patil",
+    "description": "Share an uploaded file through a download token or QR code, with optional account history.",
+    "technologies": [
+      "React",
+      "Node.js",
+      "Express",
+      "Supabase Storage"
+    ],
+    "problem": "A sender needs to hand a file to someone who may have no account or may be using another device.",
+    "solution": "The Express upload handler stores the file in Supabase Storage and creates a token and QR code for retrieval. An account associates uploads with a sender’s history.",
+    "journey": [
+      "Select and upload a file.",
+      "Share its download link or QR code.",
+      "The recipient opens the link to retrieve the file."
+    ],
+    "upstream": "https://github.com/YashChaudhari999/FileShare",
+    "icon": "FaLock",
+    "featured": false,
+    "github": "https://github.com/kunalkhaire302/FileShared",
+    "sources": {
+      "branch": "main",
+      "retrieved": "2026-11-25",
+      "commit": "e012bc802e18acc86cc3b64c185d817763450165",
+      "paths": [
+        "README.md",
+        "app.js",
+        "public/abus.html"
+      ],
+      "media": "https://fileshared.onrender.com/"
+    },
+    "heroImage": {
+      "src": "/case-studies/fileshare.webp",
+      "width": 1200,
+      "height": 750,
+      "alt": "FileShare homepage with the Share Now action and upload and download navigation.",
+      "caption": "The public starting point for sending or retrieving a file."
+    }
+  },
+  {
+    "id": 5,
+    "slug": "smart-guard",
+    "title": "Smart Guard: Attendance System",
+    "category": "Workforce analytics",
+    "status": "Attendance analytics prototype",
+    "description": "Role-specific attendance views for security guards and the supervisors reviewing their shifts.",
+    "technologies": [
+      "Python",
+      "Flask",
+      "Power BI",
+      "Matplotlib",
+      "SQL"
+    ],
+    "problem": "Supervisors need an overview across shifts, while an individual guard needs to see their own attendance history.",
+    "solution": "A Flask application handles attendance records and serves guard-level summaries. The repository also includes Power BI reports for comparative analysis.",
+    "journey": [
+      "Select the guard or supervisor role at sign-in.",
+      "Review the guard’s attendance summary or open the supervisor report.",
+      "Inspect trends across the recorded shifts."
+    ],
+    "icon": "FaUserShield",
+    "featured": false,
+    "github": "https://github.com/kunalkhaire302/Smart-Guard-Attendance-Behaviour-Analytics-System",
+    "sources": {
+      "branch": "main",
+      "retrieved": "2026-11-25",
+      "commit": "d393d377a6e5269875d9dd8d6f7303f9f8d446ed",
+      "paths": [
+        "README.md",
+        "app.py"
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "slug": "evolvex-system",
+    "title": "EvolveX System",
+    "category": "Habit tracking",
+    "status": "Gamified task application",
+    "live": "https://evolvexsystem-tcz2.onrender.com/",
+    "description": "A habit tracker that turns workouts and productivity goals into quests with character progression.",
+    "technologies": [
+      "Python",
+      "Flask",
+      "MongoDB",
+      "JavaScript"
+    ],
+    "problem": "A list of completed habits shows what happened today but gives little sense of progress over time.",
+    "solution": "Players choose physical or productivity quests, complete tasks and follow changes to their character’s stats and streaks.",
+    "journey": [
+      "Create a player profile.",
+      "Complete a daily training or productivity quest.",
+      "Review progress and choose the next task."
+    ],
+    "icon": "FaCog",
+    "featured": false,
+    "github": "https://github.com/kunalkhaire302/evolvexsystem",
+    "sources": {
+      "branch": "main",
+      "retrieved": "2026-11-25",
+      "commit": "719a246fa31fcb8d80cbcf900deb7add83828e51",
+      "paths": [
+        "README.md",
+        "render.yaml",
+        "backend/simple_app.py"
+      ],
+      "media": "https://evolvexsystem-tcz2.onrender.com/"
+    },
+    "team": "The project credits Antigravity as system designer.",
+    "heroImage": {
+      "src": "/case-studies/evolvex.webp",
+      "width": 1200,
+      "height": 750,
+      "alt": "EvolveX sign-in screen introducing its leveling and quest system.",
+      "caption": "The player entry screen in the public demo."
+    }
+  },
+  {
+    "id": 7,
+    "slug": "smartcsv",
+    "title": "SmartCSV: Intelligent CSV Analytics Platform",
+    "category": "Data analysis",
+    "status": "Repository implementation",
+    "description": "Turn a CSV upload into a cleaned dataset, statistical summaries and a shareable report.",
+    "technologies": [
+      "Flask",
+      "pandas",
+      "SciPy",
+      "Chart.js",
+      "PostgreSQL"
+    ],
+    "problem": "A raw CSV can contain duplicates, missing values and outliers before an analyst has even begun to look for relationships.",
+    "solution": "A Flask pipeline cleans the table and derives descriptive statistics and correlations. The frontend plots the results and the reporting flow supports shareable links.",
+    "journey": [
+      "Upload a CSV for processing.",
+      "Inspect distributions and correlations in the generated report.",
+      "Share the findings or ask a dataset question when the Claude integration is configured."
+    ],
+    "icon": "FaChartBar",
+    "featured": false,
+    "github": "https://github.com/kunalkhaire302/SmartCSV",
+    "sources": {
+      "branch": "main",
+      "retrieved": "2026-11-25",
+      "commit": "d3b2cddaae9d6ca476e89f5b44b9ecde0651609a",
+      "paths": [
+        "README.md"
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "slug": "house-rent-predictor",
+    "title": "House Rent Predictor",
+    "category": "Housing estimates",
+    "status": "Browser-based estimator",
+    "live": "https://house-rent-predictor-three.vercel.app/",
+    "description": "Estimate monthly rent across five Indian cities using property details and regression models that run in the browser.",
+    "technologies": [
+      "JavaScript",
+      "Python",
+      "scikit-learn",
+      "Chart.js"
+    ],
+    "problem": "Someone comparing rentals needs to see how a change in city, floor area or bedroom count affects an estimated monthly budget.",
+    "solution": "Python-trained regression coefficients ship with the interface. The browser calculates the estimate from the selected property details without a prediction server.",
+    "journey": [
+      "Choose a city and enter the property details.",
+      "Request a monthly rent estimate.",
+      "Change the inputs to explore a different property."
+    ],
+    "limitations": "Estimates reflect the training data and the five supported cities. They do not establish the asking price of an individual listing.",
+    "heroImage": {
+      "src": "/case-studies/rent.webp",
+      "width": 1200,
+      "height": 750,
+      "alt": "House Rent Predictor showing city selection, property inputs and the estimate panel.",
+      "caption": "The public estimator before a visitor enters their property details."
+    },
+    "icon": "FaHome",
+    "featured": false,
+    "github": "https://github.com/kunalkhaire302/house-rent-predictor",
+    "sources": {
+      "branch": "main",
+      "retrieved": "2026-11-25",
+      "commit": "94ee1fe11ffe90d984654589ca26959da13db81a",
+      "paths": [
+        "README.md",
+        "index.html",
+        "extract_model_params.py"
+      ],
+      "media": "https://house-rent-predictor-three.vercel.app/"
+    }
+  }
+]

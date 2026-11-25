@@ -13,7 +13,7 @@ const navLinks = [
     { name: 'Resume', isDownload: true, href: '/Kunal_Khaire_Resume.pdf', downloadName: 'Kunal_Khaire_Resume.pdf' },
 ];
 
-const Navigation = () => {
+const Navigation = ({ projectPage = false }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
@@ -60,6 +60,7 @@ const Navigation = () => {
     // Precision Scroll Spy logic
     const handleScroll = useCallback(() => {
         setScrolled(window.scrollY > 20);
+        if (projectPage) { setActiveSection('projects'); return; }
 
         const sections = navLinks.map(link => document.getElementById(link.to));
         const viewportHeight = window.innerHeight;
@@ -83,7 +84,7 @@ const Navigation = () => {
         }
 
         setActiveSection(currentSection);
-    }, []);
+    }, [projectPage]);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -99,9 +100,10 @@ const Navigation = () => {
 
         window.addEventListener('resize', closeDesktopMenu);
         return () => window.removeEventListener('resize', closeDesktopMenu);
-    }, []);
+    }, [projectPage]);
 
     const scrollToSection = (id) => {
+        if (projectPage) { window.location.assign('/#' + id); return; }
         const element = document.getElementById(id);
         if (element) {
             const offset = 80; // Account for fixed header

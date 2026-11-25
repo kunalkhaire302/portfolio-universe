@@ -55,7 +55,7 @@ vercel.json             Production deployment settings
 
 ## Updating content
 
-Edit `src/data/portfolioData.js`. The hero constellation, project showcase, skills network, experience timeline, certifications, and contact section all consume that shared source.
+Edit `src/data/projects.json` for project cards and their `/projects/<slug>` articles. Each entry records the repository, reviewed branch, commit, retrieval date and source paths. Verify those references when refreshing an article. Store reviewed screenshots and demo stills in `public/case-studies/`. The other homepage sections use `src/data/portfolioData.js`.
 
 ## Contact
 
