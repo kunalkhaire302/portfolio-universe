@@ -18,7 +18,7 @@ import ContactSection from './components/Sections/ContactSection';
 
 function App() {
   return (
-    <div className="min-h-screen bg-espresso text-ivory selection:bg-tangerine selection:text-espresso">
+    <div className="min-h-screen bg-canvas text-porcelain selection:bg-coral selection:text-canvas">
       <CustomCursor />
       <ScrollProgress />
       <Navigation />

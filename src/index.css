@@ -5,27 +5,29 @@
 :root {
   color-scheme: dark;
 
-  --color-bg-primary: 24 22 19;
-  --color-bg-secondary: 36 32 28;
-  --color-bg-elevated: 45 40 35;
-  --color-bg-hover: 55 48 40;
-  --color-text-primary: 247 240 233;
-  --color-text-secondary: 200 190 179;
-  --color-text-muted: 165 151 137;
-  --color-accent: 255 147 102;
-  --color-accent-hover: 255 173 140;
-  --color-accent-active: 232 117 73;
-  --color-accent-surface: 53 37 30;
-  --color-border-subtle: 80 71 64;
-  --color-border-interactive: 135 116 103;
+  --color-bg-primary: 0 0 0;
+  --color-bg-secondary: 13 13 16;
+  --color-bg-elevated: 21 21 24;
+  --color-bg-hover: 28 24 36;
+  --color-text-primary: 246 242 255;
+  --color-text-secondary: 188 181 202;
+  --color-text-muted: 162 156 171;
+  --color-accent: 255 157 140;
+  --color-accent-hover: 255 179 166;
+  --color-accent-active: 238 140 124;
+  --color-accent-surface: 36 23 25;
+  --color-border-subtle: 48 48 54;
+  --color-border-interactive: 99 85 113;
+  --color-secondary: 186 161 247;
+  --color-secondary-hover: 206 186 255;
   --color-success: 81 229 168;
 
   --background: rgb(var(--color-bg-primary));
   --background-deep: rgb(var(--color-bg-primary));
-  --surface: rgb(var(--color-bg-secondary) / 0.72);
+  --surface: rgb(var(--color-bg-secondary));
   --surface-strong: rgb(var(--color-bg-elevated));
-  --cyan: rgb(var(--color-accent));
-  --blue: rgb(var(--color-accent-active));
+  --coral: rgb(var(--color-accent));
+  --lilac: rgb(var(--color-secondary));
   --text: rgb(var(--color-text-primary));
   --muted: rgb(var(--color-text-secondary));
   --dim: rgb(var(--color-text-muted));
@@ -48,10 +50,7 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  background:
-    radial-gradient(circle at 12% 12%, rgb(var(--color-accent) / 0.07), transparent 26rem),
-    radial-gradient(circle at 90% 42%, rgb(var(--color-accent-active) / 0.08), transparent 32rem),
-    var(--background);
+  background: var(--background);
   color: var(--text);
   font-family: "Avenir Next", "Segoe UI Variable", "Segoe UI", sans-serif;
   font-synthesis: none;
@@ -69,7 +68,7 @@ body::before {
 }
 
 ::selection {
-  background: var(--cyan);
+  background: var(--coral);
   color: var(--background-deep);
 }
 
@@ -93,7 +92,7 @@ button {
 a:focus-visible,
 button:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid rgb(var(--color-accent-hover));
+  outline: 2px solid var(--lilac);
   outline-offset: 4px;
 }
 
@@ -156,17 +155,17 @@ img {
 }
 
 .button--primary {
-  background: var(--cyan);
-  box-shadow: 0 14px 40px rgb(var(--color-accent) / 0.15);
+  background: var(--coral);
+  box-shadow: 0 14px 40px rgb(var(--color-bg-primary) / 0.35);
   color: var(--background-deep);
 }
 
-.button--primary:active {
+.button--primary:active:not(:disabled, [aria-disabled="true"]) {
   background: rgb(var(--color-accent-active));
 }
 
 .button--secondary {
-  border-color: rgb(var(--color-border-interactive));
+  border-color: var(--lilac);
   background: transparent;
   color: var(--text);
 }
@@ -179,7 +178,8 @@ img {
 .button:disabled,
 .button[aria-disabled="true"] {
   cursor: not-allowed;
-  opacity: 0.55;
+  background: var(--surface-strong);
+  color: var(--dim);
 }
 
 .section-container {
@@ -222,7 +222,7 @@ img {
 
 .section-heading h2 span,
 .contact-copy h2 span {
-  color: var(--cyan);
+  color: var(--coral);
 }
 
 .section-heading--split > p {
@@ -238,7 +238,7 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  color: var(--cyan);
+  color: var(--lilac);
   font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
   font-size: 0.68rem;
   font-weight: 700;
@@ -299,19 +299,22 @@ img {
   aspect-ratio: 1;
   transform: translate3d(-50%, -50%, 0);
   border-radius: 50%;
-  background: radial-gradient(circle, rgb(var(--color-accent) / 0.13), rgb(var(--color-accent) / 0.035) 34%, transparent 68%);
+  background: rgb(var(--color-text-primary) / 0.015);
+  filter: blur(100px);
   transition: transform 180ms var(--ease-out);
   will-change: transform;
 }
 
 .hero-ambient--blue {
-  background: radial-gradient(circle at 82% 36%, rgb(var(--color-accent-active) / 0.12), transparent 34%);
+  background-image:
+    linear-gradient(rgb(var(--color-border-subtle) / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--color-border-subtle) / 0.08) 1px, transparent 1px);
+  background-size: 64px 64px;
 }
 
 .hero-vignette {
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, rgb(var(--color-bg-primary) / 0.12), transparent 48%, rgb(var(--color-bg-primary) / 0.2));
 }
 
 .hero-content {
@@ -324,7 +327,7 @@ img {
 }
 
 .hero-eyebrow {
-  color: var(--cyan);
+  color: var(--lilac);
   font-size: clamp(0.58rem, 0.8vw, 0.68rem);
 }
 
@@ -332,8 +335,8 @@ img {
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 18px var(--cyan);
+  background: var(--lilac);
+  box-shadow: 0 0 18px rgb(var(--color-secondary) / 0.2);
 }
 
 .hero-name {
@@ -356,16 +359,11 @@ img {
 }
 
 .hero-name__line:first-child > span {
-  background: linear-gradient(180deg, var(--text) 20%, var(--muted) 100%);
-  background-clip: text;
-  color: transparent;
+  color: var(--text);
 }
 
 .hero-name__line:last-child > span {
-  background: linear-gradient(105deg, rgb(var(--color-accent-hover)) 10%, var(--cyan) 45%, var(--blue) 96%);
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 24px rgb(var(--color-accent) / 0.12));
+  color: var(--coral);
 }
 
 .hero-intro {
@@ -409,7 +407,7 @@ img {
 .technology-list li {
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgb(var(--color-bg-secondary) / 0.5);
+  background: var(--surface);
   color: var(--muted);
   padding: 0.4rem 0.66rem;
   font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
@@ -421,7 +419,7 @@ img {
 .hero-tech li {
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgb(var(--color-bg-secondary) / 0.72);
+  background: var(--surface);
   color: var(--muted);
   padding: 0.42rem 0.7rem;
   font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
@@ -466,7 +464,7 @@ img {
   border: 1px solid var(--line);
   border-radius: 0.75rem;
   background: rgb(var(--color-bg-secondary) / 0.46);
-  color: var(--muted);
+  color: var(--lilac);
   transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease, transform 160ms var(--ease-out);
 }
 
@@ -478,7 +476,7 @@ img {
   background:
     linear-gradient(rgb(var(--color-border-subtle) / 0.14) 1px, transparent 1px),
     linear-gradient(90deg, rgb(var(--color-border-subtle) / 0.14) 1px, transparent 1px),
-    linear-gradient(145deg, rgb(var(--color-bg-secondary) / 0.92), rgb(var(--color-bg-primary) / 0.84));
+    var(--surface);
   background-size: 30px 30px, 30px 30px, auto;
   box-shadow: inset 0 1px rgb(var(--color-text-primary) / 0.04), 0 34px 90px rgb(var(--color-bg-primary) / 0.4);
   transform-origin: center;
@@ -494,7 +492,7 @@ img {
 
 .architecture-header span,
 .architecture-detail > span {
-  color: var(--cyan);
+  color: var(--lilac);
   font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
   font-size: 0.8125rem;
   font-weight: 700;
@@ -513,8 +511,8 @@ img {
   height: 0.5rem;
   margin-top: 0.25rem;
   border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 18px rgb(var(--color-accent) / 0.72);
+  background: var(--coral);
+  box-shadow: 0 0 18px rgb(var(--color-accent) / 0.18);
 }
 
 .architecture-map {
@@ -537,14 +535,14 @@ img {
 
 .architecture-lines path {
   fill: none;
-  stroke: rgb(var(--color-border-interactive) / 0.45);
+  stroke: rgb(var(--color-secondary) / 0.36);
   stroke-width: 0.32;
   vector-effect: non-scaling-stroke;
   transition: stroke 180ms ease, stroke-width 180ms ease;
 }
 
 .architecture-lines path.is-active {
-  stroke: rgb(var(--color-accent) / 0.82);
+  stroke: rgb(var(--color-secondary) / 0.72);
   stroke-width: 0.62;
 }
 
@@ -558,10 +556,10 @@ img {
   height: 4rem;
   place-items: center;
   transform: translate(-50%, -50%);
-  border: 1px solid rgb(var(--color-accent) / 0.34);
+  border: 1px solid rgb(var(--color-secondary) / 0.34);
   border-radius: 50%;
   background: rgb(var(--color-bg-elevated));
-  box-shadow: 0 0 0 0.65rem rgb(var(--color-accent) / 0.035), 0 0 40px rgb(var(--color-accent) / 0.18);
+  box-shadow: 0 0 0 0.65rem rgb(var(--color-secondary) / 0.035), 0 0 40px rgb(var(--color-secondary) / 0.08);
 }
 
 .architecture-core span {
@@ -576,7 +574,7 @@ img {
 .architecture-core i {
   position: absolute;
   inset: 0.4rem;
-  border: 1px dashed rgb(var(--color-accent) / 0.34);
+  border: 1px dashed rgb(var(--color-secondary) / 0.34);
   border-radius: 50%;
   animation: hero-core-spin 18s linear infinite;
 }
@@ -591,8 +589,8 @@ img {
   gap: 0.85rem;
   border: 1px solid var(--line);
   border-radius: 1rem;
-  background: rgb(var(--color-bg-secondary) / 0.86);
-  color: var(--muted);
+  background: var(--surface-strong);
+  color: var(--text);
   padding: 0.85rem;
   text-align: left;
   transition: transform 180ms var(--ease-out), border-color 180ms ease, background-color 180ms ease, color 180ms ease;
@@ -603,7 +601,7 @@ img {
 }
 
 .architecture-node.is-active {
-  border-color: rgb(var(--color-accent) / 0.52);
+  border-color: var(--coral);
   background: rgb(var(--color-accent-surface) / 0.94);
   color: var(--text);
 }
@@ -614,10 +612,16 @@ img {
   height: 2.45rem;
   flex: 0 0 auto;
   place-items: center;
-  border: 1px solid rgb(var(--color-accent) / 0.25);
+  border: 1px solid rgb(var(--color-secondary) / 0.25);
   border-radius: 0.75rem;
-  background: rgb(var(--color-accent) / 0.05);
-  color: var(--cyan);
+  background: rgb(var(--color-secondary) / 0.05);
+  color: var(--lilac);
+}
+
+.architecture-node.is-active .architecture-node__icon {
+  color: var(--coral);
+  border-color: rgb(var(--color-accent) / 0.35);
+  background: rgb(var(--color-accent) / 0.08);
 }
 
 .architecture-node strong,
@@ -637,7 +641,7 @@ img {
 
 .architecture-node small {
   margin-top: 0.25rem;
-  color: var(--dim);
+  color: var(--muted);
   font-family: "Cascadia Code", monospace;
   font-size: 0.75rem;
   overflow-wrap: anywhere;
@@ -646,7 +650,7 @@ img {
 .architecture-detail {
   min-height: 5.3rem;
   border-top: 1px solid var(--line);
-  background: rgb(var(--color-bg-primary) / 0.7);
+  background: var(--surface);
   padding: 0.9rem 1.25rem 1rem;
 }
 
@@ -662,7 +666,7 @@ img {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
-  color: var(--cyan);
+  color: var(--coral);
   font-size: 0.875rem;
   text-decoration: underline;
   text-underline-offset: 0.2em;
@@ -699,7 +703,7 @@ img {
   height: 100%;
   transform: scaleY(0);
   transform-origin: top;
-  background: linear-gradient(var(--cyan), var(--blue));
+  background: linear-gradient(var(--coral), var(--lilac));
 }
 
 .hero-scroll-invitation {
@@ -720,7 +724,7 @@ img {
 }
 
 .hero-scroll-invitation svg {
-  color: var(--cyan);
+  color: var(--coral);
   animation: hero-scroll-cue 2.4s var(--ease-in-out) 2s infinite;
 }
 
@@ -755,17 +759,11 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  color: var(--cyan);
+  color: var(--coral);
   min-height: 44px;
   font-size: 0.8125rem;
   font-weight: 800;
   white-space: nowrap;
-}
-
-.section--about,
-.section--skills,
-.section--certifications {
-  background: linear-gradient(180deg, transparent, rgb(var(--color-bg-secondary) / 0.38), transparent);
 }
 
 .about-layout {
@@ -788,7 +786,7 @@ img {
 
 .about-discipline > svg {
   margin-top: 0.2rem;
-  color: var(--cyan);
+  color: var(--coral);
   font-size: 1.2rem;
 }
 
@@ -819,7 +817,7 @@ img {
 .contact-panel {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: linear-gradient(150deg, rgb(var(--color-bg-elevated) / 0.72), rgb(var(--color-bg-secondary) / 0.82));
+  background: var(--surface);
   box-shadow: inset 0 1px rgb(var(--color-text-primary) / 0.04);
   padding: clamp(1.4rem, 4vw, 2rem);
 }
@@ -870,12 +868,12 @@ img {
   height: 0.5rem;
   border: 2px solid var(--background);
   border-radius: 50%;
-  background: var(--cyan);
+  background: var(--coral);
   box-shadow: 0 0 0 3px rgb(var(--color-accent) / 0.14);
 }
 
 .education-panel time {
-  color: var(--cyan);
+  color: var(--dim);
   font-family: "Cascadia Code", monospace;
   font-size: 0.8125rem;
 }
@@ -901,7 +899,7 @@ img {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: linear-gradient(145deg, rgb(var(--color-bg-elevated) / 0.96), rgb(var(--color-bg-secondary) / 0.98));
+  background: var(--surface);
   box-shadow: 0 30px 80px rgb(var(--color-bg-primary) / 0.36);
 }
 
@@ -943,7 +941,7 @@ img {
 
 .feature-list li::before {
   margin-right: 0.65rem;
-  color: var(--cyan);
+  color: var(--coral);
   content: "↗";
 }
 
@@ -964,7 +962,7 @@ img {
 .project-actions a.project-actions__secondary {
   border-color: var(--line);
   background: rgb(var(--color-bg-elevated) / 0.55);
-  color: var(--muted);
+  color: var(--coral);
 }
 
 .featured-project__visual {
@@ -981,18 +979,15 @@ img {
   place-items: center;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background:
-    linear-gradient(rgb(var(--color-accent) / 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--color-accent) / 0.04) 1px, transparent 1px),
-    radial-gradient(circle, rgb(var(--color-accent) / 0.16), transparent 55%);
-  background-size: 28px 28px, 28px 28px, auto;
+  background: linear-gradient(rgb(var(--color-border-subtle) / 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--color-border-subtle) / 0.22) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
 .project-blueprint > svg {
   z-index: 2;
-  color: var(--cyan);
+  color: var(--lilac);
   font-size: clamp(3.5rem, 7vw, 6.5rem);
-  filter: drop-shadow(0 0 28px rgb(var(--color-accent) / 0.35));
 }
 
 .project-blueprint__label,
@@ -1013,7 +1008,7 @@ img {
 .project-blueprint__status {
   right: 1rem;
   bottom: 1rem;
-  color: var(--cyan);
+  color: var(--coral);
 }
 
 .project-blueprint__status::before {
@@ -1022,8 +1017,8 @@ img {
   height: 0.4rem;
   margin-right: 0.4rem;
   border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 10px var(--cyan);
+  background: var(--coral);
+  box-shadow: 0 0 10px rgb(var(--color-accent) / 0.2);
   content: "";
 }
 
@@ -1031,7 +1026,7 @@ img {
   position: absolute;
   width: 54%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgb(var(--color-accent) / 0.55), transparent);
+  background: linear-gradient(90deg, transparent, rgb(var(--color-secondary) / 0.55), transparent);
 }
 
 .project-blueprint__line--one {
@@ -1046,7 +1041,7 @@ img {
   position: absolute;
   width: 0.55rem;
   height: 0.55rem;
-  border: 1px solid var(--cyan);
+  border: 1px solid var(--coral);
   border-radius: 50%;
   background: var(--background);
 }
@@ -1081,7 +1076,7 @@ img {
   flex-direction: column;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background: rgb(var(--color-bg-secondary) / 0.68);
+  background: var(--surface);
   padding: 1.4rem;
 }
 
@@ -1099,10 +1094,10 @@ img {
   width: 2.5rem;
   height: 2.5rem;
   place-items: center;
-  border: 1px solid rgb(var(--color-accent) / 0.2);
+  border: 1px solid rgb(var(--color-secondary) / 0.2);
   border-radius: 0.75rem;
-  background: rgb(var(--color-accent) / 0.06);
-  color: var(--cyan);
+  background: rgb(var(--color-secondary) / 0.06);
+  color: var(--lilac);
   font-size: 1.05rem;
 }
 
@@ -1125,7 +1120,7 @@ img {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: rgb(var(--color-bg-secondary) / 0.72);
+  background: var(--surface);
 }
 
 .skill-tabs {
@@ -1157,9 +1152,9 @@ img {
 }
 
 .skill-tabs button[aria-pressed="true"] {
-  border-left: 2px solid var(--cyan);
+  border-left: 2px solid var(--coral);
   background: rgb(var(--color-accent-surface));
-  color: var(--text);
+  color: var(--coral);
 }
 
 .skill-network {
@@ -1167,8 +1162,8 @@ img {
   min-height: 430px;
   padding: clamp(1.25rem, 4vw, 2.5rem);
   background:
-    linear-gradient(rgb(var(--color-accent) / 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--color-accent) / 0.03) 1px, transparent 1px);
+    linear-gradient(rgb(var(--color-border-subtle) / 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--color-border-subtle) / 0.18) 1px, transparent 1px);
   background-size: 36px 36px;
 }
 
@@ -1204,7 +1199,7 @@ img {
   gap: 0.85rem;
   border: 1px solid var(--line);
   border-radius: 1rem;
-  background: rgb(var(--color-bg-elevated) / 0.72);
+  background: var(--surface-strong);
   padding: 0.85rem;
 }
 
@@ -1215,8 +1210,8 @@ img {
   flex: 0 0 auto;
   place-items: center;
   border-radius: 0.8rem;
-  background: rgb(var(--color-accent) / 0.08);
-  color: var(--cyan);
+  background: rgb(var(--color-secondary) / 0.08);
+  color: var(--lilac);
   font-size: 1.25rem;
 }
 
@@ -1246,7 +1241,7 @@ img {
   left: 1.05rem;
   width: 1px;
   transform-origin: top;
-  background: linear-gradient(var(--cyan), rgb(var(--color-accent) / 0.08));
+  background: var(--line);
 }
 
 .experience-entry {
@@ -1273,7 +1268,7 @@ img {
   border: 1px solid rgb(var(--color-accent) / 0.32);
   border-radius: 50%;
   background: var(--background);
-  color: var(--cyan);
+  color: var(--coral);
   font-family: "Cascadia Code", monospace;
   font-size: 0.6rem;
 }
@@ -1290,7 +1285,7 @@ img {
 
 .experience-entry__content > p {
   margin: 0;
-  color: var(--cyan);
+  color: var(--coral);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -1322,7 +1317,7 @@ img {
 .experience-entry li svg {
   flex: 0 0 auto;
   margin-top: 0.3rem;
-  color: var(--cyan);
+  color: var(--coral);
 }
 
 .certification-grid {
@@ -1334,7 +1329,7 @@ img {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background: rgb(var(--color-bg-secondary) / 0.72);
+  background: var(--surface);
 }
 
 .certification-card__image {
@@ -1363,7 +1358,7 @@ img {
 
 .certification-card__body > p {
   margin: 1rem 0 0.35rem;
-  color: var(--cyan);
+  color: var(--coral);
   font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1374,6 +1369,10 @@ img {
   margin: 0;
   font-size: 1.15rem;
   line-height: 1.3;
+}
+
+.certification-card__actions button {
+  color: var(--lilac);
 }
 
 .certification-card__actions {
@@ -1395,6 +1394,8 @@ img {
 
 .certificate-dialog__content {
   position: relative;
+  background: var(--surface);
+  border-radius: var(--radius-md);
   width: min(100%, 1000px);
   max-height: 90svh;
 }
@@ -1410,8 +1411,8 @@ img {
   place-items: center;
   border: 1px solid rgb(var(--color-border-interactive));
   border-radius: 50%;
-  background: rgb(var(--color-bg-elevated) / 0.8);
-  color: var(--text);
+  background: var(--surface);
+  color: var(--lilac);
 }
 
 .certificate-dialog img {
@@ -1425,7 +1426,7 @@ img {
 .section--contact {
   min-height: 90svh;
   overflow: hidden;
-  background: linear-gradient(180deg, transparent, rgb(var(--color-bg-secondary) / 0.72));
+  background: var(--background);
 }
 
 .contact-aura {
@@ -1435,7 +1436,7 @@ img {
   width: 42rem;
   height: 42rem;
   border-radius: 50%;
-  background: rgb(var(--color-accent) / 0.1);
+  background: transparent;
   filter: blur(100px);
   pointer-events: none;
 }
@@ -1495,11 +1496,11 @@ img {
 }
 
 .contact-panel li > svg {
-  color: var(--cyan);
+  color: var(--coral);
 }
 
 .contact-panel li > span {
-  color: var(--dim);
+  color: var(--muted);
   font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1529,6 +1530,10 @@ img {
   padding: 0.65rem 0.8rem;
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.contact-socials a svg {
+  color: var(--lilac);
 }
 
 .contact-email {
@@ -1633,15 +1638,20 @@ footer {
     transform: translateY(-2px);
   }
 
-  .button--secondary:hover,
+  .button--secondary:hover:not(:disabled, [aria-disabled="true"]),
   .hero-socials a:hover,
   .contact-socials a:hover {
-    border-color: var(--cyan);
+    border-color: rgb(var(--color-secondary-hover));
     background: rgb(var(--color-bg-hover));
     color: var(--text);
   }
 
-  .button--primary:hover:not(:active) {
+  .hero-socials a:hover,
+  .contact-socials a:hover svg {
+    color: var(--coral);
+  }
+
+  .button--primary:hover:not(:active, :disabled, [aria-disabled="true"]) {
     background: rgb(var(--color-accent-hover));
   }
 
@@ -1657,7 +1667,7 @@ footer {
   .project-card:hover,
   .skill-node:hover,
   .certification-card:hover {
-    border-color: rgb(var(--color-border-interactive));
+    border-color: rgb(var(--color-secondary) / 0.45);
   }
 
 }

@@ -43,14 +43,14 @@ const CustomCursor = () => {
                     className="h-16 w-16 rounded-full border-2"
                     animate={{
                         scale: isHovering ? 1 : 0.5,
-                        backgroundColor: isHovering ? "rgb(var(--color-accent) / 0.2)" : "rgb(var(--color-accent) / 0.1)",
-                        borderColor: isHovering ? "rgb(var(--color-accent) / 0.8)" : "rgb(var(--color-accent) / 0.5)"
+                        backgroundColor: isHovering ? "rgb(var(--color-secondary) / 0.2)" : "rgb(var(--color-secondary) / 0.1)",
+                        borderColor: isHovering ? "rgb(var(--color-secondary) / 0.8)" : "rgb(var(--color-secondary) / 0.5)"
                     }}
                     transition={spring}
                     style={{ mixBlendMode: "screen" }}
                 />
             </div>
-            <div className="absolute left-0 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-tangerine" />
+            <div className="absolute left-0 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-lilac" />
         </motion.div>
     );
 };
