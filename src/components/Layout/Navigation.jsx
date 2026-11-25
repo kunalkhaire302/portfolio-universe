@@ -8,7 +8,7 @@ const navLinks = [
     { name: 'Projects', to: 'projects' },
     { name: 'Skills', to: 'skills' },
     { name: 'Experience', to: 'experience' },
-    { name: 'Achievements', to: 'certifications' },
+    { name: 'Certifications', to: 'certifications' },
     { name: 'Contact', to: 'contact' },
     { name: 'Resume', isDownload: true, href: '/Kunal_Khaire_Resume.pdf', downloadName: 'Kunal_Khaire_Resume.pdf' },
 ];
@@ -198,7 +198,7 @@ const Navigation = () => {
                                     href={process.env.PUBLIC_URL + link.href}
                                     onClick={(e) => handleDownload(e, link.href, link.downloadName)}
                                     download={link.downloadName}
-                                    className="relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-[color,transform] duration-150 ease-[var(--ease-out)] rounded-full whitespace-nowrap text-taupe hover:text-ivory active:scale-[0.97] motion-reduce:transform-none"
+                                    className="relative px-2 py-2 text-[13px] font-bold transition-[color,transform] duration-150 ease-[var(--ease-out)] rounded-full whitespace-nowrap text-taupe hover:text-ivory active:scale-[0.97] motion-reduce:transform-none"
                                 >
                                     <span className="relative z-10">{link.name}</span>
                                 </a>
@@ -206,7 +206,8 @@ const Navigation = () => {
                                 <button
                                     key={link.name}
                                     onClick={() => scrollToSection(link.to)}
-                                    className={`relative px-1.5 lg:px-2 xl:px-3 py-2 text-[9px] xl:text-[10px] font-black uppercase tracking-[0.05em] xl:tracking-[0.1em] transition-[color,transform] duration-150 ease-[var(--ease-out)] rounded-full whitespace-nowrap active:scale-[0.97] motion-reduce:transform-none ${
+                                    aria-current={activeSection === link.to ? 'location' : undefined}
+                                    className={`relative px-2 py-2 text-[13px] font-bold transition-[color,transform] duration-150 ease-[var(--ease-out)] rounded-full whitespace-nowrap active:scale-[0.97] motion-reduce:transform-none ${
                                         activeSection === link.to 
                                         ? 'text-tangerine text-glow'
                                         : 'text-taupe hover:text-ivory'
@@ -245,7 +246,7 @@ const Navigation = () => {
                             aria-expanded={isOpen}
                             aria-controls="mobile-navigation"
                             aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
-                            className="xl:hidden p-2.5 text-lg text-tangerine bg-espresso-elevated rounded-full border border-border-interactive hover:bg-espresso-hover transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none z-[110]"
+                            className="grid h-11 w-11 place-items-center text-lg text-tangerine bg-espresso-elevated rounded-full border border-border-interactive hover:bg-espresso-hover transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none z-[110] xl:hidden"
                         >
                             {isOpen ? <FaTimes /> : <FaBars />}
                         </button>
@@ -265,16 +266,18 @@ const Navigation = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-                        className="fixed inset-0 z-[120] flex flex-col items-center overflow-y-auto bg-espresso/95 px-4 pb-[calc(2rem_+_env(safe-area-inset-bottom))] pt-[calc(5.5rem_+_env(safe-area-inset-top))] backdrop-blur-2xl xl:hidden"
+                        className="fixed inset-0 z-[120] flex flex-col bg-espresso/95 backdrop-blur-2xl xl:hidden"
                     >
+                        <div className="relative z-20 flex shrink-0 justify-end px-4 pb-2 pt-[calc(0.75rem_+_env(safe-area-inset-top))]">
                         <button
                             type="button"
                             onClick={() => setIsOpen(false)}
                             aria-label="Close navigation menu"
-                            className="pressable absolute right-4 top-[calc(1rem+env(safe-area-inset-top,0px))] z-20 rounded-full border border-border-interactive bg-espresso-elevated p-2.5 text-lg text-tangerine transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-espresso-hover motion-reduce:transform-none"
+                            className="pressable inline-flex min-h-11 items-center gap-2 rounded-full border border-border-interactive bg-espresso-elevated px-4 text-sm text-tangerine transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-espresso-hover motion-reduce:transform-none"
                         >
-                            <FaTimes />
+                            <FaTimes aria-hidden="true" /> Close
                         </button>
+                        </div>
 
                         {/* Background Stars Decoration */}
                         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
@@ -293,7 +296,8 @@ const Navigation = () => {
                             ))}
                         </div>
 
-                        <nav id="mobile-navigation" aria-label="Mobile navigation links" className="relative z-10 my-auto flex w-full flex-col items-center px-4 sm:px-10">
+                        <nav id="mobile-navigation" aria-label="Mobile navigation links" className="relative z-10 min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 pb-[calc(1rem_+_env(safe-area-inset-bottom))]">
+                            <div className="mx-auto flex max-w-xs flex-col">
                             {navLinks.map((link) => (
                                 link.isDownload ? (
                                     <a
@@ -311,6 +315,7 @@ const Navigation = () => {
                                 ) : (
                                     <button
                                         key={link.name}
+                                        aria-current={activeSection === link.to ? 'location' : undefined}
                                         onClick={() => scrollToSection(link.to)}
                                         className="group flex min-h-11 w-full max-w-xs items-center justify-between border-b border-border-subtle py-2.5 transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transform-none sm:py-4"
                                     >
@@ -325,6 +330,7 @@ const Navigation = () => {
                                     </button>
                                 )
                             ))}
+                            </div>
                         </nav>
                     </motion.div>
                 )}

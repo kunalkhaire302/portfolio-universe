@@ -8,7 +8,7 @@ const ExperienceSection = () => (
     <SectionContainer id="experience" className="section--experience">
         <div className="section-heading section-heading--split">
             <div>
-                <h2>A journey of <span>building and learning.</span></h2>
+                <h2>Experience</h2>
             </div>
             <p>Professional roles and technical experiences that shaped how I approach products, teams, and engineering problems.</p>
         </div>

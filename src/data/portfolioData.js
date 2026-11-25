@@ -18,7 +18,7 @@ const portfolioData = {
         github: "https://github.com/kunalkhaire302",
     },
 
-    objective: "Web Developer and Information Technology undergraduate with hands-on experience building secure, responsive web applications through GitHub projects. Skilled in HTML, CSS, JavaScript, React.js, Node.js, and Python, with a focus on clean code and scalable solutions.",
+    objective: "I’m pursuing a B.Tech in Information Technology, with expected graduation in 2027. I focus on building secure, responsive web apps and integrating AI where it helps users.",
 
     education: [
         {
@@ -41,29 +41,29 @@ const portfolioData = {
         "Frontend": [
             { name: "React.js", icon: "FaReact" },
             { name: "Next.js", icon: "SiNextdotjs" },
-            { name: "TypeScript", icon: "FaCode" },
+            { name: "TypeScript", icon: "SiTypescript" },
             { name: "JavaScript (ES6+)", icon: "FaJs" },
             { name: "HTML5", icon: "FaHtml5" },
             { name: "CSS3", icon: "FaCss3Alt" },
-            { name: "Tailwind CSS", icon: "FaCss3Alt" },
+            { name: "Tailwind CSS", icon: "SiTailwindcss" },
         ],
         "Backend": [
             { name: "Node.js", icon: "FaNode" },
-            { name: "Express.js", icon: "FaNode" },
+            { name: "Express.js", icon: "SiExpress" },
             { name: "REST APIs", icon: "FaCode" },
-            { name: "Socket.io", icon: "FaCode" },
-            { name: "Prisma", icon: "FaDatabase" },
+            { name: "Socket.io", icon: "SiSocketdotio" },
+            { name: "Prisma", icon: "SiPrisma" },
             { name: "FastAPI", icon: "SiFastapi" },
             { name: "ASP.NET Core", icon: "SiDotnet" },
         ],
         "Databases": [
             { name: "PostgreSQL", icon: "SiPostgresql" },
-            { name: "MongoDB", icon: "FaDatabase" },
-            { name: "Redis", icon: "FaDatabase" },
+            { name: "MongoDB", icon: "SiMongodb" },
+            { name: "Redis", icon: "SiRedis" },
         ],
         "Languages": [
             { name: "JavaScript", icon: "FaJs" },
-            { name: "TypeScript", icon: "FaCode" },
+            { name: "TypeScript", icon: "SiTypescript" },
             { name: "Python", icon: "FaPython" },
             { name: "C#", icon: "SiDotnet" },
             { name: "SQL", icon: "FaDatabase" },
@@ -76,12 +76,12 @@ const portfolioData = {
         "Tools & Cloud": [
             { name: "Git", icon: "FaGitAlt" },
             { name: "GitHub", icon: "FaGithub" },
-            { name: "Postman", icon: "FaCode" },
-            { name: "Firebase", icon: "FaDatabase" },
+            { name: "Postman", icon: "SiPostman" },
+            { name: "Firebase", icon: "SiFirebase" },
             { name: "BullMQ", icon: "FaCode" },
-            { name: "Vercel", icon: "FaCode" },
-            { name: "Render", icon: "FaAws" },
-            { name: "MongoDB Atlas", icon: "FaDatabase" },
+            { name: "Vercel", icon: "SiVercel" },
+            { name: "Render", icon: "SiRender" },
+            { name: "MongoDB Atlas", icon: "SiMongodb" },
         ],
         "Concepts": [
             { name: "RBAC", icon: "FaCode" },

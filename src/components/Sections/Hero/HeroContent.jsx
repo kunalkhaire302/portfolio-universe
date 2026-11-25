@@ -15,7 +15,6 @@ const HeroContent = ({ personalInfo, reducedMotion, scrollStyles = {} }) => {
     const socialLinks = [
         { icon: FaGithub, href: personalInfo.github, label: 'GitHub' },
         { icon: FaLinkedin, href: personalInfo.linkedin, label: 'LinkedIn' },
-        { icon: FaEnvelope, href: `mailto:${personalInfo.email}`, label: 'Email' },
     ];
     const animation = (delay, distance, duration) => reducedMotion ? { initial: false } : entrance(delay, distance, duration);
     const badgeDelays = [0, 0.08, 0.14, 0.19, 0.23, 0.26];
@@ -50,13 +49,13 @@ const HeroContent = ({ personalInfo, reducedMotion, scrollStyles = {} }) => {
             <motion.div style={scrollStyles.actions}>
                 <motion.div {...animation(1, 6, 0.4)} className="hero-actions">
                     <a href="#projects" className="button button--primary">
-                        Explore my work <FaArrowRight aria-hidden="true" />
+                        View Projects <FaArrowRight aria-hidden="true" />
                     </a>
                     <a href={`${process.env.PUBLIC_URL}/Kunal_Khaire_Resume.pdf`} download="Kunal_Khaire_Resume.pdf" className="button button--secondary">
                         Download résumé <FaDownload aria-hidden="true" />
                     </a>
-                    <a href="#contact" className="button button--quiet">
-                        Get in touch <FaEnvelope aria-hidden="true" />
+                    <a href={`mailto:${personalInfo.email}`} className="button button--quiet">
+                        Email Me <FaEnvelope aria-hidden="true" />
                     </a>
                 </motion.div>
             </motion.div>
@@ -68,8 +67,8 @@ const HeroContent = ({ personalInfo, reducedMotion, scrollStyles = {} }) => {
                         <a
                             key={label}
                             href={href}
-                            target={label === 'Email' ? undefined : '_blank'}
-                            rel={label === 'Email' ? undefined : 'noopener noreferrer'}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             aria-label={label}
                         >
                             <Icon aria-hidden="true" />

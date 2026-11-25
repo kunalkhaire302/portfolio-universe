@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import {
-    FaAws, FaBrain, FaCode, FaCss3Alt, FaDatabase, FaGitAlt,
+    FaBrain, FaCode, FaCss3Alt, FaDatabase, FaGitAlt,
     FaGithub, FaHtml5, FaJs, FaNode, FaPython, FaReact,
 } from 'react-icons/fa';
 import {
     SiDotnet, SiFastapi, SiNextdotjs, SiPostgresql, SiTensorflow,
+    SiExpress, SiFirebase, SiMongodb, SiPostman, SiPrisma, SiRedis,
+    SiRender, SiSocketdotio, SiTailwindcss, SiTypescript, SiVercel,
 } from 'react-icons/si';
 import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
 
 const icons = {
-    FaAws, FaBrain, FaCode, FaCss3Alt, FaDatabase, FaGitAlt,
+    FaBrain, FaCode, FaCss3Alt, FaDatabase, FaGitAlt,
     FaGithub, FaHtml5, FaJs, FaNode, FaPython, FaReact,
     SiDotnet, SiFastapi, SiNextdotjs, SiPostgresql, SiTensorflow,
+    SiExpress, SiFirebase, SiMongodb, SiPostman, SiPrisma, SiRedis,
+    SiRender, SiSocketdotio, SiTailwindcss, SiTypescript, SiVercel,
 };
 
 const SkillIcon = ({ name }) => {
@@ -65,10 +69,7 @@ const SkillsSection = () => {
                         {activeSkills.map((skill, index) => (
                             <article key={skill.name} className="skill-node" style={{ '--skill-index': index }}>
                                 <span className="skill-node__icon"><SkillIcon name={skill.icon} /></span>
-                                <div>
-                                    <h3>{skill.name}</h3>
-                                    <p>{activeCategory}</p>
-                                </div>
+                                <h3>{skill.name}</h3>
                             </article>
                         ))}
                     </div>

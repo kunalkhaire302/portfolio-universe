@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FaArrowUpRightFromSquare, FaXmark } from 'react-icons/fa6';
 import SectionContainer from '../Layout/SectionContainer';
@@ -13,7 +14,10 @@ const CertificationSection = () => {
         if (!selectedCertificate) return undefined;
 
         const previousOverflow = document.body.style.overflow;
+        const page = document.getElementById('root');
+        const wasInert = page?.hasAttribute('inert');
         document.body.style.overflow = 'hidden';
+        page?.setAttribute('inert', '');
         closeButtonRef.current?.focus();
 
         const closeOnEscape = (event) => {
@@ -28,6 +32,7 @@ const CertificationSection = () => {
         return () => {
             document.removeEventListener('keydown', closeOnEscape);
             document.body.style.overflow = previousOverflow;
+            if (!wasInert) page?.removeAttribute('inert');
             openerRef.current?.focus();
         };
     }, [selectedCertificate]);
@@ -36,7 +41,7 @@ const CertificationSection = () => {
         <SectionContainer id="certifications" className="section--certifications">
             <div className="section-heading section-heading--split">
                 <div>
-                    <h2>Learning made <span>visible.</span></h2>
+                    <h2>Certifications</h2>
                 </div>
                 <p>Selected certifications and practical simulations that extend my engineering, cloud, and applied-AI foundation.</p>
             </div>
@@ -61,7 +66,6 @@ const CertificationSection = () => {
                             className="certification-card__image"
                         >
                             <img src={certificate.image} alt="" loading="lazy" />
-                            <span>Preview credential</span>
                         </button>
                         <div className="certification-card__body">
                             <div className="certification-card__meta">
@@ -91,7 +95,7 @@ const CertificationSection = () => {
                 ))}
             </div>
 
-            <AnimatePresence>
+            {createPortal(<AnimatePresence>
                 {selectedCertificate && (
                     <motion.div
                         role="dialog"
@@ -119,7 +123,7 @@ const CertificationSection = () => {
                         </motion.div>
                     </motion.div>
                 )}
-            </AnimatePresence>
+            </AnimatePresence>, document.body)}
         </SectionContainer>
     );
 };

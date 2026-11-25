@@ -7,4 +7,5 @@ test('updates architecture details for keyboard focus', () => {
     fireEvent.focus(screen.getByRole('button', { name: /explore ai \/ ml architecture layer/i }));
 
     expect(screen.getByText(/prediction workflows/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /view related project: carbon footprint ai/i })).toHaveAttribute('href', '#project-10');
 });

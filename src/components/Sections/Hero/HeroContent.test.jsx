@@ -14,10 +14,9 @@ test('preserves the hero actions and social destinations', () => {
     render(<HeroContent personalInfo={personalInfo} reducedMotion />);
 
     expect(screen.getByRole('heading', { level: 1, name: 'Kunal Khaire' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /explore my work/i })).toHaveAttribute('href', '#projects');
+    expect(screen.getByRole('link', { name: /view projects/i })).toHaveAttribute('href', '#projects');
     expect(screen.getByRole('link', { name: /download résumé/i })).toHaveAttribute('href', '/Kunal_Khaire_Resume.pdf');
-    expect(screen.getByRole('link', { name: /get in touch/i })).toHaveAttribute('href', '#contact');
+    expect(screen.getByRole('link', { name: 'Email Me' })).toHaveAttribute('href', `mailto:${personalInfo.email}`);
     expect(screen.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', personalInfo.github);
     expect(screen.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', personalInfo.linkedin);
-    expect(screen.getByRole('link', { name: 'Email' })).toHaveAttribute('href', `mailto:${personalInfo.email}`);
 });

@@ -32,7 +32,7 @@ const FeaturedProject = ({ project, index }) => {
     const Icon = iconMap[project.icon] || FaRocket;
 
     return (
-        <article className="featured-project" style={{ '--stack-index': index }}>
+        <article id={`project-${project.id}`} className="featured-project" style={{ '--stack-index': index }}>
             <div className="featured-project__content">
                 <div className="featured-project__meta">
                     <span>Featured build / 0{index + 1}</span>
@@ -46,7 +46,7 @@ const FeaturedProject = ({ project, index }) => {
                     {project.features.slice(0, 4).map((feature) => <li key={feature}>{feature}</li>)}
                 </ul>
                 <ul className="technology-list" aria-label={`${project.title} technologies`}>
-                    {project.technologies.slice(0, 7).map((technology) => <li key={technology}>{technology}</li>)}
+                    {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
                 </ul>
                 <ProjectActions project={project} />
             </div>
@@ -67,7 +67,7 @@ const FeaturedProject = ({ project, index }) => {
     );
 };
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, index }) => {
     const Icon = iconMap[project.icon] || FaRocket;
 
     return (
@@ -77,15 +77,16 @@ const ProjectCard = ({ project }) => {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
             className="project-card"
+            id={`project-${project.id}`}
         >
             <div className="project-card__topline">
                 <span><Icon aria-hidden="true" /></span>
-                <span>{String(project.id).padStart(2, '0')}</span>
+                <span>{String(index + 1).padStart(2, '0')}</span>
             </div>
             <h3>{project.title}</h3>
             <p>{project.description}</p>
             <ul className="technology-list" aria-label={`${project.title} technologies`}>
-                {project.technologies.slice(0, 4).map((technology) => <li key={technology}>{technology}</li>)}
+                {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
             </ul>
             <ProjectActions project={project} />
         </motion.article>
@@ -114,7 +115,7 @@ const ProjectsSection = () => {
                 <span>{otherProjects.length} additional builds</span>
             </div>
             <div className="project-grid">
-                {otherProjects.map((project) => <ProjectCard key={project.id} project={project} />)}
+                {otherProjects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} />)}
             </div>
         </SectionContainer>
     );

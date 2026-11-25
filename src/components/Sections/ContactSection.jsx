@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 import SectionContainer from '../Layout/SectionContainer';
 import portfolioData from '../../data/portfolioData';
 
 const ContactSection = () => {
     const { personalInfo } = portfolioData;
+    const [copyStatus, setCopyStatus] = useState('');
+
+    const copyEmail = async () => {
+        try {
+            await navigator.clipboard.writeText(personalInfo.email);
+            setCopyStatus('Email copied.');
+        } catch {
+            setCopyStatus('Could not copy automatically. Select the email address to copy it.');
+        }
+    };
 
     return (
         <SectionContainer id="contact" className="section--contact">
@@ -14,7 +24,7 @@ const ContactSection = () => {
                     <h2>Let&apos;s build something <span>meaningful.</span></h2>
                     <p>I&apos;m open to thoughtful conversations about software engineering, intelligent applications, product ideas, and collaborative technical work.</p>
                     <a href={`mailto:${personalInfo.email}`} className="button button--primary contact-cta">
-                        Start a conversation <FaArrowRight aria-hidden="true" />
+                        Email Me <FaArrowRight aria-hidden="true" />
                     </a>
                 </div>
 
@@ -27,7 +37,10 @@ const ContactSection = () => {
                         <li>
                             <FaEnvelope aria-hidden="true" />
                             <span>Email</span>
-                            <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+                            <div className="contact-email">
+                                <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+                                <button type="button" className="button button--secondary" onClick={copyEmail}>Copy Email</button>
+                            </div>
                         </li>
                         <li>
                             <FaPhone aria-hidden="true" />
@@ -40,6 +53,7 @@ const ContactSection = () => {
                             <strong>{personalInfo.location}</strong>
                         </li>
                     </ul>
+                    <p className="contact-copy-status" role="status">{copyStatus}</p>
                     <div className="contact-socials">
                         <a href={personalInfo.github} target="_blank" rel="noopener noreferrer"><FaGithub aria-hidden="true" /> GitHub</a>
                         <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer"><FaLinkedin aria-hidden="true" /> LinkedIn</a>

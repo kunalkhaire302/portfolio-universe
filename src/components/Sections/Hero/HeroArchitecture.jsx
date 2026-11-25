@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaBrain, FaCode, FaDatabase, FaServer } from 'react-icons/fa';
+import portfolioData from '../../../data/portfolioData';
 
 const easeOut = [0.23, 1, 0.32, 1];
 const nodes = [
     {
         id: 'frontend',
+        projectId: 99,
         label: 'Frontend',
         stack: 'React / Next.js',
         detail: 'Accessible interfaces, interaction systems, and responsive product experiences.',
@@ -15,6 +17,7 @@ const nodes = [
     },
     {
         id: 'backend',
+        projectId: 13,
         label: 'Backend',
         stack: 'Node.js / APIs',
         detail: 'Scalable services, secure application logic, and reliable API contracts.',
@@ -24,6 +27,7 @@ const nodes = [
     },
     {
         id: 'ai',
+        projectId: 10,
         label: 'AI / ML',
         stack: 'Python / Models',
         detail: 'Applied intelligence, prediction workflows, and data-informed automation.',
@@ -33,6 +37,7 @@ const nodes = [
     },
     {
         id: 'data',
+        projectId: 12,
         label: 'Cloud & Database',
         stack: 'PostgreSQL / Cloud',
         detail: 'Durable data models, deployment systems, and production infrastructure.',
@@ -45,6 +50,7 @@ const nodes = [
 const HeroArchitecture = ({ reducedMotion, scrollStyle }) => {
     const [activeId, setActiveId] = useState(nodes[0].id);
     const activeNode = nodes.find((node) => node.id === activeId) || nodes[0];
+    const relatedProject = portfolioData.projects.find(({ id }) => id === activeNode.projectId);
 
     return (
         <motion.aside className="hero-architecture" aria-labelledby="architecture-title" style={scrollStyle}>
@@ -56,7 +62,7 @@ const HeroArchitecture = ({ reducedMotion, scrollStyle }) => {
                 <i aria-hidden="true" />
             </header>
 
-            <div className="architecture-map" onMouseLeave={() => setActiveId(nodes[0].id)}>
+            <div className="architecture-map">
                 <svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" className="architecture-lines">
                     {nodes.map((node, index) => (
                         <motion.path
@@ -111,6 +117,9 @@ const HeroArchitecture = ({ reducedMotion, scrollStyle }) => {
             <div id="architecture-detail" className="architecture-detail" aria-live="polite">
                 <span>{activeNode.label}</span>
                 <p>{activeNode.detail}</p>
+                {relatedProject && (
+                    <a href={`#project-${relatedProject.id}`}>View related project: {relatedProject.title}</a>
+                )}
             </div>
         </motion.aside>
     );

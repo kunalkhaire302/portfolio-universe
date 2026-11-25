@@ -413,7 +413,8 @@ img {
   color: var(--muted);
   padding: 0.4rem 0.66rem;
   font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
-  font-size: 0.63rem;
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
   letter-spacing: 0.04em;
 }
 
@@ -424,7 +425,7 @@ img {
   color: var(--muted);
   padding: 0.42rem 0.7rem;
   font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
-  font-size: 0.63rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.04em;
 }
 
@@ -451,7 +452,7 @@ img {
 .hero-socials > span {
   margin-right: 0.3rem;
   color: var(--dim);
-  font-size: 0.65rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -459,8 +460,8 @@ img {
 
 .hero-socials a {
   display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 0.75rem;
@@ -495,7 +496,7 @@ img {
 .architecture-detail > span {
   color: var(--cyan);
   font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
-  font-size: 0.58rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -635,13 +636,11 @@ img {
 }
 
 .architecture-node small {
-  overflow: hidden;
   margin-top: 0.25rem;
   color: var(--dim);
   font-family: "Cascadia Code", monospace;
-  font-size: 0.54rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
 }
 
 .architecture-detail {
@@ -655,8 +654,18 @@ img {
   max-width: 42rem;
   margin: 0.35rem 0 0;
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   line-height: 1.55;
+}
+
+.architecture-detail a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--cyan);
+  font-size: 0.875rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .hero-progress {
@@ -734,7 +743,7 @@ img {
   gap: 0.5rem 1rem;
   color: var(--dim);
   font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
-  font-size: 0.62rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -747,7 +756,8 @@ img {
   align-items: center;
   gap: 0.45rem;
   color: var(--cyan);
-  font-size: 0.7rem;
+  min-height: 44px;
+  font-size: 0.8125rem;
   font-weight: 800;
   white-space: nowrap;
 }
@@ -820,7 +830,9 @@ img {
   margin-bottom: 2rem;
   color: var(--dim);
   font-family: "Cascadia Code", monospace;
-  font-size: 0.62rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -865,7 +877,7 @@ img {
 .education-panel time {
   color: var(--cyan);
   font-family: "Cascadia Code", monospace;
-  font-size: 0.68rem;
+  font-size: 0.8125rem;
 }
 
 .education-panel h4 {
@@ -876,6 +888,11 @@ img {
 .featured-projects {
   display: grid;
   gap: 2rem;
+}
+
+.featured-project,
+.project-card {
+  scroll-margin-top: 7rem;
 }
 
 .featured-project {
@@ -921,7 +938,7 @@ img {
 
 .feature-list li {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
 }
 
 .feature-list li::before {
@@ -938,7 +955,6 @@ img {
 }
 
 .project-actions a {
-  min-height: 42px;
   border: 1px solid rgb(var(--color-accent) / 0.28);
   border-radius: 0.75rem;
   background: rgb(var(--color-accent) / 0.08);
@@ -1100,7 +1116,7 @@ img {
   flex: 1;
   margin: 0;
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: 1rem;
   line-height: 1.65;
 }
 
@@ -1209,13 +1225,12 @@ img {
   font-size: 0.88rem;
 }
 
-.skill-node p {
-  overflow: hidden;
-  margin: 0.25rem 0 0;
-  color: var(--dim);
-  font-size: 0.63rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.skill-node h3 {
+  overflow-wrap: anywhere;
+}
+
+.section--experience .section-heading {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .experience-timeline {
@@ -1269,7 +1284,7 @@ img {
   gap: 0.5rem 1rem;
   color: var(--dim);
   font-family: "Cascadia Code", monospace;
-  font-size: 0.65rem;
+  font-size: 0.8125rem;
   text-transform: uppercase;
 }
 
@@ -1300,7 +1315,7 @@ img {
   display: flex;
   gap: 0.65rem;
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: 1rem;
   line-height: 1.55;
 }
 
@@ -1329,28 +1344,17 @@ img {
   width: 100%;
   aspect-ratio: 16 / 9;
   border-bottom: 1px solid var(--line);
-  background: var(--background);
+  background: rgb(var(--color-bg-elevated));
 }
 
 .certification-card__image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  opacity: 0.82;
-  transition: opacity 180ms ease, transform 300ms var(--ease-out);
+  object-fit: contain;
 }
 
-.certification-card__image span {
-  position: absolute;
-  right: 0.8rem;
-  bottom: 0.8rem;
-  border: 1px solid rgb(var(--color-border-interactive));
-  border-radius: 999px;
-  background: rgb(var(--color-bg-primary) / 0.88);
-  padding: 0.45rem 0.65rem;
-  color: var(--text);
-  font-size: 0.62rem;
-  font-weight: 700;
+.certification-card__image:focus-visible {
+  outline-offset: -4px;
 }
 
 .certification-card__body {
@@ -1360,7 +1364,7 @@ img {
 .certification-card__body > p {
   margin: 1rem 0 0.35rem;
   color: var(--cyan);
-  font-size: 0.7rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1374,6 +1378,7 @@ img {
 
 .certification-card__actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1.25rem;
 }
@@ -1385,7 +1390,7 @@ img {
   display: grid;
   place-items: center;
   background: rgb(var(--color-bg-primary) / 0.92);
-  padding: 1rem;
+  padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom));
 }
 
 .certificate-dialog__content {
@@ -1411,7 +1416,7 @@ img {
 
 .certificate-dialog img {
   width: 100%;
-  max-height: 90svh;
+  max-height: min(90svh, calc(100svh - 2rem));
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   object-fit: contain;
@@ -1495,7 +1500,7 @@ img {
 
 .contact-panel li > span {
   color: var(--dim);
-  font-size: 0.65rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -1516,7 +1521,7 @@ img {
 
 .contact-socials a {
   display: inline-flex;
-  min-height: 42px;
+  min-height: 44px;
   align-items: center;
   gap: 0.55rem;
   border: 1px solid var(--line);
@@ -1524,6 +1529,27 @@ img {
   padding: 0.65rem 0.8rem;
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.contact-email {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contact-email a {
+  user-select: text;
+}
+
+.contact-copy-status {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.contact-copy-status:not(:empty) {
+  margin-top: 0.75rem;
 }
 
 footer {
@@ -1634,10 +1660,6 @@ footer {
     border-color: rgb(var(--color-border-interactive));
   }
 
-  .certification-card__image:hover img {
-    opacity: 1;
-    transform: scale(1.02);
-  }
 }
 
 @media (min-width: 1024px) and (max-height: 900px) {
